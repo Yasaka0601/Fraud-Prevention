@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+issue_templates:
+  - name: Basic template
+    description: Basic Issue Template
+    file: basic.md
