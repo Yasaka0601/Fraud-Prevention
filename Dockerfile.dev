@@ -1,0 +1,29 @@
+# ベースイメージの設定
+FROM ruby:3.3.6
+
+# ENVは、環境変数。文字コードとタイムゾーンを設定している。
+ENV LANG C.UTF-8
+ENV TZ Asia/Tokyo
+
+# Node.js と Yarn を使えるようにするためのリポジトリ登録と、鍵の追加。
+RUN apt-get update -qq \
+&& apt-get install -y ca-certificates curl gnupg \
+&& mkdir -p /etc/apt/keyrings \
+&& curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+&& NODE_MAJOR=20 \
+&& echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+&& wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+&& echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+# Node.js と Yarn をインストール
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn vim
+
+# アプリケーションディレクトリの作成
+RUN mkdir /myapp
+WORKDIR /myapp
+
+# Bundlerのインストール
+RUN gem install bundler
+
+# アプリケーションのコードをコピー
+COPY . /myapp
