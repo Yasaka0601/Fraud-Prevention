@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:17 #バージョンを指定。理由は、バージョンを指定しないと、常に最新版が入るから。最新のimageが出た際に勝手に入る。
+    restart: always #コンテナが落ちたら、自動で再起動させる設定。
+    environment:
+      TZ: Asia/Tokyo #コンテナ内のタイムゾーンを日本時間にしている。
+      POSTGRES_PASSWORD: password #パスワードを設定。config/database.ymlも同じパスワードに設定する。
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data #DB の実データをホスト側のボリューム(postgresql_data)に保存して永続化する
+    ports:
+      - 5432:5432 #ホストの 5432 ポートをコンテナの 5432 に割り当て。ホストから localhost:5432 でアクセス可能にする。
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d myapp_development -U postgres"] #DB に接続できるか確認している。
+      interval: 10s #ヘルスチェック。10秒おきに pg_isreadyを実行してDBの接続を確認。healthy もしくは unhealthy を返す。
+      timeout: 5s #各ヘルスチェックを５秒待って応答がなければ失敗とみなす。
+      retries: 5 #失敗が５回続いたら、unhealthy とみなす。
+  web:
+    build:
+      context: . # カレントディレクトリ（アプリのルート）をビルドコンテキストにする。
+      dockerfile: Dockerfile.dev # Dockerfile.devを元に、webコンテナを作成。
+    command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && ./bin/dev" #コンテナ起動時に毎回実行するコマンド。
+    tty: true # 擬似ターミナルを割り当て。ログ出力などを見やすくするための設定。
+    stdin_open: true # 標準入力を開いたままにする。docker compose exec で対話的な操作ができる。
+    volumes:
+      - .:/myapp # ホストのカレントディレクトリをコンテナ内 /myapp にマウント（コードの変更が即コンテナに反映される）。
+      - bundle_data:/usr/local/bundle:cached #gem のインストール先をボリュームにして、毎回ゼロからインストールしなくて済むようにする。
+      - node_modules:/myapp/node_modules #JS パッケージもボリュームに逃がして、ホストとコンテナで権限ぐちゃぐちゃにならないようにする。
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - "3000:3000" # ホストの 3000 番ポートをコンテナの 3000 番に割り当て。ブラウザで http://localhost:3000 にアクセス。
+    depends_on:
+      db:
+        condition: service_healthy #DB が healthyになるまで起動しない設定。DB がちゃんと起動してから Rails を立ち上げる。
+volumes:
+  bundle_data: #gem のインストール先を保持するボリューム
+  postgresql_data: #PostgreSQL のデータファイルを保持するボリューム
+  node_modules: #Node.js パッケージ(node_modules)を保持するボリューム
