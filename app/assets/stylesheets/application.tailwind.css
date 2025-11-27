@@ -1,1 +1,18 @@
 @import "tailwindcss";
+@import "./homes.css";
+
+/*　　　共通のCSS　　　*/
+
+
+
+/*　　ユーザーが指定した文字サイズを正しく反映　　　*/
+html {
+    font-size: 100%;
+}
+
+
+/*　　書体の設定　　*/
+body {
+    font-family: "Yu Gothic", "遊ゴシック体", YuGothic, sans-serif;
+}
+
