@@ -1,5 +1,12 @@
-Rails.application.routes.draw do #ルーティングを定義する宣言
+Rails.application.routes.draw do
+  # Devise が users 用のルーティングをまとめて定義
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions:      'users/sessions'
+  }
+
   root "homes#top" #ルートパスにアクセスされたら、HomesControllerのtopアクションを呼ぶ。
+
   get "home", to: "homes#home"
 
   get "up" => "rails/health#show", as: :rails_health_check

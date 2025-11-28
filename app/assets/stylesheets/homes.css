@@ -6,7 +6,6 @@
   margin: 0 auto 24px;  /* 上：0px／左右：autoで中央寄せ／下：24px の余白をつける */
 }
 
-
 /*　　　ホーム画面全体のレイアウト　　*/
 .home-page {
   max-width: 960px;    /* 画面の最大幅を960pxに制限（PCで横に広がりすぎないようにする） */
@@ -14,9 +13,9 @@
   padding: 40px 16px;  /* 上下40px／左右16pxの内側余白をつけて、中身が端にくっつかないようにする */
 }
 
-
 /*　　　ボタン　　*/
-.home-buttons {
+.home-button {
+  display: block;           /* aタグ全体をブロック化して、ボタンの範囲全体をクリックできるようにする */
   font-size: 1.375rem;      /* ボタン内の文字を少し大きめにする（ベースの1.375倍のサイズ） */
   background: rgba(77, 221, 0, 0.711);
   color: #000;
@@ -25,12 +24,7 @@
   margin: 0 auto 24px;      /* 上：0px／左右：autoでボタンを中央寄せ／下に24pxの余白をあけてボタン同士を離す */
   width: 200px;             /* ボタンの幅を200pxで固定する（ボタンの横幅が揃う） */
   text-align: center;       /* ボタン内のテキスト（aタグ）を中央寄せにする */
-}
-
-.home-buttons a {
   text-decoration: none;    /* リンクの下線を消して、ボタンらしい見た目にする */
-  color: inherit;           /* 親(.home-buttons)のcolor設定（黒）をそのまま引き継ぐ */
-  display: block;           /* aタグ全体をブロック化して、ボタンの範囲全体をクリックできるようにする */
 }
 
 .home-buttons:hover {
