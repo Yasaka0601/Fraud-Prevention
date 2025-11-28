@@ -1,2 +1,7 @@
 <h1>ここはホームです</h1>
 <p>（新規登録・ログイン後に表示する仮ホーム画面）</p>
+
+<%= link_to "ログアウト",
+  destroy_user_session_path,
+  data: { turbo_method: :delete },
+  class: "home-button" %>
