@@ -1,0 +1,26 @@
+ja:
+  users:
+    registrations:
+      new:
+        title: "新規登録"
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード（6文字以上）"
+        password_confirmation: "パスワード（入力確認）"
+        submit: "登録"
+      edit:
+        title: "ユーザー編集"
+        name: "名前"
+        email: "メールアドレス"
+        submit: "更新"
+    sessions:
+      new:
+        title: "ログイン"
+        email: "メールアドレス"
+        password: "パスワード"
+        submit: "ログイン"
+    shared:
+      links:
+        log_in: "ログイン"
+        sign_up: "まだ新規登録していない方はこちら"
+        forgot: "パスワードを忘れた方はこちら"
