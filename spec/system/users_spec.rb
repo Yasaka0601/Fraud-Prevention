@@ -35,4 +35,28 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+
+  describe 'ログイン' do
+    let!(:user) { create(:user, role: :general, name: 'test_user', email: 'example@email.com', password: 'password', password_confirmation: 'password') }
+
+    context '正常な入力の場合' do
+      it 'ログインできること' do
+        visit new_user_session_path
+        fill_in 'メールアドレス', with: 'example@email.com'
+        fill_in 'パスワード', with: 'password'
+        click_button 'ログイン'
+        expect(page).to have_content 'ログインしました'
+      end
+    end
+
+    context '異常な入力の場合' do
+      it 'エラーメッセージが表示されること' do
+        visit new_user_session_path
+        fill_in 'メールアドレス', with: 'example@email.com'
+        fill_in 'パスワード', with: 'non_password'
+        click_button 'ログイン'
+        expect(page).to have_content '無効なユーザー名またはパスワードです'
+      end
+    end
+  end
 end
