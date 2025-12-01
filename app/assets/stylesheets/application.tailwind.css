@@ -1,8 +1,10 @@
+/***　各CSSファイルを読み込み *****/
 @import "tailwindcss";
 @import "./homes.css";
 @import "./tops.css";
 @import "./registrations.css";
 @import "./header.css";
+@import "./footer.css";
 
 /**********　ここに記述するのは共通のCSS ***********/
 
@@ -11,9 +13,14 @@ html {
     font-size: 100%;
 }
 
-/*********** 書体の設定 ***********/
 body {
+    /*********** 書体の設定 ***********/
     font-family: "Yu Gothic", "遊ゴシック体", YuGothic, sans-serif;
+
+    /******** フッターを下に固定するための記述 ******/
+    min-height: 100vh;        /* 画面の高さ分までは伸びる */
+    display: flex;            /* 縦方向にヘッダー / コンテンツ / フッターを並べる */
+    flex-direction: column;   /* 上から下に積む */
 }
 
 /********* フォームのCSS **********/

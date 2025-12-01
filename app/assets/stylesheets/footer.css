@@ -1,0 +1,21 @@
+/******** フッター全体 **********/
+.site-footer {
+  background: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  padding: 12px 16px;
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: #555555;
+}
+
+/* 中身を中央寄せ＋最大幅をヘッダーと揃える */
+.site-footer__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* コピーライト表記 */
+.site-footer__copy {
+  display: inline-block;
+}
