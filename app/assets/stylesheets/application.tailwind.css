@@ -75,3 +75,29 @@ body {
 .actions input[type="submit"]:hover {
   background: #11aa00d2;
 }
+
+/****** 共通のフラッシュメッセージ *******/
+
+/*  フラッシュメッセージのサイズ    */
+.flash {
+  max-width: 900px;
+  margin: 16px auto;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* 　　　成功系の色　　　　 */
+.flash-notice {
+  background: #e0f7e9;
+  color: #106b34;
+  border: 1px solid #8ad4a5;
+}
+
+/* 　　　　エラー系の色　　　 */
+.flash-alert,
+.flash-error {
+  background: #fde2e1;
+  color: #9b1c1c;
+  border: 1px solid #f5a3a3;
+}
