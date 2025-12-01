@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="header-inner">
+    <!-- 左側：ロゴ（クリックで home_path へ） -->
+    <%= link_to home_path, class: "header-logo-link" do %>
+      <%= image_tag "header_logo.png", alt: "詐欺対策道場", class: "header-logo" %>
+    <% end %>
+
+    <!-- 右側：未ログインなら「新規登録」、ログイン中なら名前＋ログアウト -->
+    <nav class="header-nav">
+      <% if user_signed_in? %>
+        <span class="header-username">
+          <%= current_user.name.presence || "ゲスト" %> さん
+        </span>
+
+        <%= button_to "ログアウト",
+                      destroy_user_session_path,
+                      method: :delete,
+                      class: "header-logout-button" %>
+      <% else %>
+        <%= link_to "新規登録",
+                    new_user_registration_path,
+                    class: "header-link" %>
+      <% end %>
+    </nav>
+  </div>
+</header>
