@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "./homes.css";
+@import "./tops.css";
+@import "./registrations.css";
 
 /**********　ここに記述するのは共通のCSS ***********/
 
@@ -72,50 +74,4 @@ body {
 /* マウスオーバー・フォーカス時は色を変える */
 .actions input[type="submit"]:hover {
   background: #11aa00d2;
-}
-
-
-/******　新規登録画面のCSS　******/
-
-/* 新規登録ページのタイトル */
-.signup-title {
-  text-align: center;   /* 中央寄せ */
-  margin-bottom: 16px;  /* 下に少し余白 */
-}
-
-/* パスワードの注意書き（最小文字数） */
-.field-note {
-  display: block;         /* 行を分ける */
-  width: 40%;             /* label / input と同じ幅 */
-  margin: 0 auto 4px;     /* 左右 auto で真ん中に寄せる＋下に少し余白 */
-  font-size: 0.85rem;     /* 本文より少し小さめ */
-  color: #777;            /* 文字色を薄めにして、ラベルより控えめに */
-  text-align: left;       /* label と同じ左寄せ */
-}
-
-
-/* ログインへのリンク（「Log in」など）の位置とスタイル */
-.signup-links {
-  width: 40%;             /* フォームのラベル・入力と同じ幅 */
-  margin: 8px auto 0;     /* 左右 auto で中央寄せ＋少し上に余白 */
-  font-size: 0.85rem;     /* 本文より少し小さめ */
-  text-align: left;       /* ラベルと同じ左寄せ */
-}
-
-/* 実際のリンクを「丸いボタン」っぽく */
-.signup-links a {
-  display: inline-block;        /* ボタンのように扱えるようにする */
-  padding: 6px 14px;            /* 内側の余白でボタンの高さと横幅を出す */
-  border-radius: 9999px;        /* しっかり丸みを帯びた pill 型 */
-  background-color: #ffe0bf;    /* ふんわり淡いオレンジ背景 */
-  color: #b85a00;               /* 少し濃いめのオレンジ文字 */
-  text-decoration: none;        /* 下線は消す */
-}
-
-/* マウスオーバー・フォーカス時は濃いオレンジに */
-.signup-links a:hover,
-.signup-links a:focus {
-  background-color: #f2a45a;    /* 少し濃いオレンジ */
-  color: #ffffff;               /* 文字は白にしてコントラストアップ */
-  text-decoration: none;        /* 下線はつけず、色だけで状態を伝える */
 }
