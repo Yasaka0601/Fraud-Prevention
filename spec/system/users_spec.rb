@@ -55,7 +55,7 @@ RSpec.describe "Users", type: :system do
         fill_in 'メールアドレス', with: 'example@email.com'
         fill_in 'パスワード', with: 'non_password'
         click_button 'ログイン'
-        expect(page).to have_content '無効なユーザー名またはパスワードです'
+        expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
       end
     end
   end
