@@ -1,24 +1,23 @@
+# 表示画面の日本語化
 ja:
   users:
     registrations:
       new:
         title: "新規登録"
-        name: "名前"
-        email: "メールアドレス"
         password: "パスワード(６文字以上)"
-        password_confirmation: "パスワード(入力確認)"
         submit: "登録"
       edit:
         title: "ユーザー編集"
-        name: "名前"
-        email: "メールアドレス"
         submit: "更新"
     sessions:
       new:
         title: "ログイン"
-        email: "メールアドレス"
-        password: "パスワード"
+        password: "パスワード(６文字以上)"
         submit: "ログイン"
+    passwords:
+      new:
+        title: "パスワードの再設定"
+        submit: "再設定メール送信"
     shared:
       links:
         log_in: "ログイン"

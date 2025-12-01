@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # Devise が users 用のルーティングをまとめて定義
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    sessions:      'users/sessions'
+    sessions:      'users/sessions',
+    passwords:     'users/passwords'
   }
   #ルートパスにアクセスされたら、TopsControllerのtopアクションを呼ぶ。
   root "tops#top"
