@@ -31,13 +31,13 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_content('名前を入力してください')
           expect(page).to have_content('メールアドレスを入力してください')
           expect(page).to have_content('パスワードを入力してください')
-          expect(page).to have_content('パスワード（入力確認）を入力してください')
+          expect(page).to have_content('パスワード(入力確認)を入力してください')
       end
     end
   end
 
   describe 'ログイン' do
-    let!(:user) { create(:user, role: :general, name: 'test_user', email: 'example@email.com', password: 'password', password_confirmation: 'password') }
+    let!(:user) { FactoryBot.create(:user) }
 
     context '正常な入力の場合' do
       it 'ログインできること' do
