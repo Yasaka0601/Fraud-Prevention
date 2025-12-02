@@ -76,7 +76,6 @@ Rails.application.configure do
 
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
-  config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -100,21 +99,21 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  # Gmail を使用する設定-------ここから-------
-config.action_mailer.default_url_options = {
-  host: 'fraud-prevention-l35r.onrender.com',
-  protocol: 'https'
-}
+  config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = Settings.default_url_options.to_h
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
-  address:              'smtp.gmail.com',
-  port:                 587,
-  domain:               'fraud-prevention-l35r.onrender.com',
-  user_name:            ENV['MAILER_SENDER'],
-  password:             ENV['MAILER_PASSWORD'],
-  authentication:       'plain',
-  enable_starttls_auto: true
-}
+  # Gmail を使用する設定-------ここから-------
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              "smtp.gmail.com",
+    port:                 587,
+    domain:               "fraud-prevention-l35r.onrender.com",
+    user_name:            ENV["MAILER_SENDER"],
+    password:             ENV["MAILER_PASSWORD"],
+    authentication:       "plain",
+    enable_starttls_auto: true
+  }
   #-------ここまで---------------
 end
