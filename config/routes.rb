@@ -20,4 +20,8 @@ Rails.application.routes.draw do
 # PWA用の設定ファイル（アプリアイコンや名前などの情報）を返すルート。
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+# letter_opener_web のルーティング。
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
