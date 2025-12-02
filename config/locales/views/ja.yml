@@ -18,6 +18,11 @@ ja:
       new:
         title: "パスワードの再設定"
         submit: "再設定メール送信"
+      edit:
+        title: "新しいパスワードを設定してください"
+        new_password: "新しいパスワード(6文字以上)"
+        password_confirmation: "新しいパスワード(入力確認)"
+        submit: "パスワードを変更"
     shared:
       links:
         log_in: "ログイン"
