@@ -1,7 +1,7 @@
 <header class="site-header">
   <div class="header-inner">
-    <!-- 左側：ロゴ（クリックで home_path へ） -->
-    <%= link_to home_path, class: "header-logo-link" do %>
+    <!-- 左側：ロゴ（未ログインならトップ画面、ログインならホーム画面へ） -->
+    <%= link_to (user_signed_in? ? home_path : root_path), class: "header-logo-link" do %>
       <%= image_tag "header_logo.png", alt: "詐欺対策道場", class: "header-logo" %>
     <% end %>
 
