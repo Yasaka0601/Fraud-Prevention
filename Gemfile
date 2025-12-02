@@ -56,6 +56,8 @@ group :development do
   gem "web-console"
 
   gem "letter_opener_web"
+
+  gem "dotenv-rails"
 end
 
 group :test do
