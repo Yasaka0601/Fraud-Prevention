@@ -11,6 +11,12 @@ Rails.application.routes.draw do
 
   get "home", to: "homes#home"
 
+  resources :rooms do
+    collection do
+      get :home
+    end
+  end
+
 #アプリが動いているかhealth_checkするルート。
   get "up" => "rails/health#show", as: :rails_health_check
 
