@@ -26,7 +26,7 @@ Devise.setup do |config|
   # with default "from" parameter.
 
   # Gmail を使用する設定
-  config.mailer_sender = ENV['MAILER_SENDER']
+  config.mailer_sender = ENV.fetch('MAILER_SENDER', 'test@example.com')
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
