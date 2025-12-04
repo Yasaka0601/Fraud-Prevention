@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :rooms do
     collection do
       get :home
+      # 家族ルーム作成機能の実装完了まで、招待機能のルーティングはコメントに。
+      # resources :invitations, only: %i[ show new create edit update ]
     end
   end
 
