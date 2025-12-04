@@ -18,6 +18,9 @@ RSpec.configure do |config|
 
   config.use_transactional_fixtures = true
 
+  # ログイン処理のモジュールを読み込み。
+  config.include SystemLoginHelpers, type: :system
+
   config.filter_rails_from_backtrace!
   config.include FactoryBot::Syntax::Methods
   # system spec はデフォルトでは rack_test で動かす（ブラウザなし）
