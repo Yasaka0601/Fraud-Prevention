@@ -15,5 +15,9 @@ ja:
         remember_created_at: ログイン記憶時刻
         created_at: 作成日
         updated_at: 更新日
+      room:
+        name: 家族ルーム名
+        entry_word: 合言葉
     models:
       user: ユーザー
+      room: 家族ルーム

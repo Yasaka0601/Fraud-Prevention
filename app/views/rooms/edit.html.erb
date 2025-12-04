@@ -1,0 +1,26 @@
+家族ルーム編集画面
+
+<%= form_with model: @room do |f| %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :entry_word %>
+    <%= f.text_field :entry_word %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('.submit') %>
+  </div>
+
+<% end %>
+
+<div class="actions">
+  <%= button_to t('.destroy'),
+                room_path(@room),
+                method: :delete,
+                data: { confirm: '本当にこの家族ルームを削除してもよろしいですか？' } %>
+</div>

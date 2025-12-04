@@ -28,3 +28,6 @@ ja:
         log_in: "ログイン"
         sign_up: "まだ新規登録していない方はこちら"
         forgot: "パスワードを忘れた方はこちら"
+  rooms:
+    new:
+      submit: "作成"
