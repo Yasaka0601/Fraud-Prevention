@@ -7,11 +7,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
+  # アソシエーション
+  belongs_to :room, optional: true
+
   # 各ユーザーの権限を定義。
   enum role: { general: 0, host: 1, child: 2, admin: 3}
 
   # 各ユーザーの共通バリデーション
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 20 }
 
   # 一般 & ホスト向け（子ユーザー以外）バリデーション
   # with_options で child? の条件を共通化。(child? は enum で自動で生成させるメソッド)
@@ -24,6 +27,11 @@ class User < ApplicationRecord
                                       if: -> { new_record? || changes[:encrypted_password] }
     validates :email, presence: true,
                       uniqueness: true
+  end
+
+  # 子ユーザー向けバリデーション
+  with_options if: :child? do
+    validates :room_id, presence: true
   end
 end
 
