@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get "home", to: "homes#home"
 
-  resources :rooms do
+  resources :rooms, only: %i[new create edit update destroy] do
     collection do
       get :home
       # 家族ルーム作成機能の実装完了まで、招待機能のルーティングはコメントに。

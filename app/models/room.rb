@@ -1,9 +1,11 @@
 class Room < ApplicationRecord
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :host_user_id, presence: true
+  validates :name, presence: true, length: { maximum: 20 }
   validates :entry_word, presence: true, length: { minimum: 4, maximum: 20 }
   #子ユーザーは、hostになれないというバリデーション。
   validate :child_users_cannot_host
 
+  has_many :users, dependent: :nullify
   belongs_to :host_user, class_name: 'User'
 
   private
