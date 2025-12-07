@@ -61,7 +61,7 @@ body {
 
 /* 送信ボタンのブロック */
 .actions {
-  width: 40%;             /* フォームと同じ幅 */
+  width: 40%;
   margin: 16px auto 0;    /* 中央寄せ＋上に余白 */
   text-align: center;     /* ボタンを中央表示 */
 }
@@ -82,6 +82,33 @@ body {
 /* マウスオーバー・フォーカス時は色を変える */
 .actions input[type="submit"]:hover {
   background: #11aa00d2;
+}
+
+/* destroy ボタンのブロック */
+.delete_actions {
+  width: 40%;
+  margin: 16px auto 0;    /* 中央寄せ＋上に余白 */
+  text-align: center;     /* ボタンを中央表示 */
+}
+
+/* destroy ボタンの見た目 */
+.delete_actions input[type="submit"],
+.delete_actions button {
+  width: 40%;            /* ここの数値で大きさを調整 */
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 9999px;  /* まん丸ボタンにして柔らかい印象に */
+  border: none;
+  background: #ff6242;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* マウスオーバー・フォーカス時は色を変える */
+.delete_actions input[type="submit"],
+.delete_actions button:hover {
+  background: #b30505d2;
 }
 
 /****** 共通のフラッシュメッセージ *******/

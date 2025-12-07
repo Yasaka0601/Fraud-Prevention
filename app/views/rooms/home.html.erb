@@ -14,3 +14,10 @@
 </p>
 
 <%= link_to "家族ルーム作成", new_room_path %>
+
+<% if current_user.room.present? %>
+  <%= link_to "家族ルーム編集", edit_room_path(current_user.room) %>
+<% else %>
+  <p>家族ルームを作成もしくは参加してください</p>
+<% end %>
+

@@ -31,3 +31,6 @@ ja:
   rooms:
     new:
       submit: "作成"
+    edit:
+      submit: "更新"
+      destroy: "削除"
