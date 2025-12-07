@@ -7,7 +7,7 @@ RSpec.describe "Users", type: :system do
         visit new_user_registration_path
         fill_in '名前', with: 'test_user'
         fill_in 'メールアドレス', with: 'example@email.com'
-        fill_in 'パスワード(６文字以上)', with: 'password'
+        fill_in 'パスワード(6文字以上)', with: 'password'
         fill_in 'パスワード(入力確認)', with: 'password'
 
         # このブロックで「ボタンを押した結果、Userの件数が1件増えること」を確認している

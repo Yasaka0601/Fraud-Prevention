@@ -14,7 +14,7 @@ class User < ApplicationRecord
   enum role: { general: 0, child: 1, admin: 2}
 
   # 各ユーザーの共通バリデーション
-  validates :name, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 50 }
 
   # 一般 & ホスト向け（子ユーザー以外）バリデーション
   # with_options で child? の条件を共通化。(child? は enum で自動で生成させるメソッド)

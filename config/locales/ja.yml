@@ -21,3 +21,6 @@ ja:
     models:
       user: ユーザー
       room: 家族ルーム
+  errors:
+    messages:
+      blank: "を入力してください"
