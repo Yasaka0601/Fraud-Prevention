@@ -9,8 +9,6 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    @room.host_user = current_user
-
     if @room.save
       flash[:notice] = "家族ルームを作成しました"
       current_user.update!(room_id: @room.id)
@@ -21,7 +19,7 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit;end
 
   def update
     if @room.update(room_params)
@@ -46,6 +44,17 @@ class RoomsController < ApplicationController
   end
 
   def set_have_room
-    @room = Room.find_by!(id: params[:id], host_user_id: current_user.id)
+    @room = current_user.room
+    if @room.nil?
+      flash[:danger] = "どの家族ルームにも参加していません"
+      redirect_to home_rooms_path
+      return
+    end
+
+    unless @room.id == params[:id].to_i
+      flash[:danger] = "参加している家族ルームではありません"
+      redirect_to home_rooms_path
+      return
+    end
   end
 end
