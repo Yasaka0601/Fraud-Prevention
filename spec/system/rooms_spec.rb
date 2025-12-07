@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Rooms", type: :system do
   let(:user) { FactoryBot.create(:user) }
+  let(:room) { FactoryBot.create(:room) }
 
   before do
     login_as_user(user)
@@ -19,8 +20,6 @@ RSpec.describe "Rooms", type: :system do
         }.to change(Room, :count).by(1)
 
         expect(page).to have_content '家族ルームを作成しました'
-        # host_user がホストになっているかチェック
-        expect(Room.last.host_user).to eq user
       end
     end
 
@@ -38,17 +37,36 @@ RSpec.describe "Rooms", type: :system do
     end
   end
 
-  describe '家族ルームの削除' do
-    let(:room) { FactoryBot.create(:room, host_user: user) }
+  describe '家族ルームの編集機能' do
+
+    before do
+      # FactoryBot で作成したユーザーが room に参加している状態を作る。
+      user.update!(room: room)
+    end
 
     it '家族ルームを削除できること' do
-        visit edit_room_path(room)
+      visit edit_room_path(room)
 
-        expect {
-          click_button 'この家族ルームを削除'
-          click_button '承知の上で削除'
-        }.to change(Room, :count).by(-1)
-        expect(page).to have_content('家族ルームを削除しました')
+      expect {
+        click_button 'この家族ルームを削除'
+      }.to change(Room, :count).by(-1)
+
+      expect(page).to have_content('家族ルームを削除しました')
+    end
+
+    it '家族ルームを編集できること' do
+      visit edit_room_path(room)
+
+        fill_in '家族ルーム名', with: 'test_room_change'
+        fill_in '合言葉', with: 'テストの合言葉変更'
+        click_button '更新'
+
+        expect(page).to have_content('家族ルームを更新しました')
+
+        # DBの中身が本当に変わったか確認
+        room.reload
+        expect(room.name).to eq 'test_room_change'
+        expect(room.entry_word).to eq 'テストの合言葉変更'
     end
   end
 end

@@ -4,7 +4,7 @@ ja:
     registrations:
       new:
         title: "新規登録"
-        password: "パスワード(６文字以上)"
+        password: "パスワード(6文字以上)"
         submit: "登録"
       edit:
         title: "ユーザー編集"
@@ -12,7 +12,7 @@ ja:
     sessions:
       new:
         title: "ログイン"
-        password: "パスワード(６文字以上)"
+        password: "パスワード(6文字以上)"
         submit: "ログイン"
     passwords:
       new:
@@ -33,4 +33,4 @@ ja:
       submit: "作成"
     edit:
       submit: "更新"
-      destroy: "削除"
+      destroy: "この家族ルームを削除"
