@@ -11,7 +11,7 @@ class User < ApplicationRecord
   belongs_to :room, optional: true
 
   # 各ユーザーの権限を定義。
-  enum role: { general: 0, host: 1, child: 2, admin: 3}
+  enum role: { general: 0, child: 1, admin: 2}
 
   # 各ユーザーの共通バリデーション
   validates :name, presence: true, length: { maximum: 20 }
