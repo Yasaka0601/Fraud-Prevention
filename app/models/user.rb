@@ -1,22 +1,21 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are: (訳： デフォルトのDeviseモジュールを含める。その他利用可能なモジュールは次のとおりです：)
-  # デフォルトのDeviseモジュールの一覧。 :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  # devise のモジュールを適用させている記述。
+  ##### devise のモジュールを適用させている記述。#####
   # :validatable これは、子ユーザーの実装のために排除。
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
-  # アソシエーション
+  ##### アソシエーション #####
+  # optional: true は、presence バリデーションを自動で付けさせないための記述。
   belongs_to :room, optional: true
 
-  # 各ユーザーの権限を定義。
+  ##### 各ユーザーの権限を定義。#####
   enum role: { general: 0, child: 1, admin: 2}
 
-  # 各ユーザーの共通バリデーション
+  ##### 各ユーザーの共通バリデーション #####
   validates :name, presence: true, length: { maximum: 50 }
 
-  # 一般 & ホスト向け（子ユーザー以外）バリデーション
+  ##### 一般 & ホスト向け（子ユーザー以外）バリデーション #####
   # with_options で child? の条件を共通化。(child? は enum で自動で生成させるメソッド)
   with_options unless: :child? do
     validates :password,  presence: true,
@@ -29,13 +28,15 @@ class User < ApplicationRecord
                       uniqueness: true
   end
 
-  # 子ユーザー向けバリデーション
+  ##### 子ユーザー向けバリデーション #####
   with_options if: :child? do
     validates :room_id, presence: true
   end
 end
 
-# 各モジュールの役割
+#####  メモ   #####
+
+# Devise の各モジュールの役割
 # 1. :database_authenticatable
 # •	メールアドレス＋パスワードでログインするための機能。
 # •	パスワードをハッシュ化して encrypted_password に保存
