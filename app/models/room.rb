@@ -10,6 +10,7 @@ class Room < ApplicationRecord
 
   ##### アソシエーション #####
   has_many :users
+  has_many :invitations, dependent: :destroy
 
   private
 
