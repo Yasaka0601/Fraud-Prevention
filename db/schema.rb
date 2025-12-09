@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_07_075541) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_09_113911) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.string "token_digest", null: false
+    t.datetime "send_token_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_invitations_on_room_id"
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string "name", null: false
@@ -38,5 +47,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_07_075541) do
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
+  add_foreign_key "invitations", "rooms"
   add_foreign_key "users", "rooms"
 end
