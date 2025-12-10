@@ -1,8 +1,17 @@
 <h1>仮の家族ルーム画面</h1>
 
-<%= current_user.room.present? ? "現在参加中の家族ルーム：#{current_user.room.name}" : "現在家族ルームに属していません" %>
+<% if @room.present? %>
+  <p>現在参加中の家族ルーム : <%= @room.name %></P>
 
-
+  <h2>この家族ルームのメンバー</h2>
+  <ul>
+    <% @room_members.each do |member| %>
+      <li><%= member.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>現在家族ルームに属していません</p>
+<% end %>
 
 <p>今後実装するもの。
 <li>・属している家族ルーム名を表示 済</li>
@@ -14,9 +23,9 @@
 
 <%= link_to "家族ルーム作成", new_room_path %>
 
-<% if current_user.room.present? %>
-  <%= link_to "家族ルーム編集", edit_room_path(current_user.room) %>
-  <%= link_to "家族ルームに招待する", new_room_invitation_path(current_user.room) %>
+<% if @room.present? %>
+  <%= link_to "家族ルーム編集", edit_room_path(@room) %>
+  <%= link_to "家族ルームに招待する", new_room_invitation_path(@room) %>
 <% else %>
   <p>家族ルームを作成もしくは参加してください</p>
 <% end %>
