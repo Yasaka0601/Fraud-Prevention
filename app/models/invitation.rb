@@ -1,3 +1,4 @@
+require 'bcrypt'
 class Invitation < ApplicationRecord
 
   ##### バリデーション #####
