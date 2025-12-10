@@ -40,7 +40,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name, :entry_word)
+    params.require(:room).permit(:name)
   end
 
   def set_have_room
