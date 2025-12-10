@@ -1,7 +1,11 @@
 class RoomsController < ApplicationController
   before_action :set_have_room, only: %i[edit update destroy]
 
-  def home; end
+  def home
+    @room = current_user.room
+    # ルームに属していれば、メンバー一覧を代入。いなければ空配列を代入。（三項演算子）
+    @room_members = @room ? @room.users : []
+  end
 
   def new
     @room = Room.new
