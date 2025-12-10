@@ -1,13 +1,13 @@
 <% content_for :title, "家族ルーム参加" %>
 
     <h1>
-      <%= @program.title %>
+      <%= @room.name %>
     </h1>
     
     <h2>この家族ルームに参加しますか？</h2>
     
-    <%= button_to program_invitation_path, method: :patch do %>
-      参加する
-    <% end %>
+<%= button_to '参加する',
+              room_invitation_path(@room, @invitation, token: params[:token]),
+              method: :patch %>
   </div>
 </div>
