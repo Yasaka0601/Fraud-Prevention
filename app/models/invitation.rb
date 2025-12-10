@@ -15,7 +15,7 @@ class Invitation < ApplicationRecord
   def self.new_token
     SecureRandom.urlsafe_base64
   end
-  
+
   ##### 渡された文字列のハッシュ値を返す #####
   def self.digest(string)
     # cost = 計算コスト（大きいほどセキュリティ高いけど重くなる）

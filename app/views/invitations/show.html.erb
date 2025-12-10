@@ -1,22 +1,32 @@
 <% content_for :title, "家族ルーム招待" %>
 
-    <h2>
-      招待リンク
-    </h2>
+<%= label_tag :invitation_link, '招待リンク' %>
 
-    <div>
-      <%= "招待リンクは#{@expiration_time}に期限切れになります" %>
-    </div>
+<% invite_url = edit_room_invitation_url(@room, @invitation, token: @token || params[:token]) %>
 
-    <div>
-      <div>
-        <h3>注意事項</h3>
-        <ul>
-          <li>期限切れになった場合は再度招待リンクを生成してください</li>
-          <li>招待リンクは3日が経過するか再度リンクを生成すると古いものが期限切れになります</li>
-          <li>招待したい相手以外には伝えないように気を付けてください</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<input
+  type="text"
+  class="form-control"
+  value="<%= invite_url %>"
+  readonly
+>
+
+<button class="btn btn-primary"
+        onclick="navigator.clipboard.writeText('<%= invite_url %>')">
+  <i class="bi bi-clipboard me-2"></i>
+  コピー
+</button>
+
+<div>
+  <%= "招待リンクは#{@expiration_time}に期限切れになります" %>
 </div>
+
+<div>
+  <h3>注意事項</h3>
+  <ul>
+    <li>期限切れになった場合は再度招待リンクを生成してください</li>
+    <li>招待リンクは1日が経過すると期限切れになります</li>
+    <li>招待したい相手以外には伝えないように気を付けてください</li>
+  </ul>
+</div>
+

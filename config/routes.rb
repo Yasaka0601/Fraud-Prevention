@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   resources :rooms, only: %i[new create edit update destroy] do
     collection do
       get :home
-      # 家族ルーム作成機能の実装完了まで、招待機能のルーティングはコメントに。
-      # resources :invitations, only: %i[ show new create edit update ]
     end
+      # rooms に invitations をネストさせて、/rooms/:room_id/invitations/new みたいなパスを作成。
+      resources :invitations, only: %i[ show new create edit update ]
   end
 
 #アプリが動いているかhealth_checkするルート。
