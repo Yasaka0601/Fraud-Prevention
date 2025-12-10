@@ -15,7 +15,6 @@ RSpec.describe "Rooms", type: :system do
 
         expect {
           fill_in '家族ルーム名', with: 'test_room'
-          fill_in '合言葉', with: 'テストの合言葉'
           click_button '作成'
         }.to change(Room, :count).by(1)
 
@@ -32,7 +31,6 @@ RSpec.describe "Rooms", type: :system do
         }.not_to change(Room, :count)
 
         expect(page).to have_content('家族ルーム名を入力してください')
-        expect(page).to have_content('合言葉を入力してください')
       end
     end
   end
@@ -58,7 +56,6 @@ RSpec.describe "Rooms", type: :system do
       visit edit_room_path(room)
 
         fill_in '家族ルーム名', with: 'test_room_change'
-        fill_in '合言葉', with: 'テストの合言葉変更'
         click_button '更新'
 
         expect(page).to have_content('家族ルームを更新しました')
@@ -66,7 +63,6 @@ RSpec.describe "Rooms", type: :system do
         # DBの中身が本当に変わったか確認
         room.reload
         expect(room.name).to eq 'test_room_change'
-        expect(room.entry_word).to eq 'テストの合言葉変更'
     end
   end
 end
