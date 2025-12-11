@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
+  ##### adminでログイン中 → /admin というルートが生える。 #####
+  authenticate :user, ->(u) { u.admin? } do
+    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  end
 
-  # Devise が users 用のルーティングをまとめて定義
+  ##### Devise が users 用のルーティングをまとめて定義している #####
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions:      'users/sessions',
     passwords:     'users/passwords'
   }
-  #ルートパスにアクセスされたら、TopsControllerのtopアクションを呼ぶ。
+
+  ##### ルートパスにアクセスされたら、TopsControllerのtopアクションを呼ぶ。 #####
   root "tops#top"
 
   get "home", to: "homes#home"
@@ -19,16 +24,16 @@ Rails.application.routes.draw do
       resources :invitations, only: %i[ show new create edit update ]
   end
 
-#アプリが動いているかhealth_checkするルート。
+  ##### アプリが動いているかhealth_checkするルート。 #####
   get "up" => "rails/health#show", as: :rails_health_check
 
-# PWA用のservice worker（ブラウザ側で動くJS）を返すルート。PWAとは、簡単に言うと「アプリっぽく動かす仕組み」
+  ##### PWA用のservice worker（ブラウザ側で動くJS）を返すルート。PWAとは、簡単に言うと「アプリっぽく動かす仕組み」 #####
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-# PWA用の設定ファイル（アプリアイコンや名前などの情報）を返すルート。
+  ##### PWA用の設定ファイル（アプリアイコンや名前などの情報）を返すルート。#####
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-# letter_opener_web のルーティング。
+  ##### letter_opener_web のルーティング。（ぶっちゃけ使ってない）#####
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
