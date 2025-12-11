@@ -25,7 +25,7 @@ gem "jbuilder"
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# ハッシュ化をするGem 招待トークンで使用。
+##### ハッシュ化をするGem 招待トークンで使用。#####
 gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -70,9 +70,14 @@ group :test do
   gem "shoulda-matchers"
 end
 
-# 認証
+##### 認証 #####
 gem "devise"
 
-# 日本語化
+##### 日本語化 #####
 gem 'rails-i18n'
 gem 'devise-i18n'
+
+##### 管理者画面 #####
+gem "rails_admin", "~> 3.0"
+gem "cancancan"
+gem "sassc-rails"
