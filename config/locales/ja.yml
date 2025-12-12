@@ -15,12 +15,79 @@ ja:
         remember_created_at: ログイン記憶時刻
         created_at: 作成日
         updated_at: 更新日
+        room: 家族ルーム
+        room_id: 家族ルーム
+
       room:
         name: 家族ルーム名
+        created_at: 作成日
+        updated_at: 更新日
+
+      quiz:
+        name: クイズ名
+        sentence: 問題文
+        explanation: 解説
+        give_point: 与えるポイント
+        created_at: 作成日
+        updated_at: 更新日
+
+      invitation:
+        room: 家族ルーム
+        room_id: 家族ルーム
+        token_digest: 招待トークン（ハッシュ）
+        send_token_at: 招待送信日時
+        created_at: 作成日
+        updated_at: 更新日
+
+      choice:
+        quiz: クイズ
+        quiz_id: クイズ
+        text: クイズの選択肢
+        is_correct: 正解フラグ
+        created_at: 作成日
+        updated_at: 更新日
+
+      category:
+        name: カテゴリー
+        created_at: 作成日
+        updated_at: 更新日
+
+      course:
+        category: カテゴリー
+        category_id: カテゴリー
+        name: コース名
+        max_questions: 出題数上限
+        created_at: 作成日
+        updated_at: 更新日
+
+      course_quiz:
+        quiz: クイズ
+        quiz_id: クイズ
+        course: コース
+        course_id: コース
+        question_number: 出題順
+        created_at: 作成日
+        updated_at: 更新日
+
+      quiz_category:
+        quiz: クイズ
+        quiz_id: クイズ
+        category: カテゴリー
+        category_id: カテゴリー
+        created_at: 作成日
+        updated_at: 更新日
+
     models:
       user: ユーザー
       room: 家族ルーム
       invitation: 招待リンク
+      quiz: クイズ
+      quiz_category: クイズカテゴリー（中間テーブル）
+      course_quiz: クイズコース（中間テーブル）
+      course: コース
+      choice: クイズの選択肢
+      category: カテゴリー
+
   errors:
     messages:
       blank: "を入力してください"

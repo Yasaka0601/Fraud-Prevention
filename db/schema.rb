@@ -10,9 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_10_042656) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_12_011833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "choices", force: :cascade do |t|
+    t.bigint "quiz_id", null: false
+    t.string "text", null: false
+    t.boolean "is_correct", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_choices_on_quiz_id"
+  end
+
+  create_table "course_quizzes", force: :cascade do |t|
+    t.bigint "quiz_id", null: false
+    t.bigint "course_id", null: false
+    t.integer "question_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_quizzes_on_course_id"
+    t.index ["quiz_id"], name: "index_course_quizzes_on_quiz_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.string "name", null: false
+    t.integer "max_questions", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_courses_on_category_id"
+  end
 
   create_table "invitations", force: :cascade do |t|
     t.bigint "room_id", null: false
@@ -21,6 +55,24 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_10_042656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_invitations_on_room_id"
+  end
+
+  create_table "quiz_categories", force: :cascade do |t|
+    t.bigint "quiz_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_quiz_categories_on_category_id"
+    t.index ["quiz_id"], name: "index_quiz_categories_on_quiz_id"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "sentence", null: false
+    t.text "explanation"
+    t.integer "give_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -46,6 +98,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_10_042656) do
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
+  add_foreign_key "choices", "quizzes"
+  add_foreign_key "course_quizzes", "courses"
+  add_foreign_key "course_quizzes", "quizzes"
+  add_foreign_key "courses", "categories"
   add_foreign_key "invitations", "rooms"
+  add_foreign_key "quiz_categories", "categories"
+  add_foreign_key "quiz_categories", "quizzes"
   add_foreign_key "users", "rooms"
 end

@@ -3,7 +3,7 @@ RailsAdmin.config do |config|
 
   ### Popular gems integration
 
-  ##### == Devise == #####
+  ##### == Devise連携 == #####
   # 管理画面にアクセスする前に認証を行うための設定。Devise の warden.authenticate! メソッドを使用。
   config.authenticate_with do
     warden.authenticate! scope: :user
@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   # Rails_adminでcurrent_userを使用するためのメソッド。
   config.current_user_method(&:current_user)
 
-  ##### == CancanCan == #####
+  ##### == CancanCan連携 == #####
   # Rails_adminでのアクセス制限にcancancanを使用するための設定。
   # Abilityクラスで定義されたアクセス権限が適用される。
   config.authorize_with :cancancan
@@ -42,5 +42,32 @@ RailsAdmin.config do |config|
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+  end
+
+  config.model 'Quiz' do
+    label 'クイズ'
+
+    list do
+      field :id
+      field :name
+      field :categories
+      field :give_point
+    end
+
+    edit do
+      field :name
+      field :sentence do
+        label '問題文'
+        html_attributes rows: 10
+      end
+
+      field :explanation do
+        label '解説'
+        html_attributes rows: 10
+      end
+      field :give_point
+      field :categories
+      field :choices
+    end
   end
 end
