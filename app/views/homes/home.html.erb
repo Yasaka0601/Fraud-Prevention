@@ -8,4 +8,12 @@
 <li>・ログイン後のフッターを表示。</li>
 <li>・フッターには、「成績、家族ルーム、投稿、ユーザー情報」ボタンが用意されている。</li>
 </p>
+<% @categories.each do |category| %>
+  <li>
+    <%= link_to category.name, category_courses_path(category) %>
+  </li>
+<% end %>
+
+<li>
 <%= link_to "家族ルーム", home_rooms_path %>
+</li>

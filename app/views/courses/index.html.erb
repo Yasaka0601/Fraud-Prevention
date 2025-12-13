@@ -1,0 +1,19 @@
+<h1>コース一覧</h1>
+
+<% if @courses.present? %>
+  <ul>
+    <% @courses.each do |course| %>
+      <li>
+        <p>
+          <strong><%= course.name %></strong>
+          （全<%= course.max_questions %>問）
+        </p>
+        <p>
+          <%= link_to "このコースでクイズを開始する", play_course_path(course) %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>このカテゴリーには、まだコースがありません。</p>
+<% end %>
