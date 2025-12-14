@@ -1,11 +1,12 @@
 class PlaysController < ApplicationController
   def show
-  # 選択したcourses を1件取得する。
+  # 選択したcourses を1件取得。プレイ中のコースの情報を持つのが @course
   @course = Course.find(params[:id])
 
   @quiz = @course.quizzes
-    .joins(:course_quizzes)
-    .order('course_quizzes.question_number ASC')
+    # PostgreSQL の RANDOM という関数。
+    .order("RANDOM()")
+    # ランダムに並べ替えた中で、最初の1件を取得
     .first
 
     # &. は、セーフナビゲーション演算子という。
