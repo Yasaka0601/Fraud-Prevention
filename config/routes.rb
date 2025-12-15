@@ -29,13 +29,15 @@ Rails.application.routes.draw do
     resources :courses, only: [:index]
   end
 
-  # クイズ画面のルーティング。 quiz/courses/:id/play というパスを生成している。
+  # クイズ画面のルーティング。/courses/:course_id/play/:id というパスを生成している。
   resources :courses, only: [] do
-    member do
-      get :play, to: 'plays#show'
-    end
+    resources :play, only: [:show], controller: 'plays'
+    # post :answer, on: :member
+    # collection do
+    #   get :select
+    #   get :result
+    # end
   end
-
 
   ##### アプリが動いているかhealth_checkするルート。 #####
   get "up" => "rails/health#show", as: :rails_health_check

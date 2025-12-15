@@ -1,14 +1,13 @@
 <h1><%= @course.name %></h1>
 
-<% if @quiz.present? %>
-  <h2><%= @quiz.name %></h2>
+<p><%= @index %> / 5問 </p>
+
+  <h2> 第 <%= @index %> 問 </h2>
   <p><%= @quiz.sentence %></p>
 
-  <ul>
-    <% @choices.each do |choice| %>
-      <li><%= choice.text %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>このコースにはクイズが登録されていません。</p>
-<% end %>
+<%= form_with url: answer_quiz_path(id: @index), method: :post, local: true do |form| %>
+
+  <% @choices.each do |choice| %>
+    <li><%= choice.text %></li>
+  <% end %>
+
