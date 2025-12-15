@@ -9,7 +9,7 @@
           （全<%= course.max_questions %>問）
         </p>
         <p>
-          <%= link_to "このコースでクイズを開始する", play_course_path(course) %>
+          <%= link_to "このコースでクイズを開始する", course_play_path(course, 1, quiz_start: true) %>
         </p>
       </li>
     <% end %>
