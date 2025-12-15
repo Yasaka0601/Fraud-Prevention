@@ -24,19 +24,18 @@ Rails.application.routes.draw do
       resources :invitations, only: %i[ show new create edit update ]
   end
 
-  # categories に courses をネストさせたいだけなので、only 指定はしない。
+# categories に courses をネストさせたいだけなので、only 指定はしない。
   resources :categories, only: [] do
     resources :courses, only: [:index]
   end
 
-  # クイズ画面のルーティング。/courses/:course_id/play/:id というパスを生成している。
+# クイズ画面のルーティング。
+# /courses/:course_id/play/:id というパスを生成している。
+# :play に post :answer をネストさせ /courses/:course_id/play/:id/answer パスを生成。
   resources :courses, only: [] do
-    resources :play, only: [:show], controller: 'plays'
-    # post :answer, on: :member
-    # collection do
-    #   get :select
-    #   get :result
-    # end
+    resources :play, only: [:show], controller: 'plays' do
+      post :answer, on: :member
+    end
   end
 
   ##### アプリが動いているかhealth_checkするルート。 #####
