@@ -16,6 +16,7 @@ class PlaysController < ApplicationController
     @choices = @quiz.choices
 
     # session[:answers] が nil なら []（空配列）を代わりに使う
+    # session[:answers] が nil の場合は []（空配列）として扱うことでエラーを防ぐ。
     # その配列の「@index - 1 番目」に保存されている choice_id を取り出している
     # → すでに回答済みなら、その choice_id が入っている（＝「戻る」したときに復元できる）
     @selected_choice_id = (session[:answers] || [])[ @index - 1 ]
@@ -25,7 +26,7 @@ class PlaysController < ApplicationController
   def answer
     index = params[:id].to_i
 
-    # session[:answers] が nil のときだけ [] で初期化（すでに配列があればそれを使う）
+    # session[:answers] が nil のときだけ [] にする。（エラー回避のため）
     session[:answers] ||= []
 
     # 今の問題(index問目)でユーザーが選んだ choice_id を配列の index-1 番目に保存
@@ -48,12 +49,12 @@ class PlaysController < ApplicationController
 
   # 一度のプレイで出す問題リストを session に用意する。
   def prepare_quiz_session
-    # クイズ開始ボタンから来たとき（?quiz_start=true 付き）####未実装####
+    # クイズ開始ボタンから来たとき（クエリパラメータに quiz_start=true 付き）
     if params[:quiz_start].present?
       # セッションをリセットしている
       session[:quiz_ids] = nil
       session[:answers] = []
-      # コースの1問目にリダイレクトしている。
+      # courses/:course_id/play/:id にリダイレクトしている。
       redirect_to course_play_path(@course, 1)
       # redirect なので return で終了させる必要がある。
       return

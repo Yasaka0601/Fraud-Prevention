@@ -5,11 +5,7 @@
     <% @courses.each do |course| %>
       <li>
         <p>
-          <strong><%= course.name %></strong>
-          （全<%= course.max_questions %>問）
-        </p>
-        <p>
-          <%= link_to "このコースでクイズを開始する", course_play_path(course, 1, quiz_start: true) %>
+          <%= link_to course.name , course_play_path(course, 1, quiz_start: true) %>
         </p>
       </li>
     <% end %>
