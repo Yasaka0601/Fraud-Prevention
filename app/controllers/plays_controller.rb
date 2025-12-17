@@ -6,15 +6,29 @@ class PlaysController < ApplicationController
   def show
     # 正解が、２個以上なら、複数選択問題とみなす。
     @multiple_answer = @choices.where(is_correct: true).count > 1
-    # session[:answers] が nil なら []（空配列）を代わりに使う
-    # session[:answers] が nil の場合は []（空配列）として扱うことでエラーを防ぐ。
-    # その配列の「@index - 1 番目」に保存されている choice_id を取り出している
-    # → すでに回答済みなら、その choice_id が入っている（＝「戻る」したときに復元できる）
+    stored_answer = (session[:answers] || [])[ @index - 1 ]
+
     if @multiple_answer
-      stored = (session[:answers] || [])[ @index - 1]
-      @selected_choice_ids = Array(stored).map(&:to_i)
+      ##### 複数選択肢の場合。#####
+      @selected_choice_ids = Array(stored_answer).map(&:to_i)
+
+      if @selected_choice_ids.present?
+        # 正解の選択肢
+        correct_ids = @choices.where(is_correct: true).pluck(:id)
+        @multi_correct_choices = @choices.where(id: correct_ids)
+        @is_correct = (@selected_choice_ids.sort == correct_ids.sort)
+      end
     else
-      @selected_choice_id = (session[:answers] || [])[ @index - 1 ]
+      ##### 単一選択の場合 #####
+      @selected_choice_id = stored_answer
+
+      if @selected_choice_id.present?
+        selected_choice = @choices.find_by(id: @selected_choice_id)
+        correct_choice = @choices.find_by(is_correct: true)
+
+        @correct_choice = correct_choice
+        @is_correct = (selected_choice == correct_choice)
+      end
     end
   end
 
@@ -25,50 +39,17 @@ class PlaysController < ApplicationController
 
     if @choices.where(is_correct: true).count > 1
       ##### 複数選択問題（チェックボックス）の場合 #####
-
       # params[:selected_choice_ids] は ["3", "5", ...] みたいな配列で来る想定
       selected_ids = Array(params[:selected_choice_ids]).map(&:to_i).uniq
-
-      # 正解の選択肢
-      correct_ids = @choices.where(is_correct: true).pluck(:id)
-
       # セッションで、選んだid の配列を残しておく。
       session[:answers][@index - 1] = selected_ids
-
-      @selected_choice_ids = selected_ids
-      @multi_correct_choices = @choices.where(id: correct_ids)
-      @is_correct = (selected_ids.sort == correct_ids.sort)
     else
-      ##### 単一選択問題（ラジオボタン）の場合 #####
-      selected_id = params[:selected_choice].presence
-
       # 今の問題(index問目)でユーザーが選んだ choice_id を配列の index-1 番目に保存
       session[:answers][@index - 1] = params[:selected_choice]
-
-      @selected_choice_id = selected_id
-
-      # /courses/:course_id/play/:id/answer から、id と body の :selected_choice を受け取る。
-      selected_choice = @choices.find_by(id: params[:selected_choice])
-
-      # 解答を取得している。
-      correct_choice  = @choices.find_by(is_correct: true)
-
-      # 正解の選択肢を @correct_choice に代入している。
-      @correct_choice = correct_choice
-      # 答え合わせをして、@is_correct に代入している。同じなら true、違えば false
-      @is_correct = (selected_choice == correct_choice)
     end
-
-    render :show
-
-    # # 問題番号(index)が、問題数(quiz_ids.size)以上なら「最後の問題を解き終わった」とみなす
-    # if @index >= session[:quiz_ids].size
-    #   redirect_to home_rooms_path# 成績表示のページは未実装なので、一旦 homeへ。
-    # else
-    #   # 次の問題へリダイレクト。
-    #   redirect_to course_play_path(@course, @index + 1)
-    # end
+    redirect_to course_play_path(@course, @index)
   end
+
 
   private
   # どのコースをプレイ中か特定している。
@@ -115,5 +96,4 @@ class PlaysController < ApplicationController
   def set_choices
     @choices = @quiz.choices
   end
-
 end
