@@ -9,7 +9,7 @@ class PlaysController < ApplicationController
     stored_answer = (session[:answers] || [])[ @index - 1 ]
 
     if @multiple_answer
-      ##### 複数選択肢の場合。#####
+      ##### 複数選択肢の場合。 #####
       @selected_choice_ids = Array(stored_answer).map(&:to_i)
 
       if @selected_choice_ids.present?
