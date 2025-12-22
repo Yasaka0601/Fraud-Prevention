@@ -11,4 +11,5 @@ class Course < ApplicationRecord
 
   has_many :course_quizzes, dependent: :destroy
   has_many :quizzes, through: :course_quizzes
+  has_many :course_results, dependent: :destroy
 end

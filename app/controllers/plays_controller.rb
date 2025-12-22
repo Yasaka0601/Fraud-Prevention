@@ -40,7 +40,6 @@ class PlaysController < ApplicationController
   end
 
   def answer
-
     # session[:answers] が nil のときだけ [] にする。（エラー回避のため）
     session[:answers] ||= []
 
@@ -54,7 +53,23 @@ class PlaysController < ApplicationController
       # 今の問題(index問目)でユーザーが選んだ choice_id を配列の index-1 番目に保存
       session[:answers][@index - 1] = params[:selected_choice]
     end
-    redirect_to course_play_path(@course, @index)
+
+    # 最後の問題、途中の問題で条件を分岐。
+    if @index >= session[:quiz_ids].size
+      # 最後の問題の場合。
+      # build_from_session! に引数を与え、生成したオブジェクトを変数に代入。
+      course_result = CourseResult.build_from_session!(
+        user: current_user,
+        course: @course,
+        quiz_ids: session[:quiz_ids],
+        answers: session[:answers]
+      )
+
+      redirect_to result_path(course_result)
+    else
+      # 次の問題へリダイレクトする。
+      redirect_to course_play_path(@course, @index)
+    end
   end
 
 
