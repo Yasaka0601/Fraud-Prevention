@@ -45,7 +45,6 @@
 <% end %>
 
 <% unless @is_correct.nil? %>
-  <hr>
 
   <% if @is_correct %>
     <p>✅正解✅</p>
@@ -67,7 +66,7 @@
   <% end %>
 
   <p>
-     <% if @index == 5 %>
+    <% if @index == 5 %>
       <%= "結果発表" %>
     <% else %>
       <%= link_to "次の問題へ進む", course_play_path(@course, @index + 1) %>

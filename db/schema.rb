@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_14_053637) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_22_045055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_14_053637) do
     t.index ["quiz_id"], name: "index_course_quizzes_on_quiz_id"
   end
 
+  create_table "course_results", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.integer "correct_count", default: 0, null: false
+    t.integer "total_questions", default: 0, null: false
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_results_on_course_id"
+    t.index ["user_id"], name: "index_course_results_on_user_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.string "name", null: false
@@ -63,6 +76,26 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_14_053637) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_quiz_categories_on_category_id"
     t.index ["quiz_id"], name: "index_quiz_categories_on_quiz_id"
+  end
+
+  create_table "quiz_histories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_result_id", null: false
+    t.bigint "quiz_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_result_id"], name: "index_quiz_histories_on_course_result_id"
+    t.index ["quiz_id"], name: "index_quiz_histories_on_quiz_id"
+    t.index ["user_id"], name: "index_quiz_histories_on_user_id"
+  end
+
+  create_table "quiz_history_choices", force: :cascade do |t|
+    t.bigint "quiz_history_id", null: false
+    t.bigint "choice_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["choice_id"], name: "index_quiz_history_choices_on_choice_id"
+    t.index ["quiz_history_id"], name: "index_quiz_history_choices_on_quiz_history_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -100,9 +133,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_14_053637) do
   add_foreign_key "choices", "quizzes"
   add_foreign_key "course_quizzes", "courses"
   add_foreign_key "course_quizzes", "quizzes"
+  add_foreign_key "course_results", "courses"
+  add_foreign_key "course_results", "users"
   add_foreign_key "courses", "categories"
   add_foreign_key "invitations", "rooms"
   add_foreign_key "quiz_categories", "categories"
   add_foreign_key "quiz_categories", "quizzes"
+  add_foreign_key "quiz_histories", "course_results"
+  add_foreign_key "quiz_histories", "quizzes"
+  add_foreign_key "quiz_histories", "users"
+  add_foreign_key "quiz_history_choices", "choices"
+  add_foreign_key "quiz_history_choices", "quiz_histories"
   add_foreign_key "users", "rooms"
 end
