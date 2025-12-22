@@ -66,9 +66,9 @@
   <% end %>
 
   <p>
-    <% if @index == 5 %>
-      <%= "結果発表" %>
-    <% else %>
+    <% if @index == 5 && @course_result_id.present? %>
+      <%= link_to "結果発表", result_path(@course_result_id) %>
+    <% elsif @index < 5 %>
       <%= link_to "次の問題へ進む", course_play_path(@course, @index + 1) %>
     <% end %>
   </p>
