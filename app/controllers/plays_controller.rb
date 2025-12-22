@@ -10,6 +10,9 @@ class PlaysController < ApplicationController
     # 自分の回答を変数に代入。
     stored_answer = (session[:answers] || [])[ @index - 1 ]
 
+    # 最後の問題用に、「結果発表」で飛ぶ先の id を覚えておく
+    @course_result_id = params[:result_id].presence&.to_i
+
     if @multiple_answer
       ##### 複数選択肢の場合。 #####
       # 自分の回答を整数 id に変換して@selected_choice_ids に代入。
@@ -65,7 +68,7 @@ class PlaysController < ApplicationController
         answers: session[:answers]
       )
 
-      redirect_to result_path(course_result)
+      redirect_to course_play_path(@course, @index, result_id: course_result.id)
     else
       # 次の問題へリダイレクトする。
       redirect_to course_play_path(@course, @index)
