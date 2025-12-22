@@ -28,6 +28,8 @@ ja:
         sentence: 問題文
         explanation: 解説
         give_point: 与えるポイント
+        categories: カテゴリー
+        choices: 選択肢
         created_at: 作成日
         updated_at: 更新日
 
@@ -87,6 +89,9 @@ ja:
       course: コース
       choice: クイズの選択肢
       category: カテゴリー
+      course_result: コースの成績
+      quiz_history: クイズの成績
+      quiz_history_choice: ユーザーの回答
 
   errors:
     messages:
