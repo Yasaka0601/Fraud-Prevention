@@ -1,0 +1,72 @@
+<h1><%= @course_result.course.name %> コースの結果</h1>
+
+<p>
+  全 <%= @course_result.total_questions %> 問中
+  <%= @course_result.correct_count %> 問正解
+</p>
+
+<hr>
+
+<% @quiz_histories.each_with_index do |history, i| %>
+  <% quiz = history.quiz %>
+  <% correct_choices  = quiz.choices.select(&:is_correct) %>
+  <% selected_choices = history.choices.to_a %>
+
+  <% correct_ids  = correct_choices.map(&:id).sort %>
+  <% selected_ids = selected_choices.map(&:id).sort %>
+  <% is_correct   = (correct_ids == selected_ids) %>
+
+  <section style="margin-bottom: 2rem;">
+    <h2>第 <%= i + 1 %> 問</h2>
+
+    <p>問題：<%= quiz.sentence %></p>
+
+    <p>あなたの回答：</p>
+    <% if selected_choices.present? %>
+      <% if selected_choices.size == 1 %>
+        <p>・<%= selected_choices.first.text %></p>
+      <% else %>
+        <ul>
+          <% selected_choices.each do |choice| %>
+            <li><%= choice.text %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% else %>
+      <p>（無回答）</p>
+    <% end %>
+
+    <p>正解：</p>
+    <% if correct_choices.size == 1 %>
+      <p>・<%= correct_choices.first.text %></p>
+    <% else %>
+      <ul>
+        <% correct_choices.each do |choice| %>
+          <li><%= choice.text %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <p>
+      結果：
+      <% if is_correct %>
+        ✅ 正解
+      <% else %>
+        ❌ 不正解
+      <% end %>
+    </p>
+
+    <% if quiz.explanation.present? %>
+      <p>解説：<%= quiz.explanation %></p>
+    <% end %>
+  </section>
+
+  <hr>
+<% end %>
+
+<p>
+  <%= link_to "成績一覧へ", results_path %>
+</p>
+<p>
+  <%= link_to "ホームへ", home_path %>
+</p>
