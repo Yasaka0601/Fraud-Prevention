@@ -5,8 +5,11 @@
   <%= @course_result.correct_count %> 問正解
 </p>
 
-<hr>
+<p>
+  今回の獲得ポイント : <%= @get_point %> ❗️
+</p>
 
+<hr>
 <% @quiz_histories.each_with_index do |history, i| %>
   <% quiz = history.quiz %>
   <% correct_choices  = quiz.choices.select(&:is_correct) %>

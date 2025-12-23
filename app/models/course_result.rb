@@ -11,6 +11,8 @@ class CourseResult < ApplicationRecord
     total_questions = quiz_ids.size
     # 正解数をカウントする変数。
     correct_count = 0
+    # ポイントをカウントする変数。
+    get_point = 0
 
     # 受け取った引数や、上記の変数で CourseResult モデルのオブジェクトを生成。
     course_result = CourseResult.create!(
@@ -40,13 +42,21 @@ class CourseResult < ApplicationRecord
 
       # 正解の選択肢を取得し、id を抽出し、ソートして代入。
       correct_ids = quiz.choices.where(is_correct: true).pluck(:id).sort
-      # 答え合わせをして、正解(true) であれば、correct_count に 1 を追加。
-      correct_count += 1 if selected_ids.sort == correct_ids
+      # 答え合わせをしている。正解であれば true
+      if selected_ids.sort == correct_ids
+        correct_count += 1 #正解数に 1 を追加。
+        get_point += quiz.give_point.to_i #正解したクイズのポイントを追加。
+      end
     end
     # 正解数を最新の状態にアップデート
     course_result.update!(correct_count: correct_count)
     # 最新の１０件のみを保存。１１件目以降は、古い成績が削除される。
     user.course_results.order(created_at: :desc).offset(10).destroy_all
+    # ユーザーの total_point にget_point を加算。positive? でポイントが 1 以上か判定。
+    if get_point.positive?
+      # increment! は ActiveRecord の数値カラムを加算し、保存するメソッド。
+      user.increment!(:total_point, get_point)
+    end
     # メソッドの戻り値
     course_result
   end
