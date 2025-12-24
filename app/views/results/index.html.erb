@@ -1,0 +1,51 @@
+<h1>成績</h1>
+
+<%= form_with url: results_path, method: :get, local: true do %>
+  <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+    <div>
+      <label>カテゴリ</label><br>
+      <%= select_tag :category_id,
+            options_from_collection_for_select(@category_options, :id, :name, params[:category_id]),
+            include_blank: "すべて" %>
+    </div>
+
+    <div>
+      <label>コース</label><br>
+      <%= select_tag :course_id,
+            options_from_collection_for_select(@course_options, :id, :name, params[:course_id]),
+            include_blank: "すべて" %>
+    </div>
+
+    <div>
+      <%= submit_tag "検索" %>
+      <%= link_to "クリア", results_path, style: "margin-left:8px;" %>
+    </div>
+  </div>
+<% end %>
+
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>日時</th>
+      <th>コース</th>
+      <th>正解数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @course_results.present? %>
+      <% @course_results.each do |r| %>
+        <tr>
+          <td><%= r.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= link_to r.course.name, result_path(r) %></td>
+          <td><%= "#{r.correct_count} / #{r.total_questions}" %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3">成績がありません</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
