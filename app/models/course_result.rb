@@ -50,8 +50,7 @@ class CourseResult < ApplicationRecord
     end
     # 正解数を最新の状態にアップデート
     course_result.update!(correct_count: correct_count)
-    # 最新の１０件のみを保存。１１件目以降は、古い成績が削除される。
-    user.course_results.order(created_at: :desc).offset(10).destroy_all
+
     # ユーザーの total_point にget_point を加算。positive? でポイントが 1 以上か判定。
     if get_point.positive?
       # increment! は ActiveRecord の数値カラムを加算し、保存するメソッド。
