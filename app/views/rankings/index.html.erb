@@ -1,0 +1,29 @@
+<h1>ランキング</h1>
+
+<div style="display:flex; gap:12px; margin-bottom:16px;">
+  <% scope = (@scope.presence || "room") %>
+
+  <%= link_to "家族ルーム内", rankings_path(scope: "room"),
+      style: "padding:8px 12px; border:1px solid #ccc; border-radius:8px; text-decoration:none; #{scope == "room" ? "font-weight:bold;" : ""}" %>
+
+  <%= link_to "全体", rankings_path(scope: "all"),
+      style: "padding:8px 12px; border:1px solid #ccc; border-radius:8px; text-decoration:none; #{scope == "all" ? "font-weight:bold;" : ""}" %>
+</div>
+
+<% if scope == "room" && current_user.room.blank? %>
+  <p>家族ルームに属していません。</p>
+<% else %>
+  <% if @users.present? %>
+    <ol>
+      <% @users.each_with_index do |user, i| %>
+        <li style="margin:8px 0;">
+          <strong><%= i + 1 %>位</strong>
+          <%= user.name %>
+          （<%= user.total_point %>pt）
+        </li>
+      <% end %>
+    </ol>
+  <% else %>
+    <p>ランキング対象がいません。</p>
+  <% end %>
+<% end %>

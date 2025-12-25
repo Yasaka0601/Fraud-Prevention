@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   get "results/users", to: "results#users", as: :result_users
   resources :results, only: [:index, :show]
 
+  ##### ランキングのルーティング #####
+  resources :rankings, only: [:index]
+
   ##### アプリが動いているかhealth_checkするルート。 #####
   get "up" => "rails/health#show", as: :rails_health_check
 
