@@ -22,5 +22,7 @@ class Room < ApplicationRecord
 
     # 一般ユーザーは、room_id を nil にする。
     users.general.update_all(room_id: nil)
+    # admin についても、room_id を nil にする。
+    users.admin.update_all(room_id: nil)
   end
 end
