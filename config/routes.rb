@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get "home", to: "homes#home"
 
+  ##### 家族ルームのルーティング #####
   resources :rooms, only: %i[new create edit update destroy] do
     collection do
       get :home
@@ -24,21 +25,23 @@ Rails.application.routes.draw do
       resources :invitations, only: %i[ show new create edit update ]
   end
 
-##### categories に courses をネストさせたいだけなので、only 指定はしない。#####
+  ##### カテゴリーとコースのルーティング #####
+  # categories に courses をネストさせたいだけなので、only 指定はしない。
   resources :categories, only: [] do
     resources :courses, only: [:index]
   end
 
-##### クイズ画面のルーティング。#####
-# /courses/:course_id/play/:id というパスを生成している。
-# :play に post :answer をネストさせ /courses/:course_id/play/:id/answer パスを生成。
+  ##### クイズ画面のルーティング。#####
+  # /courses/:course_id/play/:id というパスを生成している。
+  # :play に post :answer をネストさせ /courses/:course_id/play/:id/answer パスを生成。
   resources :courses, only: [] do
     resources :play, only: [:show], controller: 'plays' do
       post :answer, on: :member
     end
   end
 
-##### 成績表示のルーティング #####
+  ##### 成績表示のルーティング #####
+  get "results/users", to: "results#users", as: :result_users
   resources :results, only: [:index, :show]
 
   ##### アプリが動いているかhealth_checkするルート。 #####
