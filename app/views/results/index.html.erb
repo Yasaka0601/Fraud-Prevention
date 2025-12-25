@@ -35,11 +35,11 @@
   </thead>
   <tbody>
     <% if @course_results.present? %>
-      <% @course_results.each do |r| %>
+      <% @course_results.each do |result| %>
         <tr>
-          <td><%= r.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-          <td><%= link_to r.course.name, result_path(r) %></td>
-          <td><%= "#{r.correct_count} / #{r.total_questions}" %></td>
+          <td><%= result.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= link_to "#{result.course.name}の詳細", result_path(result, user_id: params[:user_id]) %></td>
+          <td><%= "#{result.correct_count} / #{result.total_questions}" %></td>
         </tr>
       <% end %>
     <% else %>
