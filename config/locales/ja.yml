@@ -17,6 +17,7 @@ ja:
         updated_at: 更新日
         room: 家族ルーム
         room_id: 家族ルーム
+        image: アイコン画像
 
       room:
         name: 家族ルーム名

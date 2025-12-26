@@ -36,6 +36,12 @@ class User < ApplicationRecord
   with_options if: :child? do
     validates :room_id, presence: true
   end
+
+  ##### 画像ファイルの種類とサイズのバリデーション #####
+  ACCEPTED_CONTENT_TYPES = %w[image/jpeg image/png image/gif image/webp].freeze
+  validates :image, content_type: ACCEPTED_CONTENT_TYPES,
+                    size: { less_than_or_equal_to: 5.megabytes }
+
 end
 
 #####  メモ   #####

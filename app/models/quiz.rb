@@ -7,6 +7,11 @@ class Quiz < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :sentence, presence: true
 
+  # 画像ファイルの種類とサイズのバリデーション
+  ACCEPTED_CONTENT_TYPES = %w[image/jpeg image/png image/gif image/webp].freeze
+  validates :image, content_type: ACCEPTED_CONTENT_TYPES,
+                    size: { less_than_or_equal_to: 5.megabytes }
+
   ##### アソシエーション #####
   has_many :choices, dependent: :destroy
 
