@@ -5,6 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
+  ##### Active Storage #####
+  has_one_attached :image
+
   ##### アソシエーション #####
   # optional: true は、presence バリデーションを自動で付けさせないための記述。
   belongs_to :room, optional: true

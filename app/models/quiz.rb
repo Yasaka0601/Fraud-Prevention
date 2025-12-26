@@ -1,5 +1,8 @@
 class Quiz < ApplicationRecord
 
+  ##### Active Storage #####
+  has_one_attached :image
+
   ##### バリデーション #####
   validates :name, presence: true, length: { maximum: 50 }
   validates :sentence, presence: true
