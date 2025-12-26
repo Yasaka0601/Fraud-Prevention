@@ -6,6 +6,7 @@ ja:
         title: "新規登録"
         password: "パスワード(6文字以上)"
         submit: "登録"
+        image: "アイコン画像"
       edit:
         title: "ユーザー編集"
         submit: "更新"
