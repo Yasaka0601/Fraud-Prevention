@@ -59,6 +59,11 @@
         <li><%= correct.text %></li>
       <% end %>
     </ul>
+  <% else %>
+    <p>正解：</p>
+    <ul>
+      <li><%= @correct_choice.text %></li>
+    </ul>
   <% end %>
 
   <% if @quiz.explanation.present? %>
