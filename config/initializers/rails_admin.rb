@@ -52,22 +52,40 @@ RailsAdmin.config do |config|
       field :name
       field :categories
       field :give_point
+      field :image
     end
 
     edit do
       field :name
+
       field :sentence do
         label '問題文'
         html_attributes rows: 10
+      end
+
+      field :image, :active_storage do
+        label '問題画像'
+        help 'JPEG / PNG / GIF / WebP（5MBまで）'
       end
 
       field :explanation do
         label '解説'
         html_attributes rows: 10
       end
+
       field :give_point
       field :categories
       field :choices
+    end
+
+    show do
+      field :id
+      field :name
+      field :sentence
+      field :image, :active_storage
+      field :explanation
+      field :give_point
+      field :categories
     end
   end
 end
