@@ -4,6 +4,15 @@
 
   <h2> 第 <%= @index %> 問 </h2>
   <p><%= @quiz.sentence %></p>
+  <ul>
+    <p>
+      <% if @quiz.image.attached? %>
+        <div class="quiz-image">
+          <%= image_tag @quiz.image, style: "max-width: 30%; height: auto;" %>
+        </div>
+      <% end %>
+    </p>
+  </ul>
 
 <%= form_with url: answer_course_play_path(@course, @index), method: :post, local: true, data: { turbo: false } do |form| %>
   <% if @multiple_answer %>
@@ -67,7 +76,9 @@
   <% end %>
 
   <% if @quiz.explanation.present? %>
-    <p>解説： <%= @quiz.explanation %></p>
+    <ul>
+      <p>解説： <%= @quiz.explanation %></p>
+    </ul>
   <% end %>
 
   <p>
