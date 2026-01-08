@@ -6,4 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     home_path
   end
 
+  # アカウント情報を編集した際、パスワードの要求を省略する。
+  def update_resource(resource, params)
+    resource.update_without_current_password(params)
+  end
+
 end

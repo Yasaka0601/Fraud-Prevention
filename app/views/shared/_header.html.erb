@@ -1,25 +1,21 @@
 <header class="site-header">
   <div class="header-inner">
-    <!-- 左側：ロゴ（未ログインならトップ画面、ログインならホーム画面へ） -->
     <%= link_to (user_signed_in? ? home_path : root_path), class: "header-logo-link" do %>
       <%= image_tag "header_logo.png", alt: "詐欺対策道場", class: "header-logo" %>
     <% end %>
 
-    <!-- 右側：未ログインなら「新規登録」、ログイン中なら名前＋ログアウト -->
     <nav class="header-nav">
       <% if user_signed_in? %>
-        <span class="header-username">
-          <%= current_user.name.presence || "ゲスト" %> さん
-        </span>
-
-        <%= button_to "ログアウト",
-                      destroy_user_session_path,
-                      method: :delete,
-                      class: "header-logout-button" %>
+        <%= link_to edit_user_registration_path, class: "header-user-link" do %>
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image,
+                          class: "header-user-avatar",
+                          alt: current_user.name %>
+          <% end %>
+          <span class="header-user-name"><%= current_user.name %></span>
+        <% end %>
       <% else %>
-        <%= link_to "新規登録",
-                    new_user_registration_path,
-                    class: "header-link" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "header-link" %>
       <% end %>
     </nav>
   </div>
