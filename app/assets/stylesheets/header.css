@@ -49,10 +49,30 @@
 }
 
 /* ログイン中に表示するユーザー名 */
-.header-username {
+.header-user-name {
   font-size: 0.95rem;
   font-weight: bold;
   color: #333333;
+}
+
+/* ユーザーアイコン（ヘッダー右上） */
+.header-user-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;           /* 画像と名前の隙間 */
+  text-decoration: none;
+  line-height: 1;
+}
+
+.header-user-avatar {
+  width: 45px;
+  height: 45px;
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex: 0 0 24px; /* flexで引き伸ばされるのを防ぐ */
 }
 
 /************ ログアウトボタン ************/

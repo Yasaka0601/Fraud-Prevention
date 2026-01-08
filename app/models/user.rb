@@ -42,6 +42,20 @@ class User < ApplicationRecord
   validates :image, content_type: ACCEPTED_CONTENT_TYPES,
                     size: { less_than_or_equal_to: 5.megabytes }
 
+  ##### ユーザー情報更新時、current_password 要求を省略するメソッド #####
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation)
+    end
+
+    result = update(params, *options)
+    clean_up_passwords
+    result
+  end
+
 end
 
 #####  メモ   #####
