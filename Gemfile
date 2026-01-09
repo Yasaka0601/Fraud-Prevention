@@ -84,3 +84,7 @@ gem 'devise-i18n'
 gem "rails_admin", "~> 3.0"
 gem "cancancan"
 gem "sassc-rails"
+
+##### LINE 認証 #####
+gem 'omniauth-line'
+gem 'omniauth-rails_csrf_protection'
