@@ -3,7 +3,8 @@ class User < ApplicationRecord
   ##### devise のモジュールを適用させている記述。#####
   # :validatable これは、子ユーザーの実装のために排除。
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
+         :recoverable, :rememberable, :omniauthable,
+         omniauth_providers: %i[line]
 
   ##### Active Storage #####
   has_one_attached :image
