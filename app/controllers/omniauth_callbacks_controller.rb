@@ -5,21 +5,24 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
-  
+
   def basic_action
-    @omniauth = request.env["omniauth.auth"]
-    if @omniauth.present?
-      @profile = User.find_or_initialize_by(provider: @omniauth["provider"], uid: @omniauth["uid"])
-      if @profile.email.blank?
-        email = @omniauth["info"]["email"] ? @omniauth["info"]["email"] : "#{@omniauth["uid"]}-#{@omniauth["provider"]}@example.com"
-        @profile = current_user || User.create!(provider: @omniauth["provider"], uid: @omniauth["uid"], email: email, name: @omniauth["info"]["name"], password: Devise.friendly_token[0, 20])
-      end
-      @profile.set_values(@omniauth)
-      sign_in(:user, @profile)
+    auth = request.env["omniauth.auth"]
+    return redirect_to(root_path, alert: "認証情報が取得できませんでした") unless auth.present?
+    user = User.find_or_initialize_by(provider: auth["provider"], uid: auth["uid"])
+    if user.new_record?
+      email = auth.dig("info", "email").presence || "#{auth["uid"]}-#{auth["provider"]}@example.com"
+      password = Devise.friendly_token[0, 20]
+      user.assign_attributes(
+        email: email,
+        name: auth.dig("info", "name"),
+        password: password,
+        password_confirmation: password)
+      user.save!
     end
-    #ログイン後のflash messageとリダイレクト先を設定
-    flash[:notice] = "ログインしました"
-    redirect_to expendable_items_path
+    user.set_values(auth)
+    sign_in(:user, user)
+    redirect_to home_path, notice: "ログインしました"
   end
 
   def fake_email(uid, provider)
