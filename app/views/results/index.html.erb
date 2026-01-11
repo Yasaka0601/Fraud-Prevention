@@ -42,6 +42,7 @@
           <td><%= "#{result.correct_count} / #{result.total_questions}" %></td>
         </tr>
       <% end %>
+    <%= paginate @course_results %>
     <% else %>
       <tr>
         <td colspan="3">成績がありません</td>

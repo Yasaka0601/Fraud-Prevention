@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   def home
     @room = current_user.room
     # ルームに属していれば、メンバー一覧を代入。いなければ空配列を代入。
-    @room_members = @room ? @room.users : []
+    @room_members = @room ? @room.users.page(params[:page]).per(10) : []
   end
 
   def new

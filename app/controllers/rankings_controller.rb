@@ -9,6 +9,14 @@ class RankingsController < ApplicationController
         User.all
       end
 
-    @users = base.order(total_point: :desc, id: :asc)
+    ranked =
+      base
+        .select("users.*, DENSE_RANK() OVER  (ORDER BY users.total_point DESC) AS point_rank")
+        .order(total_point: :desc, id: :asc)
+
+    @users = ranked.page(params[:page]).per(10)
+    points = @users.map(&:total_point).uniq
+    @tie_counts =
+    points.empty? ? {} : base.where(total_point: points).group(:total_point).count
   end
 end
