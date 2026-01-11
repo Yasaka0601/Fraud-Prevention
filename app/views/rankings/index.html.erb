@@ -15,14 +15,17 @@
 <% else %>
   <% if @users.present? %>
     <ol>
-      <% @users.each_with_index do |user, i| %>
+      <% @users.each do |user| %>
+        <% is_tie = @tie_counts[user.total_point].to_i > 1 %>
+
         <li style="margin:8px 0;">
-          <strong><%= i + 1 %>位</strong>
+          <strong><%= is_tie ? "#{user.point_rank}位" : "#{user.point_rank}位" %></strong>
           <%= user.name %>
           （<%= user.total_point %>pt）
         </li>
       <% end %>
     </ol>
+  <%= paginate @users %>
   <% else %>
     <p>ランキング対象がいません。</p>
   <% end %>

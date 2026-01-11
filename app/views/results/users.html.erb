@@ -7,6 +7,7 @@
       <%= link_to "#{user.name} の成績", results_path(user_id: user.id) %>
       </li>
     <% end %>
+  <%= paginate @room_users %>
   <% else %>
     <%= link_to "自分の成績", results_path(user_id: current_user.id) %>
     <p>家族ルームに参加すれば、同じルーム内の人の成績を閲覧することができます。</P>

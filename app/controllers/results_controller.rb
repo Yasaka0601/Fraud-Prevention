@@ -3,7 +3,7 @@ class ResultsController < ApplicationController
 
   def users
     # none はActiveRecord で空の検索結果を返す。
-    @room_users = current_user.room ? current_user.room.users.order(:id) :  User.none
+    @room_users = current_user.room ? current_user.room.users.order(:id).page(params[:page]).per(10) :  User.none
   end
 
   def index
@@ -30,7 +30,7 @@ class ResultsController < ApplicationController
     user_result = user_result.where(courses: { category_id: params[:category_id] }) if params[:category_id].present?
 
     # 絞り込みの結果をインスタンス変数に代入している。N + 1 対策済み
-    @course_results = user_result.includes(:course).order(created_at: :desc)
+    @course_results = user_result.includes(:course).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show

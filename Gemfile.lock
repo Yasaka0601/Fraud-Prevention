@@ -513,6 +513,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
+  kaminari
   letter_opener_web
   omniauth-line
   omniauth-rails_csrf_protection

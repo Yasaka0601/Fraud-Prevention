@@ -9,6 +9,7 @@
       <li><%= member.name %></li>
     <% end %>
   </ul>
+  <%= paginate @room_members %>
 <% else %>
   <p>現在家族ルームに属していません</p>
 <% end %>
