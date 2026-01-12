@@ -6,12 +6,8 @@
 
     <nav class="header-nav">
       <% if user_signed_in? %>
-        <%= link_to edit_user_registration_path, class: "header-user-link" do %>
-          <% if current_user.image.attached? %>
-            <%= image_tag current_user.image,
-                          class: "header-user-avatar",
-                          alt: current_user.name %>
-          <% end %>
+        <%= link_to edit_user_registration_path, class: "user-link" do %>
+          <%= avatar_image_tag(current_user) %>
           <span class="header-user-name"><%= current_user.name %></span>
         <% end %>
       <% else %>

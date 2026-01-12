@@ -1,0 +1,98 @@
+/***** ランキングのCSS *****/
+
+.ranking-title {
+  max-width: 960px;
+  margin: 24px auto 16px;
+  padding: 0 16px;
+}
+
+/* scope switch */
+.ranking-scope {
+  max-width: 960px;
+  margin: 0 auto 16px;
+  padding: 0 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.ranking-scope__link {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  display: inline-block;
+}
+
+.ranking-scope__link.is-active {
+  font-weight: bold;
+}
+
+/* list */
+.ranking-list {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.ranking-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* rank column width for alignment */
+.ranking-rank {
+  width: 64px;
+  flex: 0 0 64px;
+}
+
+/* avatar: ranking専用サイズにしたいならここで上書き */
+.ranking-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex: 0 0 32px;
+}
+
+.ranking-name {
+  font-weight: 700;
+}
+
+.ranking-point {
+  color: #666;
+}
+
+/* pagination */
+.ranking-pagination {
+  max-width: 960px;
+  margin: 16px auto 0;
+  padding: 0 16px;
+}
+
+/* empty text */
+.ranking-empty {
+  max-width: 960px;
+  margin: 16px auto 0;
+  padding: 0 16px;
+}
+
+/* back link */
+.ranking-back {
+  max-width: 960px;
+  margin: 20px auto 0;
+  padding: 0 16px;
+}
+
+.ranking-back__link {
+  text-decoration: none;
+}
+
+.ranking-back__link:hover,
+.ranking-back__link:focus {
+  text-decoration: underline;
+}
