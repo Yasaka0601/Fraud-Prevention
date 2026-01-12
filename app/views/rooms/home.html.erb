@@ -6,7 +6,10 @@
   <h2>この家族ルームのメンバー</h2>
   <ul>
     <% @room_members.each do |member| %>
-      <li><%= member.name %></li>
+      <li class="user-row">
+      <%= avatar_image_tag(member) %>
+      <%= member.name %>
+      </li>
     <% end %>
   </ul>
   <%= paginate @room_members %>
