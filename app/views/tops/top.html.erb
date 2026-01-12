@@ -1,8 +1,19 @@
-<div class="home-page">
-  <%= image_tag "logo.png", alt: "詐欺対策道場",class: "home-logo" %>
+<div class="top-page">
+  <div class="top-container">
+    <div class="top-signboard">
+      <%= image_tag "logo.png", alt: "詐欺対策道場", class: "top-logo" %>
+    </div>
 
-    <%= link_to "新規登録", new_user_registration_path, class: "home-button" %>
+    <p class="top-description">
+      その電話、ほんまに安全？<br>
+      そのメール、ほんまに安全？<br>
+      ここで稽古をして<br>
+      詐欺を見抜く力を鍛えよう。
+    </p>
 
-    <%= link_to "ログイン", new_user_session_path, class: "home-button" %>
-
+    <div class="top-actions">
+      <%= link_to "入門する", new_user_registration_path, class: "top-btn top-btn--primary" %>
+      <%= link_to "稽古再開（ログイン）", new_user_session_path, class: "top-btn top-btn--outline" %>
+    </div>
+  </div>
 </div>
