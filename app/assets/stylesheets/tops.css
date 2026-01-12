@@ -1,34 +1,138 @@
-/****** トップ画面のCSS  *****/
+/* ===== トップページ（構造） ===== */
+.top-page {
+  flex: 1;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 
-/*　　ロゴマーク　　*/
-.home-logo {
-  display: block;       /* 画像をインライン要素からブロック要素にして、幅指定や中央寄せをしやすくする */
-  max-width: 40%;       /* 親要素の幅に対して、最大で40%の横幅までに縮める（スマホで大きくなりすぎないように） */
-  height: auto;         /* 縦横比を保ったまま高さを自動調整する（画像が縦に潰れたり伸びたりしないように） */
-  margin: 0 auto 24px;  /* 上：0px／左右：autoで中央寄せ／下：24px の余白をつける */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+
+  background-color: #F7F3E8;
+  background-image:
+    radial-gradient(#1F2F54 0.5px, transparent 0.5px),
+    radial-gradient(#1F2F54 0.5px, #F7F3E8 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
 }
 
-/*　　　ホーム画面全体のレイアウト　　*/
-.home-page {
-  max-width: 960px;    /* 画面の最大幅を960pxに制限（PCで横に広がりすぎないようにする） */
-  margin: 0 auto;      /* 左右のマージンをautoにして、画面中央に配置する */
-  padding: 40px 16px;  /* 上下40px／左右16pxの内側余白をつけて、中身が端にくっつかないようにする */
+/* 背景パターン薄めるオーバーレイ */
+.top-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(247, 243, 232, 0.9);
+  z-index: 0;
 }
 
-/*　　　ボタン　　*/
-.home-button {
-  display: block;           /* aタグ全体をブロック化して、ボタンの範囲全体をクリックできるようにする */
-  font-size: 1.375rem;      /* ボタン内の文字を少し大きめにする（ベースの1.375倍のサイズ） */
-  background: rgba(77, 221, 0, 0.711);
-  color: #000;
-  border-radius: 10px;      /* 角を10pxだけ丸くする */
-  padding: 18px 32px;       /* 上下18px／左右32pxの内側余白で、押しやすいサイズのボタンにする */
-  margin: 0 auto 24px;      /* 上：0px／左右：autoでボタンを中央寄せ／下に24pxの余白をあけてボタン同士を離す */
-  width: 200px;             /* ボタンの幅を200pxで固定する（ボタンの横幅が揃う） */
-  text-align: center;       /* ボタン内のテキスト（aタグ）を中央寄せにする */
-  text-decoration: none;    /* リンクの下線を消して、ボタンらしい見た目にする */
+.top-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.home-buttons:hover {
-  background: #11aa00d2;    /* ホバー時だけ少し濃い緑色にして、「押せそう」な感じを出す */
+/* ===== ロゴ ===== */
+.top-signboard {
+  width: 100%;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.top-logo {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+/* ===== 説明文 ===== */
+.top-description {
+  margin: 0 0 28px;
+  text-align: center;
+  color: #1F2F54;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+  max-width: 34ch;
+}
+
+/* ===== ボタン ===== */
+.top-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top-btn {
+  width: 100%;
+  padding: 16px 14px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-family: "Noto Serif JP", serif;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 120ms ease, box-shadow 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.top-btn:active {
+  transform: scale(0.98);
+}
+
+/* 朱：入門する */
+.top-btn--primary {
+  background: #C63D2F;
+  color: #fff;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+}
+
+.top-btn--primary::after {
+  content: "›";
+  font-size: 22px;
+  line-height: 1;
+  margin-left: 10px;
+  transform: translateY(-1px);
+}
+
+.top-btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.18);
+  transform: skewX(-12deg) translateX(-120%);
+  transition: transform 700ms ease;
+}
+
+.top-btn--primary:hover::before {
+  transform: skewX(-12deg) translateX(120%);
+}
+
+/* 藍：ログイン */
+.top-btn--outline {
+  background: transparent;
+  color: #1F2F54;
+  border: 2px solid #1F2F54;
+}
+
+.top-btn--outline:hover {
+  background: #1F2F54;
+  color: #fff;
 }
