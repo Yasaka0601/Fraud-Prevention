@@ -6,6 +6,7 @@
 @import "./header.css";
 @import "./footer.css";
 @import "./ranking.css";
+@import url('https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap');
 /**********　ここに記述するのは共通のCSS ***********/
 
 /***** ユーザーが指定した文字サイズを正しく反映 ******/
