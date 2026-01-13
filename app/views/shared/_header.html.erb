@@ -1,4 +1,5 @@
-<header class="site-header">
+<header class="site-header"
+        style="background-image: url('<%= asset_path('yaki-ita.jpg') %>');">
   <div class="header-inner">
     <%= link_to (user_signed_in? ? home_path : root_path), class: "header-logo-link" do %>
       <span class="header-text">詐欺対策道場</span>
