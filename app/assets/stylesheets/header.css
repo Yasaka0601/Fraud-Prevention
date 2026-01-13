@@ -1,7 +1,7 @@
 /************ ヘッダー全体 ************/
 .site-header {
-  background: #ffffff;
-  border-bottom: 1px solid #dddddd;
+  background: url("/assets/yaki-ita.jpg") center / auto 100% repeat-x;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 /* 中身を左右に分けるコンテナ */
@@ -14,64 +14,33 @@
   justify-content: space-between;
 }
 
-/************ ロゴ部分 ************/
-
-/* ロゴ全体をクリックできるようにするリンク */
-.header-logo-link {
-  display: inline-flex;
-  align-items: center;
+/************ テキスト共通 ************/
+.header-text,
+.header-user-name {
+  color: #fff;
+  font-family: "Yuji Syuku", "Noto Serif JP", serif;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-/* 実際のロゴ画像。高さだけ決めて、横は自動調整。 */
-.header-logo {
-  height: 40px;      /* ヘッダーに収まるくらいのサイズ */
-  width: auto;
-  display: block;
+/* ロゴだけサイズと影を強める */
+.header-text {
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 /************ 右側ナビ部分 ************/
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 16px;         /* 「新規登録」や名前とボタンの間の隙間 */
+  gap: 16px;
 }
 
-/* 未ログイン時の「新規登録」リンク */
-.header-link {
-  text-decoration: none;
-  font-weight: bold;
-  color: #333333;
-}
-
-.header-link:hover,
-.header-link:focus {
-  text-decoration: underline;
-}
-
-/* ログイン中に表示するユーザー名 */
-.header-user-name {
-  font-size: 0.95rem;
-  font-weight: bold;
-  color: #333333;
-}
-
-/************ ログアウトボタン ************/
-
-/* button_to が生成する form にクラスが付くので、その見た目調整 */
-.header-logout-button {
-  margin: 0;
-  display: inline-block;
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border-radius: 9999px;
-  border: none;
-  background: rgba(77, 221, 0, 0.85);
-  color: #000;
-  cursor: pointer;
-}
-
-/* ホバー時の色 */
-.header-logout-button:hover {
-  background: #11aa00d2;
+/* hover 色（ロゴ・ユーザー名共通） */
+.header-logo-link:hover .header-text,
+.header-logo-link:focus-visible .header-text,
+.user-link:hover .header-user-name,
+.user-link:focus-visible .header-user-name {
+  color: #ffd7a6;
 }
