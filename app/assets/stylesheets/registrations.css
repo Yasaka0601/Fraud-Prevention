@@ -1,43 +1,255 @@
-/******　新規登録画面のCSS　******/
+/* 既存の import はそのままOK */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@700;900&display=swap');
 
-/* 新規登録ページのタイトル */
-.signup-title {
-  text-align: center;   /* 中央寄せ */
-  margin-bottom: 16px;  /* 下に少し余白 */
+/* ===== ページ全体（元: flex items-center justify-center min-h-screen ...） ===== */
+.reg-page{
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 3rem 1rem;          /* py-12 px-4 */
+  font-family: 'Noto Sans JP', sans-serif; /* font-sans-jp 相当 */
 }
 
-/* パスワードの注意書き（最小文字数） */
-.field-note {
-  display: block;         /* 行を分ける */
-  width: 40%;             /* label / input と同じ幅 */
-  margin: 0 auto 4px;     /* 左右 auto で真ん中に寄せる＋下に少し余白 */
-  font-size: 0.85rem;     /* 本文より少し小さめ */
-  color: #777;            /* 文字色を薄めにして、ラベルより控えめに */
-  text-align: left;       /* label と同じ左寄せ */
+@media (min-width: 640px){
+  .reg-page{ padding-left: 1.5rem; padding-right: 1.5rem; } /* sm:px-6 */
+}
+@media (min-width: 1024px){
+  .reg-page{ padding-left: 2rem; padding-right: 2rem; }     /* lg:px-8 */
 }
 
-/* ログインへのリンク（「Log in」など）の位置とスタイル */
-.signup-links {
-  width: 40%;             /* フォームのラベル・入力と同じ幅 */
-  margin: 8px auto 0;     /* 左右 auto で中央寄せ＋少し上に余白 */
-  font-size: 0.85rem;     /* 本文より少し小さめ */
-  text-align: left;       /* ラベルと同じ左寄せ */
+/* ===== 背景装飾（元の absolute〜） ===== */
+.reg-bg{
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* 実際のリンクを「丸いボタン」っぽく */
-.signup-links a {
-  display: inline-block;        /* ボタンのように扱えるようにする */
-  padding: 6px 14px;            /* 内側の余白でボタンの高さと横幅を出す */
-  border-radius: 9999px;        /* しっかり丸みを帯びた pill 型 */
-  background-color: #ffe0bf;    /* ふんわり淡いオレンジ背景 */
-  color: #b85a00;               /* 少し濃いめのオレンジ文字 */
-  text-decoration: none;        /* 下線は消す */
+.reg-bg__blob{
+  position: absolute;
+  width: 24rem;   /* w-96 */
+  height: 24rem;  /* h-96 */
+  opacity: 0.05;
+  border-radius: 9999px;
+  filter: blur(64px); /* blur-3xl */
 }
 
-/* マウスオーバー・フォーカス時は濃いオレンジに */
-.signup-links a:hover,
-.signup-links a:focus {
-  background-color: #f2a45a;    /* 少し濃いオレンジ */
-  color: #ffffff;               /* 文字は白にしてコントラストアップ */
-  text-decoration: none;        /* 下線はつけず、色だけで状態を伝える */
+.reg-bg__blob--navy{
+  top: -10%;
+  left: -10%;
+  background: #1F2F54;
+}
+
+.reg-bg__blob--red{
+  bottom: -10%;
+  right: -10%;
+  background: #C63D2F;
+}
+
+/* ===== カード（元: bg-[#fffcf5] rounded-xl shadow-2xl ...） ===== */
+.reg-card{
+  position: relative;
+  z-index: 10;
+
+  width: 100%;
+  max-width: 28rem; /* max-w-md */
+
+  background: #fffcf5;
+  border-top: 4px solid #1F2F54; /* border-t-4 border-[#1F2F54] */
+  border-radius: 0.75rem;       /* rounded-xl */
+
+  padding: 2rem;                /* p-8 */
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); /* shadow-2xl */
+}
+
+@media (min-width: 640px){
+  .reg-card{ padding: 2.5rem; } /* sm:p-10 */
+}
+
+/* ===== タイトル ===== */
+.reg-head{
+  text-align: center;
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.reg-head__title{
+  margin: 0 0 .5rem;
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;    /* font-bold */
+  letter-spacing: .1em;/* tracking-widest */
+  color: #1F2F54;
+  font-family: 'Noto Serif JP', serif; /* font-serif-jp */
+}
+
+.reg-head__sub{
+  margin: 0;
+  font-size: .875rem;  /* text-sm */
+  color: #6b7280;      /* text-gray-500 */
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* ===== エラー ===== */
+.reg-errors{ margin-bottom: 1.5rem; } /* mb-6 */
+
+/* ===== フィールド ===== */
+.reg-field{ margin-bottom: 1.25rem; } /* mb-5 */
+.reg-field--last{ margin-bottom: 1.5rem; } /* mb-6 */
+
+.reg-field__row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .5rem; /* mb-2 */
+}
+
+.reg-label{
+  display: block;
+  margin-bottom: .5rem; /* mb-2 */
+  font-size: .875rem;   /* text-sm */
+  font-weight: 700;     /* font-bold */
+  color: #1F2F54;
+  letter-spacing: .025em; /* tracking-wide */
+  font-family: 'Noto Serif JP', serif;
+}
+
+.reg-label--tight{
+  margin-bottom: 0; /* passwordラベル用 */
+}
+
+.reg-note{
+  font-size: .75rem; /* text-xs */
+  font-weight: 700;
+  color: #C63D2F;
+}
+
+/* ===== 入力 ===== */
+.reg-input{
+  width: 100%;
+  padding: .75rem 1rem;          /* px-4 py-3 */
+  background: #fff;
+  border: 1px solid #d1d5db;     /* border-gray-300 */
+  border-radius: .5rem;          /* rounded-lg */
+  color: #1f2937;                /* text-gray-800 */
+  outline: none;
+}
+
+.reg-input::placeholder{ color: #9ca3af; } /* placeholder-gray-400 */
+
+.reg-input:focus{
+  border-color: #1F2F54;
+  box-shadow: 0 0 0 2px rgba(31,47,84,0.35); /* focus:ring-2 っぽい */
+}
+
+/* ===== ボタン ===== */
+.reg-actions{ margin-top: 2rem; } /* mt-8 */
+
+.reg-submit{
+  width: 100%;
+  cursor: pointer;
+
+  background: #C63D2F;
+  color: #fff;
+
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 700;
+  font-family: 'Noto Serif JP', serif;
+
+  padding: .75rem 1rem; /* py-3 px-4 */
+  border: 0;
+  border-radius: .5rem; /* rounded-lg */
+
+  letter-spacing: .1em; /* tracking-widest */
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2); /* shadow-lg */
+
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.reg-submit:hover{
+  background: #a03024;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25); /* hover:shadow-xl */
+  transform: translateY(-2px);
+}
+
+/* ===== 区切り線 ===== */
+.reg-divider{
+  margin: 2rem 0; /* my-8 */
+  display: flex;
+  align-items: center;
+}
+
+.reg-divider__line{
+  flex-grow: 1;
+  border-top: 1px solid #d1d5db; /* border-gray-300 */
+}
+
+.reg-divider__text{
+  margin: 0 .75rem;  /* mx-3 */
+  font-size: .75rem; /* text-xs */
+  color: #9ca3af;    /* text-gray-400 */
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* ===== links ===== */
+.reg-links{
+  display: flex;
+  justify-content: center;
+}
+
+.reg-link{
+  font-size: 0.8rem;
+  text-align: center;
+
+  color: #1F2F54;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition: color 160ms ease;
+}
+
+.reg-link:hover,
+.reg-link:focus-visible{
+  color: #C63D2F;
+}
+
+/* ===== カード下の影 ===== */
+.reg-shadow{
+  position: absolute;
+  z-index: 0;
+
+  width: 90%;
+  max-width: 24rem; /* max-w-sm */
+  height: 1rem;     /* h-4 */
+
+  bottom: 3rem;     /* bottom-12 */
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #000;
+  opacity: .2;
+  filter: blur(16px);
+  border-radius: 9999px;
+}
+
+/* ===== 既存の input-dojo はそのまま ===== */
+.input-dojo{
+  transition: all 0.3s ease;
+}
+.input-dojo::placeholder{
+  color: #a0a0a0;
+  opacity: 0.7;
+}
+
+/* ===== 背景パターンは既存のまま ===== */
+.bg-washi-pattern{
+  background-color: #F7F3E8;
+  background-image:
+    radial-gradient(#1F2F54 0.5px, transparent 0.5px),
+    radial-gradient(#1F2F54 0.5px, #F7F3E8 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
 }
