@@ -1,13 +1,16 @@
-/***　各CSSファイルを読み込み *****/
+/*** CSS読み込み ***/
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@700;900&display=swap');
+
 @import "./homes.css";
 @import "./tops.css";
 @import "./registrations.css";
 @import "./header.css";
 @import "./footer.css";
 @import "./ranking.css";
-@import url('https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap');
-/**********　ここに記述するのは共通のCSS ***********/
+
+/********** ここに記述するのは共通の CSS **********/
 
 /***** ユーザーが指定した文字サイズを正しく反映 ******/
 html {
@@ -15,101 +18,176 @@ html {
 }
 
 body {
-    /*********** 書体の設定 ***********/
-    font-family: "Yu Gothic", "遊ゴシック体", YuGothic, sans-serif;
+  /*********** 書体の設定 ***********/
+  font-family: "Yu Gothic", "遊ゴシック体", YuGothic, sans-serif;
+  /******** フッターを下に固定するための記述 ******/
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-    /******** フッターを下に固定するための記述 ******/
-    min-height: 100vh;        /* 画面の高さ分までは伸びる */
-    display: flex;            /* 縦方向にヘッダー / コンテンツ / フッターを並べる */
-    flex-direction: column;   /* 上から下に積む */
+/* ===== 共通背景：和紙 ===== */
+  background-color: #F7F3E8;
+  background-image:
+    radial-gradient(#1F2F54 0.5px, transparent 0.5px),
+    radial-gradient(#1F2F54 0.5px, #F7F3E8 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
 }
 
-/********* フォームのCSS **********/
-
-/* 1項目ごとの余白だけを担当する */
-.field {
-  margin-bottom: 50px;       /* 項目ごとの位置を調整できる */
+/* ===== 共通背景：和紙 ===== */
+.bg-washi-pattern{
+  background-color: #F7F3E8;
+  background-image:
+    radial-gradient(#1F2F54 0.5px, transparent 0.5px),
+    radial-gradient(#1F2F54 0.5px, #F7F3E8 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
 }
 
-/* ラベル（項目名）：文字を少し大きく＆太くして見やすく */
-.field label {
+/* ===== 共通フォーム：カード型 ===== */
+.form-page{
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+@media (min-width: 640px){
+  .form-page{ padding-inline: 1.5rem; }
+}
+@media (min-width: 1024px){
+  .form-page{ padding-inline: 2rem; }
+}
+
+.form-card{
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 28rem;
+  padding: 2rem;
+
+  background: #fffcf5;
+  border-top: 4px solid #1F2F54;
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+@media (min-width: 640px){
+  .form-card{ padding: 2.5rem; }
+}
+
+.form-errors{ margin-bottom: 1.5rem; }
+
+.form-field{ margin-bottom: 1.25rem; }
+.form-field--last{ margin-bottom: 1.5rem; }
+
+.form-field__row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+}
+
+.form-label{
   display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  width: 40%;
-  margin: 0 auto 4px;
-  text-align: left;
+  margin-bottom: .5rem;
+  font-size: .875rem;
+  font-weight: 700;
+  color: #1F2F54;
+  letter-spacing: .025em;
+  font-family: 'Noto Serif JP', serif;
+}
+.form-label--tight{ margin-bottom: 0; }
+
+.form-note{
+  font-size: .75rem;
+  font-weight: 700;
+  color: #C63D2F;
 }
 
-/* テキスト入力・メール・パスワード入力フォーム */
-.field input {
-  width: 40%;           /* 少し大きめ。あとで調整してOK */
-  padding: 8px 10px;
-  font-size: 1rem;
-  border-radius: 6px;   /* 角は丸くして柔らかく */
-  border: 1px solid #bbbbbb;
-  box-sizing: border-box;
-  display: block;       /* ブロックにして */
-  margin: 0 auto;       /* 左右を auto にすると中央寄せになる */
+.form-input{
+  width: 100%;
+  padding: .75rem 1rem;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: .5rem;
+  color: #1f2937;
+  outline: none;
 }
 
-/* フォーカス時（入力中）は枠の色を変えて「今ここ」を分かりやすく */
-.field input:focus {
-  outline: 2px solid #4Ddd00;
-  outline-offset: 1px;
-  border-color: #4Ddd00;
+.form-input:focus{
+  border-color: #1F2F54;
+  box-shadow: 0 0 0 2px rgba(31,47,84,0.35);
 }
 
-/* 送信ボタンのブロック */
-.actions {
-  width: 40%;
-  margin: 16px auto 0;    /* 中央寄せ＋上に余白 */
-  text-align: center;     /* ボタンを中央表示 */
-}
+.form-actions{ margin-top: 2rem; }
 
-/* submit ボタン自体の見た目 */
-.actions input[type="submit"] {
-  width: 40%;            /* ここの数値で大きさを調整 */
-  padding: 10px 0;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 9999px;  /* まん丸ボタンにして柔らかい印象に */
-  border: none;
-  background: rgba(77, 221, 0, 0.85);
-  color: #000;
+.form-submit{
+  width: 100%;
   cursor: pointer;
-}
+  padding: .75rem 1rem;
+  border: 0;
+  border-radius: .5rem;
 
-/* マウスオーバー・フォーカス時は色を変える */
-.actions input[type="submit"]:hover {
-  background: #11aa00d2;
-}
-
-/* destroy ボタンのブロック */
-.delete_actions {
-  width: 40%;
-  margin: 16px auto 0;    /* 中央寄せ＋上に余白 */
-  text-align: center;     /* ボタンを中央表示 */
-}
-
-/* destroy ボタンの見た目 */
-.delete_actions input[type="submit"],
-.delete_actions button {
-  width: 40%;            /* ここの数値で大きさを調整 */
-  padding: 10px 0;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 9999px;  /* まん丸ボタンにして柔らかい印象に */
-  border: none;
-  background: #ff6242;
+  background: #C63D2F;
   color: #fff;
-  cursor: pointer;
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: .1em;
+
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
-/* マウスオーバー・フォーカス時は色を変える */
-.delete_actions input[type="submit"],
-.delete_actions button:hover {
-  background: #b30505d2;
+.form-submit:hover{
+  background: #a03024;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
+  transform: translateY(-2px);
+}
+
+/* 区切り線 */
+.form-divider{
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+}
+.form-divider__line{ flex-grow: 1; border-top: 1px solid #d1d5db; }
+.form-divider__text{
+  margin: 0 .75rem;
+  font-size: .75rem;
+  color: #9ca3af;
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* カード下の影 */
+.form-shadow{
+  position: absolute;
+  z-index: 0;
+  width: 90%;
+  max-width: 24rem;
+  height: 1rem;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  opacity: .2;
+  filter: blur(16px);
+  border-radius: 9999px;
+}
+
+/* placeholder はここに集約（input-dojo側は削除） */
+.form-input::placeholder{
+  color: #a0a0a0;
+  opacity: 0.7;
+}
+
+/* input-dojo（共通） */
+.input-dojo{
+  transition: all 0.3s ease;
 }
 
 /****** 共通のフラッシュメッセージ *******/
@@ -167,10 +245,9 @@ body {
 .line-auth{
   display: flex;
   justify-content: center;
-  margin: 16px 0 50px;
+  margin: 16px 0 24px;
 }
 
-/* button_to が form を作るので、幅を揃える */
 .line-auth form{
   margin: 0;
   width: 100%;
@@ -185,12 +262,10 @@ body {
   justify-content: center;
   gap: 10px;
 
-  /* 「登録」ボタンに寄せる */
   padding: .75rem 1rem;
   border-radius: .5rem;
   border: 0;
 
-  /* 渋い紺（藍） */
   background: #1F2F54;
   color: #fff;
 
@@ -205,14 +280,12 @@ body {
 
 .line-auth__btn:hover,
 .line-auth__btn:focus-visible{
-  background: #16213d; /* 少し濃く */
+  background: #16213d;
   box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
   transform: translateY(-2px);
 }
 
-.line-auth__btn:active{
-  transform: scale(0.99);
-}
+.line-auth__btn:active{ transform: scale(0.99); }
 
 .line-auth__icon{
   width: 22px;
@@ -220,6 +293,4 @@ body {
   display: block;
 }
 
-.line-auth__text{
-  line-height: 1;
-}
+.line-auth__text{ line-height: 1; }
