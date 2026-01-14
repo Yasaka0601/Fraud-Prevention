@@ -190,6 +190,27 @@ body {
   transition: all 0.3s ease;
 }
 
+/* ===== リンク ===== */
+.reg-links{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.reg-link{
+  font-size: 0.8rem;
+  color: #1F2F54;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.reg-link:hover,
+.reg-link:focus-visible{
+  color: #C63D2F;
+}
+
 /****** 共通のフラッシュメッセージ *******/
 
 /*  フラッシュメッセージのサイズ    */

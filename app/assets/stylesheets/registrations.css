@@ -49,23 +49,3 @@
   color: #6b7280;
   font-family: 'Noto Serif JP', serif;
 }
-
-/* ===== links（登録画面固有） ===== */
-.reg-links{
-  display: flex;
-  justify-content: center;
-}
-
-.reg-link{
-  font-size: 0.8rem;
-  color: #1F2F54;
-  font-family: "Noto Serif JP", serif;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 160ms ease;
-}
-
-.reg-link:hover,
-.reg-link:focus-visible{
-  color: #C63D2F;
-}
