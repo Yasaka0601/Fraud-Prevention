@@ -1,6 +1,26 @@
 <footer class="site-footer"
         style="background-image: url('<%= asset_path('wood.jpg') %>');">
-  <div class="site-footer__inner">
-    <small class="site-footer__copy">© 2026 詐欺対策道場</small>
-  </div>
+  <% if user_signed_in? %>
+
+    <li>
+      <%= link_to "クイズ", home_path %>
+    </li>
+
+    <li>
+      <%= link_to "家族ルーム", home_rooms_path %>
+    </li>
+
+    <li>
+      <%= link_to "成績一覧", result_users_path %>
+    </li>
+
+    <li>
+      <%= link_to "ランキング", rankings_path %>
+    </li>
+
+  <% else %>
+    <div class="site-footer__inner">
+      <small class="site-footer__copy">© 2026 詐欺対策道場</small>
+    </div>
+  <% end %>
 </footer>
