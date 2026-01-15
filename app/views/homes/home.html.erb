@@ -1,13 +1,14 @@
 <h1>詐欺対策道場ホーム</h1>
-<p>（新規登録・ログイン後に表示する仮ホーム画面）
-今後実装するもの。
-<li>・家族ルーム名の表示</li>
-<li>・家族ルームに属していなければ「家族ルームに参加していません」と「家族ルームの設定へ」が表示される。（一般のみ）</li>
-<li>・自分が獲得したポイントが表示。（済）</li>
-<li>・カテゴリーが表示。</li>
-<li>・ログイン後のフッターを表示。</li>
-<li>・フッターには、「成績、家族ルーム、投稿、ユーザー情報」ボタンが用意されている。</li>
-</p>
+
+
+<% if @room.present? %>
+  <p>
+  現在参加中の家族ルーム :
+  <strong><%= @room.name %></strong>
+  </P>
+<% else %>
+  <p>現在家族ルームに属していません</p>
+<% end %>
 
 <p>
   今週の合計ポイント：
@@ -19,15 +20,3 @@
     <%= link_to category.name, category_courses_path(category) %>
   </li>
 <% end %>
-
-<li>
-<%= link_to "家族ルーム", home_rooms_path %>
-</li>
-
-<li>
-<%= link_to "成績一覧", result_users_path %>
-</li>
-
-<li>
-<%= link_to "ランキング", rankings_path %>
-</li>
