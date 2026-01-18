@@ -6,7 +6,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-/* 中身を左右に分けるコンテナ */
+/***** 中身を左右に分けるコンテナ *****/
 .header-inner {
   max-width: 960px;
   margin: 0 auto;
@@ -44,5 +44,14 @@
 .header-logo-link:focus-visible .header-text,
 .user-link:hover .header-user-name,
 .user-link:focus-visible .header-user-name {
-  color: #054bef;
+  color: #ff0000;
+}
+
+/***** ヘッダーを常に表示 *****/
+.site-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
 }

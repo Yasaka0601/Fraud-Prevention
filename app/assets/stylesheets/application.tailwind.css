@@ -20,12 +20,17 @@ html {
 body {
   /*********** 書体の設定 ***********/
   font-family: "Yu Gothic", "遊ゴシック体", YuGothic, sans-serif;
-  /******** フッターを下に固定するための記述 ******/
+
+  /***** フッターを下に固定するための記述 ******/
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 
-/* ===== 共通背景：和紙 ===== */
+  /***** フッターにbodyが被らないようにする *****/
+  padding-bottom: 90px;
+  padding-top: 70px;
+
+/***** 共通背景：和紙 *****/
   background-color: #F7F3E8;
   background-image:
     radial-gradient(#1F2F54 0.5px, transparent 0.5px),
@@ -34,17 +39,7 @@ body {
   background-position: 0 0, 10px 10px;
 }
 
-/* ===== 共通背景：和紙 ===== */
-.bg-washi-pattern{
-  background-color: #F7F3E8;
-  background-image:
-    radial-gradient(#1F2F54 0.5px, transparent 0.5px),
-    radial-gradient(#1F2F54 0.5px, #F7F3E8 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-}
-
-/* ===== 共通フォーム：カード型 ===== */
+/***** 共通フォーム：カード型 *****/
 .form-page{
   position: relative;
   min-height: 100vh;
@@ -64,23 +59,24 @@ body {
 
 .form-card{
   position: relative;
-  z-index: 10;
+  z-index: 1;
+
   width: 100%;
   max-width: 28rem;
   padding: 2rem;
 
   background: #fffcf5;
   border-top: 4px solid #1F2F54;
-  border-radius: 0.75rem;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  border-radius: .75rem;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
 }
 
 @media (min-width: 640px){
   .form-card{ padding: 2.5rem; }
 }
 
+/* spacing */
 .form-errors{ margin-bottom: 1.5rem; }
-
 .form-field{ margin-bottom: 1.25rem; }
 .form-field--last{ margin-bottom: 1.5rem; }
 
@@ -91,6 +87,7 @@ body {
   margin-bottom: .5rem;
 }
 
+/* text */
 .form-label{
   display: block;
   margin-bottom: .5rem;
@@ -108,6 +105,7 @@ body {
   color: #C63D2F;
 }
 
+/* input */
 .form-input{
   width: 100%;
   padding: .75rem 1rem;
@@ -118,11 +116,17 @@ body {
   outline: none;
 }
 
-.form-input:focus{
-  border-color: #1F2F54;
-  box-shadow: 0 0 0 2px rgba(31,47,84,0.35);
+.form-input::placeholder{
+  color: #a0a0a0;
+  opacity: .7;
 }
 
+.form-input:focus{
+  border-color: #1F2F54;
+  box-shadow: 0 0 0 2px rgba(31,47,84,.35);
+}
+
+/* submit */
 .form-actions{ margin-top: 2rem; }
 
 .form-submit{
@@ -139,23 +143,26 @@ body {
   font-family: 'Noto Serif JP', serif;
   letter-spacing: .1em;
 
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.2);
   transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .form-submit:hover{
   background: #a03024;
-  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,.25);
   transform: translateY(-2px);
 }
 
-/* 区切り線 */
+/* divider */
 .form-divider{
   margin: 2rem 0;
   display: flex;
   align-items: center;
 }
-.form-divider__line{ flex-grow: 1; border-top: 1px solid #d1d5db; }
+.form-divider__line{
+  flex-grow: 1;
+  border-top: 1px solid #d1d5db;
+}
 .form-divider__text{
   margin: 0 .75rem;
   font-size: .75rem;
@@ -163,7 +170,7 @@ body {
   font-family: 'Noto Serif JP', serif;
 }
 
-/* カード下の影 */
+/* shadow */
 .form-shadow{
   position: absolute;
   z-index: 0;
@@ -179,18 +186,7 @@ body {
   border-radius: 9999px;
 }
 
-/* placeholder はここに集約（input-dojo側は削除） */
-.form-input::placeholder{
-  color: #a0a0a0;
-  opacity: 0.7;
-}
-
-/* input-dojo（共通） */
-.input-dojo{
-  transition: all 0.3s ease;
-}
-
-/* ===== リンク ===== */
+/***** リンク *****/
 .reg-links{
   display: flex;
   justify-content: center;
@@ -262,7 +258,7 @@ body {
   line-height: 1;
 }
 
-/* ===== LINEログイン/登録ボタン ===== */
+/***** LINEログイン/登録ボタン *****/
 .line-auth{
   display: flex;
   justify-content: center;
