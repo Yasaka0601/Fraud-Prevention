@@ -1,22 +1,57 @@
-<h1>詐欺対策道場ホーム</h1>
+<div class="home-page">
+  <div class="home-container">
 
+    <!-- ステータスパネルエリア -->
+    <div class="status-grid">
 
-<% if @room.present? %>
-  <p>
-  現在参加中の家族ルーム :
-  <strong><%= @room.name %></strong>
-  </P>
-<% else %>
-  <p>現在家族ルームに属していません</p>
-<% end %>
+      <!-- 家族ルーム情報 -->
+      <div class="status-card">
+        <h3 class="status-label">所属中の家族ルーム</h3>
 
-<p>
-  今週の合計ポイント：
-  <strong><%= current_user.total_point %> pt</strong>
-</p>
+        <% if @room.present? %>
+          <div class="status-room">
+            <strong class="status-value"><%= @room.name %></strong>
+          </div>
+        <% else %>
+          <div class="status-room">
+            <strong class="status-value status-value--empty">現在家族ルームに属していません</strong>
+          </div>
+        <% end %>
+      </div>
 
-<% @categories.each do |category| %>
-  <li>
-    <%= link_to category.name, category_courses_path(category) %>
-  </li>
-<% end %>
+      <!-- ポイント情報 -->
+      <div class="status-card status-card--point">
+        <h3 class="status-label">今週の合計ポイント</h3>
+
+        <div class="status-point">
+          <strong class="status-value status-value--point"><%= current_user.total_point %></strong>
+          <span class="status-point__unit">pt</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- カテゴリー一覧 -->
+    <!-- カテゴリーを追加すれば,ヘルパーに追記すること-->
+    <div>
+      <h2 class="section-title">本日の稽古（カテゴリー選択）</h2>
+
+      <div class="category-grid">
+        <% @categories.each do |category| %>
+          <%= link_to category_courses_path(category), class: "category-card" do %>
+            <div class="category-icon-wrapper">
+              <%= category_icon_svg(category) %>
+            </div>
+            <h3 class="category-title"><%= category.name %></h3>
+
+            <p class="category-desc">
+              <%= category_desc(category) %>
+            </p>
+
+            <div class="category-arrow">➜</div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
