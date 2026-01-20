@@ -12,6 +12,7 @@
 @import "./courses.css";
 @import "./plays.css";
 @import "./results.css";
+@import "./rooms.css";
 
 /********** ここに記述するのは共通の CSS **********/
 
@@ -314,3 +315,32 @@ body {
 }
 
 .line-auth__text{ line-height: 1; }
+
+/* ===== 共通：カテゴリー選択へ戻るボタン ===== */
+.btn-back-to-categories{
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 240px;
+
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  font-family: 'Noto Serif JP', serif;
+
+  background-color: transparent;
+  color: #1F2F54;
+  border: 2px solid #1F2F54;
+}
+
+.btn-back-to-categories:hover{
+  background-color: #1F2F54;
+  color: #fff;
+}

@@ -1,38 +1,84 @@
-<h1>仮の家族ルーム画面</h1>
+<div class="room-container">
+  <% if @room.present? %>
 
-<% if @room.present? %>
-  <p>現在参加中の家族ルーム : <%= @room.name %></P>
+    <%# --- ルーム看板 --- %>
+    <header class="room-header animate-fade-in">
+      <div class="room-name-plate">
+        <h1 class="room-title"><%= @room.name %></h1>
+      </div>
+    </header>
 
-  <h2>この家族ルームのメンバー</h2>
-  <ul>
-    <% @room_members.each do |member| %>
-      <li class="user-row">
-      <%= avatar_image_tag(member) %>
-      <%= member.name %>
-      </li>
+    <%# --- 家族メンバー一覧 --- %>
+    <div class="mb-6 flex justify-between items-end border-b-2 border-[#1F2F54] pb-2">
+      <h2 class="font-serif-jp text-xl font-bold text-[#1F2F54]">
+        <i class="fas fa-users mr-2"></i>家族の名簿
+      </h2>
+      <span class="text-sm text-gray-500 font-bold">全 <%= @room_members.total_count %> 名</span>
+    </div>
+
+    <div class="member-grid">
+      <% @room_members.each do |member| %>
+        <%= link_to results_path(user_id: member.id) do %>
+          <div class="member-card">
+            <div class="relative">
+              <%= avatar_image_tag(member) %>
+            </div>
+            <div class="member-info">
+              <div class="member-name"><%= member.name %></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="mb-10">
+      <%= paginate @room_members %>
+    </div>
+
+    <%# --- 管理・操作エリア --- %>
+    <section class="room-actions">
+      <h3 class="font-serif-jp font-bold text-[#1F2F54] mb-4">
+        家族の間・管理
+      </h3>
+      <div class="action-grid">
+        <%= link_to new_room_invitation_path(@room), class: "action-link" do %>
+          <i class="fas fa-user-plus"></i>
+          <span>家族を招待する</span>
+        <% end %>
+
+        <%= link_to edit_room_path(@room), class: "action-link" do %>
+          <i class="fas fa-cog"></i>
+          <span>ルーム設定</span>
+        <% end %>
+      </div>
+    </section>
+
+  <% else %>
+
+    <%# --- 未所属状態 --- %>
+    <div class="no-room-box animate-fade-in">
+      <span class="no-room-icon">🏯</span>
+      <h1 class="font-serif-jp text-2xl font-bold text-[#1F2F54] mb-4">家族ルームへようこそ</h1>
+      <p class="text-gray-600 mb-8 leading-relaxed">
+        家族ルームを作成して、大切な人と一緒に<br>
+        詐欺対策の修行を始めましょう。
+      </p>
+
+      <div class="flex flex-col gap-4 items-center">
+        <%= link_to new_room_path, class: "form-submit flex items-center justify-center gap-2 max-w-xs" do %>
+          <i class="fas fa-plus-circle"></i>
+          家族ルームを新しく作る
+        <% end %>
+        <p class="text-sm text-gray-400 font-bold mt-4">または、招待されるのを待つ</p>
+      </div>
+    </div>
+
+  <% end %>
+
+  <%# --- 共通ナビゲーション --- %>
+  <div class="mt-12 text-center">
+    <%= link_to home_path, class: "btn-back-to-categories" do %>
+      カテゴリー選択へ戻る
     <% end %>
-  </ul>
-  <%= paginate @room_members %>
-<% else %>
-  <p>現在家族ルームに属していません</p>
-<% end %>
-
-<p>今後実装するもの。
-<li>・属している家族ルーム名を表示 済</li>
-<li>・同じ家族ルームに属しているユーザーを一覧表示</li>
-<li>・「家族ルームの編集画面」へのボタン設置 済</li>
-<li>・「家族ルームに招待する」ボタンの設置 済</li>
-<li>・「家族ルーム作成ボタン」の設置（一般ユーザーのみ）</li>
-</p>
-
-<%= link_to "家族ルーム作成", new_room_path %>
-
-<% if @room.present? %>
-  <%= link_to "家族ルーム編集", edit_room_path(@room) %>
-  <%= link_to "家族ルームに招待する", new_room_invitation_path(@room) %>
-<% else %>
-  <p>家族ルームを作成もしくは参加してください</p>
-<% end %>
-
-<%= link_to "ホームへ", home_path %>
-
+  </div>
+</div>

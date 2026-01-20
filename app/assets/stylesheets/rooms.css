@@ -1,0 +1,134 @@
+/* --- 家族ルーム・メインコンテナ --- */
+.room-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* --- ルーム名看板 --- */
+.room-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.room-name-plate {
+  display: inline-block;
+  background-color: #fff;
+  border: 3px solid #1F2F54;
+  padding: 1rem 3rem;
+  box-shadow: 4px 4px 0px #1F2F54;
+  position: relative;
+}
+
+.room-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #1F2F54;
+}
+
+/* --- メンバー名簿（グリッド表示） --- */
+.member-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .member-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.member-card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.member-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(140, 0, 0, 0.1);
+  border-color: #C63D2F;
+}
+
+.member-info {
+  flex-grow: 1;
+}
+
+.member-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #1f2937;
+}
+
+.member-status {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* --- アクションエリア --- */
+.room-actions {
+  background: rgba(255, 252, 245, 0.8);
+  border: 2px dashed #1F2F54;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .action-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.action-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  color: #1F2F54;
+  font-weight: 700;
+  font-family: 'Noto Serif JP', serif;
+  transition: all 0.2s;
+}
+
+.action-link:hover {
+  background: #1F2F54;
+  color: #fff;
+  border-color: #1F2F54;
+}
+
+/* --- 未所属状態の表示 --- */
+.no-room-box {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.no-room-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+}
