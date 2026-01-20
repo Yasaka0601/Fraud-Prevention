@@ -1,0 +1,139 @@
+/* --- コース画面レイアウト --- */
+
+.courses-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* --- タイトルエリア --- */
+.courses-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.courses-title {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 2rem;
+  color: #1F2F54;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  border-bottom: 3px solid #C63D2F;
+  padding-bottom: 0.5rem;
+}
+
+.courses-subtitle {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* --- コースリスト（縦積み） --- */
+.course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* コースカード（木札風リストアイテム） */
+.course-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 2px solid #1F2F54; /* 藍色の枠 */
+  border-radius: 0.75rem;
+  padding: 1.5rem 2rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 4px 4px 0px rgba(31, 47, 84, 0.15); /* 控えめな和風影 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* ホバー時の挙動 */
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px rgba(198, 61, 47, 0.25); /* 朱色の影に変化 */
+  border-color: #C63D2F;
+  background-color: #fffcf5; /* 薄いクリーム色に */
+}
+
+/* コース情報エリア */
+.course-info {
+  flex-grow: 1;
+}
+
+.course-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 0.25rem;
+}
+
+/* 「稽古開始」ボタン（擬似ボタン） */
+/* link_toの中に配置する見た目だけのボタン */
+.course-start-btn {
+  background-color: #C63D2F; /* 朱色 */
+  color: #fff;
+  font-family: 'Yuji Syuku', serif;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px; /* 丸ボタン */
+  font-size: 1rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+/* カードホバー時にボタンも少し濃くする */
+.course-card:hover .course-start-btn {
+  background-color: #a03024;
+}
+
+/* レスポンシブ対応：スマホでは縦並びにする */
+@media (max-width: 640px) {
+  .course-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  
+  .course-start-btn {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
+}
+
+/* --- 戻るボタンエリア --- */
+.courses-footer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: #1F2F54;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border: 1px solid #1F2F54;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  background-color: transparent;
+}
+
+.back-link:hover {
+  background-color: #1F2F54;
+  color: #fff;
+}

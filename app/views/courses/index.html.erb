@@ -1,17 +1,50 @@
-<h1>コース一覧</h1>
+<div class="courses-container animate-fade-in">
 
-<% if @courses.present? %>
-  <ul>
-    <% @courses.each do |course| %>
-      <li>
-        <p>
-          <%= link_to course.name , course_play_path(course, 1, quiz_start: true) %>
-        </p>
-      </li>
+  <%# タイトルエリア %>
+  <div class="courses-header">
+    <h1 class="courses-title">
+      <%# カテゴリー名があれば表示、なければ固定タイトル %>
+      <%= "#{@category.name}の段" %>
+    </h1>
+    <p class="courses-subtitle">挑戦する稽古を選んでください</p>
+  </div>
+
+  <%# コースリスト %>
+  <% if @courses.present? %>
+    <div class="course-list">
+      <% @courses.each do |course| %>
+        <%# カード全体をリンクにする %>
+        <%= link_to course_play_path(course, 1, quiz_start: true), class: "course-card group" do %>
+          
+          <div class="course-info">
+            <h2 class="course-name">
+              <%= course.name %>
+            </h2>
+          </div>
+
+          <div class="course-start-btn">
+            <span>稽古開始</span>
+            <%# 矢印アイコン %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 12h18" />
+            </svg>
+          </div>
+
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <%# データがない場合の表示 %>
+    <div class="text-center py-10 border-2 border-dashed border-gray-300 rounded-lg">
+      <p class="text-gray-500 font-serif-jp">ただいま準備中でございます。</p>
+    </div>
+  <% end %>
+
+  <%# 戻るボタン %>
+  <div class="courses-footer">
+    <%= link_to home_path, class: "back-link" do %>
+      <span>&larr; 道場へ戻る</span>
     <% end %>
-  </ul>
-<% else %>
-  <p>このカテゴリーには、まだコースがありません。</p>
-<% end %>
+  </div>
 
-<%= link_to "ホームへ", home_path %>
+</div>
