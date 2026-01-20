@@ -1,91 +1,148 @@
-<h1><%= @course.name %></h1>
+<div class="quiz-container">
 
-<p><%= @index %> / 5問 </p>
-
-  <h2> 第 <%= @index %> 問 </h2>
-  <p><%= @quiz.sentence %></p>
-  <ul>
-    <p>
-      <% if @quiz.image.attached? %>
-        <div class="quiz-image">
-          <%= image_tag @quiz.image, style: "max-width: 30%; height: auto;" %>
-        </div>
-      <% end %>
-    </p>
-  </ul>
-
-<%= form_with url: answer_course_play_path(@course, @index), method: :post, local: true, data: { turbo: false } do |form| %>
-  <% if @multiple_answer %>
-    <% @choices.each do |choice| %>
-      <div>
-        <input
-          type="checkbox"
-          name="selected_choice_ids[]"
-          id="choice_<%= choice.id %>"
-          value="<%= choice.id %>"
-          <%= "checked" if @selected_choice_ids&.include?(choice.id) %>
-        >
-        <label for="choice_<%= choice.id %>">
-          <%= choice.text %>
-        </label>
+  <%# --- ヘッダー：進捗表示 --- %>
+  <div class="quiz-header">
+    <h1 class="quiz-course-name"><%= @course.name %></h1>
+    <div class="quiz-progress">
+      <span>第 <%= @index %> 問</span>
+      <%# 進捗バー（簡易計算） %>
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" style="width: <%= (@index.to_f / 5 * 100).to_i %>%;"></div>
       </div>
-    <% end %>
-  <% else %>
-    <% @choices.each do |choice| %>
-      <div>
-        <input
-          type  = "radio"
-          name  = "selected_choice"
-          id    = "choice_<%= choice.id %>"
-          value = "<%= choice.id %>"
-          <%= "checked" if choice.id.to_s == @selected_choice_id.to_s %>
-        >
-        <label for="choice_<%= choice.id %>">
-          <%= choice.text %>
-        </label>
-      </div>
-    <% end %>
-  <% end %>
-
-  <div>
-      <%= form.submit "回答する" %>
+      <span>/ 5</span>
+    </div>
   </div>
 
-<% end %>
+  <%# --- クイズカード --- %>
+  <div class="quiz-card">
+    <h2 class="quiz-question-number">問 <%= @index %></h2>
+    
+    <p class="quiz-sentence"><%= @quiz.sentence %></p>
 
-<% unless @is_correct.nil? %>
-
-  <% if @is_correct %>
-    <p>✅正解✅</p>
-  <% else %>
-    <p>❌不正解❌</p>
-  <% end %>
-
-  <% if @multi_correct_choices.present? %>
-    <p>正解：</p>
-    <ul>
-      <% @multi_correct_choices.each do |correct| %>
-        <li><%= correct.text %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>正解：</p>
-    <ul>
-      <li><%= @correct_choice.text %></li>
-    </ul>
-  <% end %>
-
-  <% if @quiz.explanation.present? %>
-    <ul>
-      <p>解説： <%= @quiz.explanation %></p>
-    </ul>
-  <% end %>
-
-  <p>
-    <% if @index == 5 && @course_result_id.present? %>
-      <%= link_to "結果発表", result_path(@course_result_id) %>
-    <% elsif @index < 5 %>
-      <%= link_to "次の問題へ進む", course_play_path(@course, @index + 1) %>
+    <% if @quiz.image.attached? %>
+      <div class="quiz-image-container">
+        <%= image_tag @quiz.image, class: "quiz-image" %>
+      </div>
     <% end %>
-  </p>
-<% end %>
+
+    <%# --- 回答フォーム（未回答時のみ表示、または回答後も表示しつつ無効化するなど要件によるが、今回は切り替え） --- %>
+    <% if @is_correct.nil? %>
+      <%= form_with url: answer_course_play_path(@course, @index), method: :post, local: true, data: { turbo: false } do |form| %>
+        
+        <div class="quiz-choices">
+          <% if @multiple_answer %>
+            <%# 複数回答（チェックボックス） %>
+            <p class="text-sm text-gray-500 font-bold mb-2">※複数選択可</p>
+            <% @choices.each do |choice| %>
+              <div class="choice-item choice-item--checkbox">
+                <input 
+                  type="checkbox" 
+                  name="selected_choice_ids[]" 
+                  id="choice_<%= choice.id %>" 
+                  value="<%= choice.id %>"
+                  <%= "checked" if @selected_choice_ids&.include?(choice.id) %>
+                >
+                <label for="choice_<%= choice.id %>" class="choice-label">
+                  <%= choice.text %>
+                </label>
+              </div>
+            <% end %>
+
+          <% else %>
+            <%# 単一回答（ラジオボタン） %>
+            <% @choices.each do |choice| %>
+              <div class="choice-item">
+                <input 
+                  type="radio" 
+                  name="selected_choice" 
+                  id="choice_<%= choice.id %>" 
+                  value="<%= choice.id %>"
+                  <%= "checked" if choice.id.to_s == @selected_choice_id.to_s %>
+                >
+                <label for="choice_<%= choice.id %>" class="choice-label">
+                  <%= choice.text %>
+                </label>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="quiz-actions">
+          <%= form.submit "回答する", class: "quiz-submit-btn" %>
+        </div>
+
+      <% end %>
+    <% else %>
+      <%# --- 回答済みの場合（選択肢を表示だけしておく：クリック不可） --- %>
+      <div class="quiz-choices opacity-60 pointer-events-none">
+        <% @choices.each do |choice| %>
+          <div class="choice-item <%= @multiple_answer ? 'choice-item--checkbox' : '' %>">
+            <input type="<%= @multiple_answer ? 'checkbox' : 'radio' %>" 
+                   <%= "checked" if (@selected_choice_ids&.include?(choice.id) || choice.id.to_s == @selected_choice_id.to_s) %> disabled>
+            <label class="choice-label"><%= choice.text %></label>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%# --- 判定結果表示エリア --- %>
+  <% unless @is_correct.nil? %>
+    <div class="result-container">
+      
+      <% if @is_correct %>
+        <%# 正解時の表示 %>
+        <div class="result-box--correct">
+          <div class="result-title--correct">
+            <span class="text-4xl">◎</span> 見事！正解
+          </div>
+        </div>
+      <% else %>
+        <%# 不正解時の表示 %>
+        <div class="result-box--incorrect">
+          <div class="result-title--incorrect">
+            <span class="text-4xl">✕</span> 無念...不正解
+          </div>
+        </div>
+      <% end %>
+
+      <%# 正解と解説 %>
+      <div class="explanation-box">
+        <div class="mb-4">
+          <span class="explanation-title text-[#C63D2F]">【正解】</span>
+          <ul class="list-disc list-inside font-bold text-lg text-gray-800">
+            <% if @multi_correct_choices.present? %>
+              <% @multi_correct_choices.each do |correct| %>
+                <li><%= correct.text %></li>
+              <% end %>
+            <% else %>
+              <li><%= @correct_choice.text %></li>
+            <% end %>
+          </ul>
+        </div>
+
+        <% if @quiz.explanation.present? %>
+          <div>
+            <span class="explanation-title">【解説】</span>
+            <p class="text-gray-700 leading-relaxed whitespace-pre-wrap"><%= @quiz.explanation %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <%# 次へボタン %>
+      <div class="text-center">
+        <% if @index == 5 && @course_result_id.present? %>
+          <%= link_to result_path(@course_result_id), class: "next-btn" do %>
+            結果を確認する &rarr;
+          <% end %>
+        <% elsif @index < 5 %>
+          <%= link_to course_play_path(@course, @index + 1), class: "next-btn" do %>
+            次の問題へ進む &rarr;
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  <% end %>
+
+</div>
