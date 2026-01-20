@@ -1,0 +1,231 @@
+/* --- リザルト画面レイアウト --- */
+.result-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* --- 総合スコアエリア（成績表ヘッダー） --- */
+.score-card {
+  background-color: #fff;
+  border: 4px double #1F2F54; /* 二重線で少し格式高く */
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* コース名 */
+.result-course-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+/* 正答数表示 */
+
+.score-summary{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.result-score-text {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 1.5rem;
+  color: #1F2F54;
+}
+
+.score-highlight {
+  font-size: 2.5rem;
+  color: #1F2F54;
+  font-weight: 700;
+}
+
+/* 獲得ポイント */
+.result-point-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 3px solid #C63D2F;
+  border-radius: 50%; /* 丸い判子 */
+  color: #C63D2F;
+  transform: rotate(-5deg); /* 少し傾ける */
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(198, 61, 47, 0.2);
+}
+
+.point-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.point-value {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.point-unit {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* --- 各問題の履歴カード --- */
+.history-card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
+  border-left-width: 6px; /* 左側の色で正誤を表現 */
+}
+
+/* 正解時のカードスタイル */
+.history-card--correct {
+  border-left-color: #22c55e; /* 緑 */
+}
+/* 不正解時のカードスタイル */
+.history-card--incorrect {
+  border-left-color: #ef4444; /* 赤 */
+}
+
+/* 問題番号 */
+.history-q-number {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 正誤バッジ */
+.status-badge {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 700;
+}
+.status-badge--correct {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+.status-badge--incorrect {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* 問題文 */
+.history-sentence {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed #d1d5db;
+  padding-bottom: 1rem;
+}
+
+/* 回答比較エリア */
+.answer-comparison {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+@media (min-width: 640px) {
+  .answer-comparison {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.answer-block {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.answer-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+/* 解説エリア */
+.history-explanation {
+  background-color: #F7F3E8; /* 和紙色背景 */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+.explanation-label {
+  font-weight: 700;
+  color: #1F2F54;
+  margin-right: 0.5rem;
+}
+
+/* --- ナビゲーションボタン --- */
+.result-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 3rem;
+  align-items: center;
+}
+@media (min-width: 640px) {
+  .result-nav {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 240px;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.nav-btn--primary {
+  background-color: #1F2F54;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.nav-btn--primary:hover {
+  background-color: #16213d;
+  transform: translateY(-2px);
+}
+
+.nav-btn--secondary {
+  background-color: transparent;
+  color: #1F2F54;
+  border: 2px solid #1F2F54;
+}
+.nav-btn--secondary:hover {
+  background-color: #1F2F54;
+  color: #fff;
+}
