@@ -219,13 +219,3 @@
   background-color: #16213d;
   transform: translateY(-2px);
 }
-
-.nav-btn--secondary {
-  background-color: transparent;
-  color: #1F2F54;
-  border: 2px solid #1F2F54;
-}
-.nav-btn--secondary:hover {
-  background-color: #1F2F54;
-  color: #fff;
-}
