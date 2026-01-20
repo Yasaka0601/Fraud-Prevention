@@ -1,0 +1,262 @@
+/* --- クイズ画面レイアウト --- */
+.quiz-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* --- ヘッダー（コース名・進捗） --- */
+.quiz-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.quiz-course-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: 'Yuji Syuku', serif;
+  font-size: 1.5rem;
+  color: #1F2F54;
+}
+
+.quiz-progress-bar {
+  width: 100%;
+  max-width: 200px;
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background-color: #1F2F54;
+  border-radius: 9999px;
+}
+
+/* --- 問題カード --- */
+.quiz-card {
+  background-color: #fff;
+  border-top: 6px solid #1F2F54;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.quiz-question-number {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2F54;
+  border-bottom: 2px solid #C63D2F;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.quiz-sentence {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-image-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.quiz-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 選択肢エリア --- */
+.quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* input[type=radio/checkbox] を隠してラベルをスタイリング */
+.choice-item input[type="radio"],
+.choice-item input[type="checkbox"] {
+  display: none; /* デフォルトのボタンを消す */
+}
+
+.choice-label {
+  display: block;
+  position: relative;
+  padding: 1rem 1.5rem 1rem 3rem; /* 左側にチェックマーク用の余白 */
+  background-color: #fff;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 700;
+  color: #4b5563;
+}
+
+/* 未選択時のホバー */
+.choice-label:hover {
+  border-color: #1F2F54;
+  background-color: #f9fafb;
+}
+
+/* 選択された状態 (input:checked + label) */
+.choice-item input:checked + .choice-label {
+  border-color: #1F2F54;
+  background-color: #eff6ff;
+  color: #1F2F54;
+  box-shadow: 0 0 0 1px #1F2F54; /* 枠線を太く見せる */
+}
+
+/* 擬似要素でチェックマーク/ラジオボタンを自作 */
+.choice-label::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #9ca3af;
+  border-radius: 50%; /* ラジオなら丸、チェックボックスなら四角にする調整が必要 */
+  background-color: #fff;
+  transition: all 0.2s;
+}
+
+/* チェックボックスの場合は四角くする */
+.choice-item--checkbox .choice-label::before {
+  border-radius: 4px;
+}
+
+/* 選択時のアイコンの中身 */
+.choice-item input:checked + .choice-label::before {
+  border-color: #1F2F54;
+  background-color: #1F2F54;
+  box-shadow: inset 0 0 0 3px #fff; /* ドーナツ型にする */
+}
+
+/* --- 送信ボタンエリア --- */
+.quiz-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.quiz-submit-btn {
+  background-color: #1F2F54; /* 藍色 */
+  color: #fff;
+  font-family: 'Yuji Syuku', serif;
+  font-size: 1.25rem;
+  padding: 0.75rem 4rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+.quiz-submit-btn:hover {
+  background-color: #16213d;
+  transform: translateY(-2px);
+}
+
+.quiz-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* --- 結果表示エリア（判定後） --- */
+.result-container {
+  margin-top: 3rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 正解のスタイル */
+.result-box--correct {
+  background-color: #f0fdf4;
+  border: 2px solid #22c55e;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-title--correct {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 2.5rem;
+  color: #15803d;
+  margin-bottom: 1rem;
+}
+
+/* 不正解のスタイル */
+.result-box--incorrect {
+  background-color: #fef2f2;
+  border: 2px solid #ef4444;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.result-title--incorrect {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 2.5rem;
+  color: #b91c1c;
+  margin-bottom: 1rem;
+}
+
+/* 解説エリア */
+.explanation-box {
+  margin-top: 2rem;
+  background-color: #f3f4f6;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: left;
+  border-left: 4px solid #6b7280;
+}
+
+.explanation-title {
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* 次へ進むボタン */
+.next-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  background-color: #C63D2F;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  transition: background-color 0.2s;
+}
+
+.next-btn:hover {
+  background-color: #a03024;
+}
