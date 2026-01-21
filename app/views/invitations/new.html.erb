@@ -1,13 +1,20 @@
-<% content_for :title, "家族ルーム招待" %>
+<div class="invitation-container animate-fade-in">
 
-    <h2>
-      ここは家族ルーム招待画面です。
-    </h2>
+  <div class="invitation-card">
 
-    <h3>この家族ルームへの招待文を生成しますか？</h3>
+    <h3 class="invitation-title">招待状の作成</h3>
+    <p class="invitation-desc">
+      家族をこのルームに招待するための<br>
+      特別なリンクを発行します。
+    </p>
 
-    <%= button_to room_invitations_path do %>
-      招待リンクを生成する
-    <% end %>
+    <div class="my-8">
+      <%= button_to room_invitations_path, class: "btn-primary-action w-full" do %>
+        招待リンクを生成する
+      <% end %>
+    </div>
 
-<%= link_to "戻る", home_rooms_path %>
+    <%= link_to "戻る", home_rooms_path, class: "btn-back-text" %>
+  </div>
+
+</div>
