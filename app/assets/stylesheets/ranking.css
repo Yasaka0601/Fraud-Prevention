@@ -1,98 +1,219 @@
-/***** ランキングのCSS *****/
+/* --- ランキング画面レイアウト --- */
+.ranking-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* --- タイトルエリア（番付表看板） --- */
+.ranking-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ranking-title-box {
+  display: inline-block;
+  border-top: 4px solid #1F2F54;
+  border-bottom: 4px solid #1F2F54;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
 
 .ranking-title {
-  max-width: 960px;
-  margin: 24px auto 16px;
-  padding: 0 16px;
+  font-family: 'Yuji Syuku', serif;
+  font-size: 2.5rem;
+  color: #1F2F54;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  padding: 0 1rem;
 }
 
-/* scope switch */
-.ranking-scope {
-  max-width: 960px;
-  margin: 0 auto 16px;
-  padding: 0 16px;
+.ranking-subtitle {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+/* --- スコープ切り替えタブ --- */
+.ranking-tabs {
   display: flex;
-  gap: 12px;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
-.ranking-scope__link {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.ranking-tab-link {
+  display: block;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 700;
   text-decoration: none;
-  color: #333;
-  display: inline-block;
+  font-family: 'Noto Serif JP', serif;
+  transition: all 0.2s;
+  border: 2px solid #1F2F54;
 }
 
-.ranking-scope__link.is-active {
-  font-weight: bold;
+/* 非アクティブなタブ */
+.ranking-tab-link {
+  background-color: transparent;
+  color: #1F2F54;
 }
 
-/* list */
+/* アクティブなタブ */
+.ranking-tab-link.is-active {
+  background-color: #1F2F54;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+.ranking-tab-link:hover:not(.is-active) {
+  background-color: rgba(31, 47, 84, 0.1);
+}
+
+/* --- ランキングリスト --- */
 .ranking-list {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.ranking-row {
+/* 各行のカードスタイル */
+.ranking-card {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
-/* rank column width for alignment */
+/* --- 順位別の装飾 --- */
+
+/* 1位：黄金 */
+.ranking-card.rank-1 {
+  background: linear-gradient(to right, #fffcf0, #fff);
+  border: 2px solid #d4af37;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+}
+.rank-badge-1 {
+  color: #d4af37; /* Gold */
+  font-size: 2rem;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+/* 2位：白銀 */
+.ranking-card.rank-2 {
+  background: linear-gradient(to right, #f8fafc, #fff);
+  border: 2px solid #94a3b8;
+  box-shadow: 0 4px 10px rgba(148, 163, 184, 0.2);
+}
+.rank-badge-2 {
+  color: #64748b; /* Silver */
+  font-size: 1.75rem;
+}
+
+/* 3位：赤銅 */
+.ranking-card.rank-3 {
+  background: linear-gradient(to right, #fff5f0, #fff);
+  border: 2px solid #b45309;
+  box-shadow: 0 4px 10px rgba(180, 83, 9, 0.15);
+}
+.rank-badge-3 {
+  color: #b45309; /* Bronze */
+  font-size: 1.5rem;
+}
+
+/* 4位以下 */
+.ranking-card.rank-other .ranking-rank {
+  font-size: 1.25rem;
+  color: #6b7280;
+}
+
+/* --- カード内要素 --- */
 .ranking-rank {
-  width: 64px;
-  flex: 0 0 64px;
+  font-family: 'Yuji Syuku', serif;
+  font-weight: 700;
+  width: 3.5rem;
+  text-align: center;
+  flex-shrink: 0;
+  margin-right: 1rem;
 }
 
-/* avatar: ranking専用サイズにしたいならここで上書き */
 .ranking-avatar {
-  width: 32px;
-  height: 32px;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
+  border: 2px solid #e5e7eb;
   object-fit: cover;
-  display: block;
-  flex: 0 0 32px;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.ranking-user-info {
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .ranking-name {
+  font-family: 'Noto Serif JP', serif;
   font-weight: 700;
+  font-size: 1.125rem;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.ranking-point {
-  color: #666;
+.ranking-point-box {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 1rem;
 }
 
-/* pagination */
-.ranking-pagination {
-  max-width: 960px;
-  margin: 16px auto 0;
-  padding: 0 16px;
+.ranking-point-label {
+  display: block;
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-bottom: -4px;
 }
 
-/* empty text */
+.ranking-point-value {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1F2F54;
+}
+
+/* --- 空の状態 --- */
 .ranking-empty {
-  max-width: 960px;
-  margin: 16px auto 0;
-  padding: 0 16px;
+  text-align: center;
+  padding: 4rem 1rem;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 1rem;
+  border: 2px dashed #d1d5db;
+  color: #6b7280;
+  font-family: 'Noto Serif JP', serif;
 }
 
-/* back link */
-.ranking-back {
-  max-width: 960px;
-  margin: 20px auto 0;
-  padding: 0 16px;
+/* --- ページネーション --- */
+.ranking-pagination {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
 }
 
-.ranking-back__link {
-  text-decoration: none;
-}
-
-.ranking-back__link:hover,
-.ranking-back__link:focus {
-  text-decoration: underline;
+/* --- 戻るボタンエリア --- */
+.ranking-footer {
+  margin-top: 4rem;
+  text-align: center;
 }
