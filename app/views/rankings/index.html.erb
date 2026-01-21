@@ -1,48 +1,124 @@
-<h1 class="ranking-title">ポイント週間ランキング</h1>
+<div class="ranking-container animate-fade-in">
 
-<div class="ranking-scope">
-  <% scope = (@scope.presence || "room") %>
-
-  <%= link_to "家族ルーム内",
-      rankings_path(scope: "room"),
-      class: "ranking-scope__link #{scope == "room" ? "is-active" : ""}" %>
-
-  <%= link_to "全体",
-      rankings_path(scope: "all"),
-      class: "ranking-scope__link #{scope == "all" ? "is-active" : ""}" %>
-</div>
-
-<% if scope == "room" && current_user.room.blank? %>
-  <p class="ranking-empty">家族ルームに属していません。</p>
-<% else %>
-  <% if @users.present? %>
-    <ol class="ranking-list">
-      <% @users.each do |user| %>
-
-        <li class="ranking-row">
-          <span class="ranking-rank">
-            <strong><%= "#{user.point_rank}位" %></strong>
-          </span>
-
-          <%= avatar_image_tag(user, css_class: "ranking-avatar") %>
-
-          <span class="ranking-name"><%= user.name %></span>
-          <span class="ranking-point">（<%= user.total_point %>pt）</span>
-        </li>
-      <% end %>
-    </ol>
-
-    <div class="ranking-pagination">
-      <%= paginate @users %>
+  <%# --- タイトルエリア（番付表） --- %>
+  <header class="ranking-header">
+    <div class="ranking-title-box">
+      <h1 class="ranking-title">週間番付</h1>
     </div>
-  <% else %>
-    <p class="ranking-empty">
-    ランキング対象がいません。
-    ポイントは毎週月曜日にリセットされます。
+    <p class="ranking-subtitle">
+      <i class="fas fa-calendar-week mr-1"></i>今週の獲得ポイント順ランキング<br>ポイントは毎週月曜日にリセットされます。
     </p>
-  <% end %>
-<% end %>
+  </header>
 
-<div class="ranking-back">
-  <%= link_to "戻る", home_path, class: "ranking-back__link" %>
+  <%# --- スコープ切り替えタブ --- %>
+  <div class="ranking-tabs">
+    <% scope = (@scope.presence || "room") %>
+
+    <%= link_to rankings_path(scope: "room"),
+        class: "ranking-tab-link #{scope == "room" ? "is-active" : ""}" do %>
+      家族ルーム
+    <% end %>
+
+    <%= link_to rankings_path(scope: "all"),
+        class: "ranking-tab-link #{scope == "all" ? "is-active" : ""}" do %>
+      道場全体
+    <% end %>
+  </div>
+
+  <%# --- ランキングリスト --- %>
+  <% if scope == "room" && current_user.room.blank? %>
+
+    <%# 家族ルーム未所属の場合 %>
+    <div class="ranking-empty">
+      <p>家族ルームに所属していません。</p>
+      <p class="text-sm mt-2">家族ルームを作成・参加すると、<br>家族内での順位が表示されます。</p>
+    </div>
+
+  <% else %>
+
+    <% if @users.present? %>
+      <ol class="ranking-list">
+        <% @users.each do |user| %>
+          <%# 順位に応じたクラス分けロジック %>
+          <% rank = user.point_rank %>
+          <% rank_css_class = case rank
+              when 1
+                "rank-1"
+              when 2
+                "rank-2"
+              when 3
+                "rank-3"
+              else "rank-other"
+              end %>
+
+          <li class="ranking-card <%= rank_css_class %>">
+            <%# 順位 %>
+            <div class="ranking-rank">
+              <% case rank %>
+              <% when 1 %>
+                <svg  xmlns="http://www.w3.org/2000/svg"
+                      height="40px"
+                      viewBox="0 -960 960 960"
+                      width="40px"
+                      fill="#EAC452">
+                      <path d="M200-160v-80h560v80H200Zm0-140-51-321q-2 0-4.5.5t-4.5.5q-25 0-42.5-17.5T80-680q0-25 17.5-42.5T140-740q25 0 42.5 17.5T200-680q0 7-1.5 13t-3.5 11l125 56 125-171q-11-8-18-21t-7-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820q0 15-7 28t-18 21l125 171 125-56q-2-5-3.5-11t-1.5-13q0-25 17.5-42.5T820-740q25 0 42.5 17.5T880-680q0 25-17.5 42.5T820-620q-2 0-4.5-.5t-4.5-.5l-51 321H200Zm68-80h424l26-167-105 46-133-183-133 183-105-46 26 167Zm212 0Z"/>
+                </svg>
+              <% when 2 %>
+                <svg  xmlns="http://www.w3.org/2000/svg"
+                      height="40px"
+                      viewBox="0 -960 960 960"
+                      width="40px" fill="#999999">
+                      <path d="M200-160v-80h560v80H200Zm0-140-51-321q-2 0-4.5.5t-4.5.5q-25 0-42.5-17.5T80-680q0-25 17.5-42.5T140-740q25 0 42.5 17.5T200-680q0 7-1.5 13t-3.5 11l125 56 125-171q-11-8-18-21t-7-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820q0 15-7 28t-18 21l125 171 125-56q-2-5-3.5-11t-1.5-13q0-25 17.5-42.5T820-740q25 0 42.5 17.5T880-680q0 25-17.5 42.5T820-620q-2 0-4.5-.5t-4.5-.5l-51 321H200Zm68-80h424l26-167-105 46-133-183-133 183-105-46 26 167Zm212 0Z"/>
+                </svg>
+              <% when 3 %>
+                <svg  xmlns="http://www.w3.org/2000/svg"
+                      height="40px"
+                      viewBox="0 -960 960 960"
+                      width="40px"
+                      fill="#BD4C31">
+                      <path d="M200-160v-80h560v80H200Zm0-140-51-321q-2 0-4.5.5t-4.5.5q-25 0-42.5-17.5T80-680q0-25 17.5-42.5T140-740q25 0 42.5 17.5T200-680q0 7-1.5 13t-3.5 11l125 56 125-171q-11-8-18-21t-7-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820q0 15-7 28t-18 21l125 171 125-56q-2-5-3.5-11t-1.5-13q0-25 17.5-42.5T820-740q25 0 42.5 17.5T880-680q0 25-17.5 42.5T820-620q-2 0-4.5-.5t-4.5-.5l-51 321H200Zm68-80h424l26-167-105 46-133-183-133 183-105-46 26 167Zm212 0Z"/>
+                </svg>
+              <% else %>
+                <span><%= rank %>位</span>
+              <% end %>
+            </div>
+
+            <%# アバター %>
+            <%= avatar_image_tag(user, css_class: "ranking-avatar") %>
+
+            <%# ユーザー情報 %>
+            <div class="ranking-user-info">
+              <div class="ranking-name"><%= user.name %></div>
+            </div>
+
+            <%# ポイント %>
+            <div class="ranking-point-box">
+              <span class="ranking-point-label">獲得pt</span>
+              <span class="ranking-point-value"><%= user.total_point %></span>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+
+      <div class="ranking-pagination">
+        <%= paginate @users %>
+      </div>
+
+    <% else %>
+      <%# 集計対象なし %>
+      <div class="ranking-empty">
+        <p>ランキング対象がいません。</p>
+        <p class="text-sm mt-2">ポイントは毎週月曜日にリセットされます。<br>稽古に励み、一番乗りを目指しましょう。</p>
+      </div>
+    <% end %>
+
+  <% end %>
+
+  <%# --- 戻るボタン --- %>
+  <div class="ranking-footer">
+    <%= link_to home_path, class: "btn-back-to-categories" do %>
+      &larr; カテゴリー選択へ戻る
+    <% end %>
+  </div>
+
 </div>
