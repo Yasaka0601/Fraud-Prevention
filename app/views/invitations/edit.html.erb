@@ -1,13 +1,24 @@
-<% content_for :title, "家族ルーム参加" %>
+<div class="invitation-container animate-fade-in">
 
-    <h1>
+  <div class="invitation-card">
+
+    <p class="text-gray-500 font-bold mb-2">以下の家族ルームへ招待されています</p>
+
+    <h1 class="join-room-name">
       <%= @room.name %>
     </h1>
-    
-    <h2>この家族ルームに参加しますか？</h2>
-    
-<%= button_to '参加する',
-              room_invitation_path(@room, @invitation, token: params[:token]),
-              method: :patch %>
+
+    <p class="invitation-desc">
+      このルームに参加して、<br>
+      家族と共に詐欺対策の稽古を始めますか？
+    </p>
+
+    <div class="my-8">
+      <%= button_to room_invitation_path(@room, @invitation, token: params[:token]), method: :patch, class: "btn-primary-action w-full" do %>
+        入門する（参加）
+      <% end %>
+    </div>
+
   </div>
+
 </div>
