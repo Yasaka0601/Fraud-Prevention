@@ -1,26 +1,82 @@
-<h1>成績を見るユーザーを選択</h1>
+<div class="user-select-container animate-fade-in">
 
-<ul>
-  <% if @room_users.present? %>
-    <% @room_users.each do |user| %>
+  <header class="page-header">
+    <h1 class="page-title">門下生 記録帳</h1>
+    <p class="text-gray-600 font-serif-jp">
+      成績を閲覧する門下生を選んでください
+    </p>
+  </header>
+
+  <!-------- 家族ルームのユーザーを一覧表示 --------->
+  <ul class="user-select-list">
+    <% if @room_users.present? %>
+      <% @room_users.each do |user| %>
+        <li>
+          <%= link_to results_path(user_id: user.id), class: "user-select-card group" do %>
+            <%= avatar_image_tag(user, css_class: "user-select-avatar" ) %>
+              <div class="user-select-body">
+                <div class="user-select-name"><%= user.name %></div>
+                  <div class="user-select-desc">
+                    <% if user == current_user %>
+                      <span class="user-select-you">あなた</span>
+                    <% else %>
+                      <span class="user-select-other">の成績を見る</span>
+                    <% end %>
+                </div>
+              </div>
+
+            <!----- 矢印アイコン ----->
+            <div class="text-gray-300 group-hover:text-[#1F2F54] transition-colors pr-6">
+              <svg  xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+
+      <!------- ページネーション ------->
+      <div class="col-span-full mt-4">
+        <%= paginate @room_users %>
+      </div>
+
+    <% else %>
+      <!------- ルーム未所属の場合 --------->
       <li>
-        <%= link_to results_path(user_id: user.id), class: "user-link" do %>
-          <%= avatar_image_tag(user) %>
-          <%= "#{user.name} の成績" %>
+        <%= link_to results_path(user_id: current_user.id), class: "user-select-card group" do %>
+          <%= avatar_image_tag(current_user, css_class: "user-select-avatar") %>
+            <div class="user-select-body">
+              <div class="user-select-name"><%= current_user.name %></div>
+                <div class="user-select-you">あなた</div>
+            </div>
+
+            <!------- 矢印アイコン ------->
+            <div class="text-gray-300 group-hover:text-[#1F2F54] transition-colors pr-6">
+              <svg  xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
         <% end %>
       </li>
+
+      <div class="col-span-full mt-8 p-4 bg-white border border-dashed border-gray-400 rounded text-center text-gray-600">
+        <p>家族ルームに参加すると、<br>家族の成績もここで閲覧できるようになります。</p>
+      </div>
     <% end %>
-    <%= paginate @room_users %>
-  <% else %>
-    <li>
-      <%= link_to results_path(user_id: current_user.id), class: "user-link " do %>
-        <%= avatar_image_tag(current_user) %>
-        <%= "#{current_user.name} の成績" %>
-      <% end %>
-    </li>
+  </ul>
 
-    <p>家族ルームに参加すれば、同じルーム内の人の成績を閲覧することができます。</p>
-  <% end %>
-</ul>
+  <div class="mt-12 text-center">
+    <%= link_to home_path, class: "btn-back-to-categories" do %>
+      カテゴリー選択へ戻る
+    <% end %>
+  </div>
 
-<%= link_to "ホームへ", home_path %>
+</div>

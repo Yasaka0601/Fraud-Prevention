@@ -1,54 +1,100 @@
-<h1>成績</h1>
+<div class="user-select-container animate-fade-in">
 
-<%= form_with url: results_path, method: :get, local: true do %>
-  <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
-    <div>
-      <label>カテゴリ</label><br>
-      <%= select_tag :category_id,
-            options_from_collection_for_select(@category_options, :id, :name, params[:category_id]),
-            include_blank: "すべて" %>
+  <header class="page-header">
+    <h1 class="page-title">稽古の記録</h1>
+  </header>
+
+  <!------- 検索フォーム ------->
+  <%= form_with url: results_path, method: :get, local: true, class: "result-filter-box" do %>
+    <!-- hidden_field_tag を使用することで、フォームの params に user_id を含ませることができる -->
+    <% if params[:user_id].present? %>
+      <%= hidden_field_tag :user_id, params[:user_id] %>
+    <% end %>
+
+    <!------- カテゴリーのフォーム ------->
+    <div class="filter-row">
+      <div class="filter-group">
+        <label class="filter-label">カテゴリ</label>
+        <%= select_tag :category_id,
+              options_from_collection_for_select(@category_options, :id, :name, params[:category_id]),
+              include_blank: "すべて",
+              class: "filter-select" %>
+      </div>
+
+      <!------- コースのフォーム ------->
+      <div class="filter-group">
+        <label class="filter-label">コース</label>
+        <%= select_tag :course_id,
+              options_from_collection_for_select(@course_options, :id, :name, params[:course_id]),
+              include_blank: "すべて",
+              class: "filter-select" %>
+      </div>
+
+      <div class="flex items-center gap-4 pb-1">
+        <%= submit_tag "絞り込む", class: "btn-filter-submit" %>
+
+        <!----- クリアボタン ----->
+        <%= link_to "クリア", results_path(user_id: params[:user_id]), class: "btn-filter-clear" %>
+      </div>
     </div>
+  <% end %>
 
-    <div>
-      <label>コース</label><br>
-      <%= select_tag :course_id,
-            options_from_collection_for_select(@course_options, :id, :name, params[:course_id]),
-            include_blank: "すべて" %>
-    </div>
-
-    <div>
-      <%= submit_tag "検索" %>
-      <%= link_to "クリア", results_path, style: "margin-left:8px;" %>
-    </div>
-  </div>
-<% end %>
-
-<hr>
-
-<table>
-  <thead>
-    <tr>
-      <th>日時</th>
-      <th>コース</th>
-      <th>正解数</th>
-    </tr>
-  </thead>
-  <tbody>
+  <!----- 履歴リスト ----->
+  <div class="history-list">
     <% if @course_results.present? %>
       <% @course_results.each do |result| %>
-        <tr>
-          <td><%= result.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-          <td><%= link_to "#{result.course.name}の詳細", result_path(result, user_id: params[:user_id]) %></td>
-          <td><%= "#{result.correct_count} / #{result.total_questions}" %></td>
-        </tr>
-      <% end %>
-    <%= paginate @course_results %>
-    <% else %>
-      <tr>
-        <td colspan="3">成績がありません</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= link_to "ユーザー一覧へ", result_users_path %>
+        <%= link_to result_path(result, user_id: params[:user_id]), class: "history-item group" do %>
+
+          <div class="history-main">
+            <div class="history-date">
+              <i class="far fa-clock mr-1"></i><%= result.created_at.strftime("%Y/%m/%d %H:%M") %>
+            </div>
+            <h3 class="history-course-name">
+              <%= result.course.name %>
+            </h3>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="history-score-badge">
+              <span><%= result.correct_count %></span>
+              <span class="text-xs mx-1">/</span>
+              <span class="text-xs"><%= result.total_questions %></span>
+            </div>
+
+            <!----- 矢印のアイコン ----->
+            <div class="text-gray-300 group-hover:text-[#1F2F54] transition-colors">
+              <svg  xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+
+        <% end %>
+      <% end %>
+
+      <!----- ページネーション ----->
+      <div class="mt-8">
+        <%= paginate @course_results %>
+      </div>
+
+    <% else %>
+      <!----- データなし ----->
+      <div class="no-data">
+        <p>該当する稽古の記録はありません。</p>
+      </div>
+    <% end %>
+  </div>
+
+  <!----- 戻るボタン ----->
+  <div class="mt-12 text-center">
+    <%= link_to result_users_path, class: "btn-back-to-categories" do %>
+      門下生選択へ戻る
+    <% end %>
+  </div>
+
+</div>
