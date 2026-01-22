@@ -219,3 +219,276 @@
   background-color: #16213d;
   transform: translateY(-2px);
 }
+
+.user-select-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 2rem;
+  color: #1F2F54;
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #C63D2F;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.user-select-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .user-select-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.user-select-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 0 #e5e7eb;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user-select-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #1F2F54;
+  border-color: #1F2F54;
+  background-color: #fffcf5;
+}
+
+.user-select-card::before {
+  content: "記録帳";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-size: 0.7rem;
+  color: #d1d5db;
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: 0.2em;
+}
+
+.user-select-card:hover::before {
+  color: #C63D2F;
+}
+
+.user-select-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.user-select-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2F54;
+}
+
+.user-select-desc {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.result-filter-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px dashed #1F2F54;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 140px;
+}
+
+.filter-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 0.5rem;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.btn-filter-submit {
+  background-color: #1F2F54;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Noto Serif JP', serif;
+  transition: background-color 0.2s;
+}
+
+.btn-filter-submit:hover {
+  background-color: #16213d;
+}
+
+.btn-filter-clear {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s;
+  padding-bottom: 2px;
+}
+
+.btn-filter-clear:hover {
+  color: #C63D2F;
+  border-bottom-color: #C63D2F;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.history-item {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+.history-item:hover {
+  transform: translateX(4px);
+  border-color: #1F2F54;
+  box-shadow: 4px 4px 0 rgba(31, 47, 84, 0.1);
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.history-course-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 0.25rem;
+}
+
+.history-score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 0.25rem 0.75rem;
+  background-color: #F7F3E8;
+  border: 1px solid #dcd3b2;
+  border-radius: 9999px;
+  color: #C63D2F;
+  font-weight: 700;
+  font-family: 'Yuji Syuku', serif;
+}
+
+.btn-back-to-categories {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 240px;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-family: 'Noto Serif JP', serif;
+  background-color: transparent;
+  color: #1F2F54;
+  border: 2px solid #1F2F54;
+}
+
+.btn-back-to-categories:hover {
+  background-color: #1F2F54;
+  color: #fff;
+}
+
+/* flex-grow を Tailwind じゃなく自前で */
+.user-select-body{
+  flex: 1; /* = flex-grow: 1 */
+  min-width: 0; /* 長い名前でも崩れにくくなる */
+}
+
+/* 「あなた」ラベルをCSS側に寄せる（Tailwind class不要に） */
+.user-select-you{
+  color: #C63D2F;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.user-select-other{
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* 右矢印（今 Tailwind で書いてた部分をCSS化） */
+.user-select-arrow{
+  color: #d1d5db;
+  padding-right: 1.5rem; /* pr-6 相当 */
+  transition: color 0.2s;
+}
+
+.history-main{
+  flex-grow: 1;
+  min-width: 0;
+}
