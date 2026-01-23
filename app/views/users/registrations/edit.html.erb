@@ -1,36 +1,61 @@
-<div class="user-edit-contents">
-  <h1>プロフィール編集</h1>
-    <div class="user-edit-form">
+<div class="profile-container animate-fade-in">
+
+  <div class="profile-card">
+    <h1 class="profile-title">門下生情報の変更</h1>
+
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div>
-        <% if resource.image.attached? %>
-          <%= image_tag resource.image, style: "width:120px;height:120px;border-radius:9999px;object-fit:cover;" %>
-        <% end %>
+      <!------ エラーメッセージ ------>
+      <div class="mb-6">
+        <%= render "devise/shared/error_messages", resource: resource %>
       </div>
 
-      <div class="field">
-        <%= f.label :name %>
-        <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      <!------ アイコンプレビュー ------>
+      <div class="profile-avatar-section">
+        <%= avatar_image_tag(current_user, css_class: "profile-avatar-preview") %>
       </div>
 
-      <div class="field">
-        <%= f.label :image, "アイコン" %>
-        <%= f.file_field :image, accept: "image/jpeg,image/png,image/gif,image/webp" %>
+      <!----- 名前入力 ----->
+      <div class="profile-field">
+        <%= f.label :name, "名前", class: "profile-label" %>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "profile-input" %>
       </div>
 
-      <div class="actions">
-        <%= f.submit "保存", class:"user-update-btn" %>
+      <!----- アイコン画像選択 ----->
+      <div class="profile-field">
+        <fieldset class="fieldset">
+          <legend class="profile-label">アイコン</legend>
+
+          <%= f.file_field :image,
+            accept: User::ACCEPTED_CONTENT_TYPES.join(","),
+            class: "file-input file-input-primary file-input-sm text-sm w-full max-w-none !bg-white !text-black",
+            id: "profile_image" %>
+
+          <span class="profile-hint">
+            最大 5MB / JPEG・PNG・GIF・WebP
+          </span>
+        </fieldset>
       </div>
+
+      <!----- 更新ボタン ----->
+      <div class="profile-actions">
+        <%= f.submit "変更を保存する", class: "btn-profile-update" %>
+      </div>
+
     <% end %>
 
+    <!----- 戻るボタン ----->
+    <div class="profile-footer">
+      <%= link_to home_path, class: "btn-back-to-categories" do %>
+        カテゴリー選択へ戻る
+      <% end %>
+
+      <!----- ログアウトボタン ----->
+      <%= button_to destroy_user_session_path, method: :delete, class: "btn-logout" do %>
+        道場から退出（ログアウト）
+      <% end %>
+    </div>
+
   </div>
+
 </div>
-
-<%= link_to "ホームへ", home_path %>
-
-<%= button_to "ログアウト",
-                      destroy_user_session_path,
-                      method: :delete,
-                      class: "header-logout-button" %>
