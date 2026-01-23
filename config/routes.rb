@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   ##### 家族ルームのルーティング #####
   resources :rooms, only: %i[new create edit update destroy] do
+    # collection は id を持たないルーティングを生成。（その逆はmember)
     collection do
       get :home
     end

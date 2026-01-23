@@ -13,11 +13,38 @@
 
 <% end %>
 
-<div class="delete_actions">
-  <%= button_to t('.destroy'),
-                room_path(@room),
+  <% if @show_warning %>
+        <!----------- daisy UI のアラート --------->
+      <div role="alert" class="alert sm:alert-horizontal mb-6 invitation-switch-alert">
+        <svg  xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 24 24"
+              class="stroke-warning h-6 w-6 shrink-0">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+
+        <!----------- アラートの本文 ------------>
+        <span>現在所属の家族ルームから退室します。<br>本当によろしいですか？</span>
+
+        <!---------- 「いいえ」ボタン --------->
+        <div class="flex gap-2">
+          <%= link_to "いいえ",
+                home_rooms_path,
+                class: "btn btn-sm btn-error" %>
+
+        <!---------- 「はい」ボタン ---------->
+          <%= button_to "はい",
+                room_path(@room, confirm: 1),
                 method: :delete,
-                data: { confirm: '本当にこの家族ルームを削除してもよろしいですか？' } %>
-</div>
+                class: "btn btn-sm btn-success" %>
+        </div>
+      </div>
+    <% end %>
+
+  <% unless @show_warning %>
+    <%= button_to "この家族ルームから退室する",
+        room_path(@room),
+        method: :delete %>
+  <% end %>
 
 <%= link_to "戻る", home_rooms_path %>

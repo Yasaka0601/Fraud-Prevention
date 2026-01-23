@@ -1,9 +1,9 @@
 <div class="invitation-container animate-fade-in">
-
   <div class="invitation-card">
 
     <p class="text-gray-500 font-bold mb-2">以下の家族ルームへ招待されています</p>
 
+    <!--------- 招待されているルームの名前 ---------->
     <h1 class="join-room-name">
       <%= @room.name %>
     </h1>
@@ -13,12 +13,45 @@
       家族と共に詐欺対策の稽古を始めますか？
     </p>
 
-    <div class="my-8">
-      <%= button_to room_invitation_path(@room, @invitation, token: params[:token]), method: :patch, class: "btn-primary-action w-full" do %>
-        入門する（参加）
-      <% end %>
-    </div>
+    <!----------- ルーム切り替えのアラート ------------->
+    <% if @show_switch_warning %>
+      <!----------- daisy UI のアラート --------->
+      <div role="alert" class="alert sm:alert-horizontal mb-6 invitation-switch-alert">
+        <svg  xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 24 24"
+              class="stroke-warning h-6 w-6 shrink-0">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+
+        <!----------- アラートの本文 ------------>
+        <span>現在所属の家族ルームは退室となります。<br>よろしいですか？</span>
+
+        <!---------- 「いいえ」ボタン --------->
+        <div class="flex gap-2">
+          <%= link_to "いいえ",
+                home_path,
+                class: "btn btn-sm btn-error" %>
+
+        <!---------- 「はい」ボタン ---------->
+          <%= button_to "はい",
+                room_invitation_path(@room, @invitation, token: params[:token], confirm: 1),
+                method: :patch,
+                class: "btn btn-sm btn-success" %>
+        </div>
+      </div>
+    <% end %>
+
+    <!---------- ルームに属していない場合(アラートなし) ---------->
+    <% unless @show_switch_warning %>
+      <div class="my-8">
+        <%= button_to room_invitation_path(@room, @invitation, token: params[:token]),
+              method: :patch,
+              class: "btn-primary-action w-full" do %>
+          入門する（参加）
+        <% end %>
+      </div>
+    <% end %>
 
   </div>
-
 </div>

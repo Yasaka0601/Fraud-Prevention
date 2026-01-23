@@ -36,8 +36,20 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room.destroy!
-    flash[:notice] = "家族ルームを削除しました"
+
+    if params[:confirm].blank?
+      @show_warning = true
+      return render :edit, status: :unprocessable_entity
+    end
+
+    current_user.update!(room: nil)
+
+    # @room が存在して、ユーザーが誰も居ないなら @room を削除。
+    if @room.present? && @room.users.reload.none?
+      @room.destroy!
+    end
+
+    flash[:notice] = "家族ルームを退出しました"
     redirect_to home_rooms_path
   end
 
