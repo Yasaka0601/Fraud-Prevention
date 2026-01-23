@@ -215,10 +215,3 @@
   color: #1F2F54;
   border-bottom-color: #1F2F54;
 }
-
-/*----- 警告アラート ------ */
-.invitation-switch-alert{
-  background: #fff !important;
-  color: #111827 !important;
-  border: 1px solid #f50b0b !important;
-}
