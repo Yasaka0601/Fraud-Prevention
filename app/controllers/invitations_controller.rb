@@ -33,19 +33,27 @@ class InvitationsController < ApplicationController
   def edit; end
 
   def update
-    # 招待されたのが子ユーザーであれば、切り替え不可。
-    if current_user.child?
-      flash[:danger] = '子ユーザーは招待リンクから家族ルームを切り替えできません'
+
+    # 既に、同じ家族ルームに参加している場合。
+    if current_user.room_id == @room.id
+      flash[:danger] = '既にこの家族ルームに参加しています'
       return redirect_to home_rooms_path
     end
 
-    if current_user.room_id == @room.id
-      flash[:danger] = '既にこの家族ルームに参加しています'
-    else
-      current_user.update!(room: @room)
-      flash[:notice] = "#{@room.name} に参加しました"
+    # needs_switch 現在のユーザーがルームに属している、かつ、そのルームが招待ルームと違う。
+    needs_switch = current_user.room_id.present? && current_user.room_id != @room.id
+    # confirm は「はい」を選択すれば params に含まれる(invitation/edit に記述)
+    if needs_switch && params[:confirm].blank?
+      # @show_switch_warning は view で条件分岐をする際に使用。
+      @show_switch_warning = true
+      # status: :unprocessable_entity は ステータスコード 422 でリダイレクトするという意味。
+      return render :edit, status: :unprocessable_entity
     end
+
+    current_user.update!(room: @room)
+    flash[:notice] = "#{@room.name} に参加しました"
     redirect_to home_rooms_path
+
   end
 
   private
