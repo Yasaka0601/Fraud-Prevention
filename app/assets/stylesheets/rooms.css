@@ -132,3 +132,61 @@
   margin-bottom: 1rem;
   display: block;
 }
+
+/* =========================================
+  ここから：編集画面用スタイル
+  ========================================= */
+
+/* --- 編集カード --- */
+.room-edit-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #1F2F54;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.room-edit-title {
+  text-align: center;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #d1d5db;
+}
+
+/* --- 退室エリア --- */
+.room-danger-zone {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 2px dashed #d1d5db;
+  text-align: center;
+}
+
+/* 退室ボタン */
+.btn-room-leave {
+  background-color: transparent;
+  color: #991b1b;
+  border: 1px solid #991b1b;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.btn-room-leave:hover {
+  background-color: #fef2f2;
+  box-shadow: 0 4px 6px rgba(153, 27, 27, 0.1);
+  transform: translateY(-1px);
+}

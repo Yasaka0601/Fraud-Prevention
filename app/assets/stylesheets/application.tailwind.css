@@ -356,3 +356,84 @@ select:-webkit-autofill{
   background-color: #1F2F54;
   color: #fff;
 }
+
+/* --- 警告アラートボックス --- */
+.room-alert-wrapper {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.room-alert-box {
+  background-color: #fff7ed;
+  border: 1px solid #fdba74;
+  border-left: 6px solid #f97316;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  color: #9a3412;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 640px) {
+  .room-alert-box {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.alert-icon {
+  flex-shrink: 0;
+  color: #f97316;
+}
+
+.alert-content {
+  flex-grow: 1;
+}
+
+.alert-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.alert-desc {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 1. button_to の型崩れ防止 */
+/* Flexコンテナ内のformタグがブロック要素として振る舞うのを防ぐ */
+.room-alert-box .flex form,
+.alert-actions form {
+  display: inline-block;
+  margin: 0;
+}
+
+/* 狭いエリアでもきれいに見せるためのクラス */
+.room-alert-box.layout-stack {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  text-align: left !important;
+}
+
+.room-alert-box.layout-stack .alert-actions {
+  margin-top: 1rem;
+  justify-content: flex-end;
+  width: 100%;
+}
