@@ -2,9 +2,10 @@
   <% if @room.present? %>
 
     <%# --- ルーム看板 --- %>
-    <header class="room-header animate-fade-in">
-      <div class="room-name-plate">
-        <h1 class="room-title"><%= @room.name %></h1>
+    <header class="room-home-header">
+      <div class="room-title-wrapper">
+        <span class="room-title-label">家族の間</span>
+        <h1 class="room-title-main"><%= @room.name %></h1>
       </div>
     </header>
 
