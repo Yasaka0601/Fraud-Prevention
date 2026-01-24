@@ -5,27 +5,39 @@
   padding: 2rem 1rem;
 }
 
-/* --- ルーム名看板 --- */
-.room-header {
+/* --- メインヘッダー --- */
+.room-home-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
   position: relative;
 }
 
-.room-name-plate {
+.room-title-wrapper {
   display: inline-block;
-  background-color: #fff;
-  border: 3px solid #1F2F54;
-  padding: 1rem 3rem;
-  box-shadow: 4px 4px 0px #1F2F54;
   position: relative;
 }
 
-.room-title {
+.room-title-label {
+  display: block;
   font-family: 'Noto Serif JP', serif;
-  font-size: 1.75rem;
-  font-weight: 900;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #C63D2F;
+  letter-spacing: 0.3em;
+  margin-bottom: 0.5rem;
+}
+
+.room-title-main {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 3.5rem;
+  font-weight: 400;
   color: #1F2F54;
+  line-height: 1.2;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .room-title-main { font-size: 2.5rem; }
 }
 
 /* --- メンバー名簿（グリッド表示） --- */
