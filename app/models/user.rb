@@ -1,10 +1,9 @@
 class User < ApplicationRecord
 
   ##### devise のモジュールを適用させている記述。#####
-  # :validatable これは、子ユーザーの実装のために排除。
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :omniauthable,
-         omniauth_providers: %i[line]
+  devise  :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :omniauthable,
+          :validatable, omniauth_providers: %i[line]
 
   ##### Active Storage #####
   has_one_attached :image
@@ -15,28 +14,10 @@ class User < ApplicationRecord
   has_many :course_results, dependent: :destroy
 
   ##### 各ユーザーの権限を定義。#####
-  enum role: { general: 0, child: 1, admin: 2}
+  enum role: { general: 0, admin: 1}
 
-  ##### 各ユーザーの共通バリデーション #####
+  ##### バリデーション #####
   validates :name, presence: true, length: { maximum: 50 }
-
-  ##### 一般 & ホスト向け（子ユーザー以外）バリデーション #####
-  # with_options で child? の条件を共通化。(child? は enum で自動で生成させるメソッド)
-  with_options unless: :child? do
-    validates :password,  presence: true,
-                          confirmation: true,
-                          length: { minimum: 6 },
-                          if: -> { new_record? || changes[:encrypted_password] }
-    validates :password_confirmation, presence: true,
-                                      if: -> { new_record? || changes[:encrypted_password] }
-    validates :email, presence: true,
-                      uniqueness: true
-  end
-
-  ##### 子ユーザー向けバリデーション #####
-  with_options if: :child? do
-    validates :room_id, presence: true
-  end
 
   ##### 画像ファイルの種類とサイズのバリデーション #####
   ACCEPTED_CONTENT_TYPES = %w[image/jpeg image/png image/gif image/webp].freeze
