@@ -5,7 +5,7 @@
     <h1 class="quiz-course-name"><%= @course.name %></h1>
     <div class="quiz-progress">
       <span>第 <%= @index %> 問</span>
-      <!-----  進捗バー. ------>
+      <!-----  進捗バー ------>
       <div class="quiz-progress-bar">
         <div class="quiz-progress-fill" style="width: <%= (@index.to_f / 5 * 100).to_i %>%;"></div>
       </div>
