@@ -14,8 +14,8 @@
     <div class="course-list">
       <% @courses.each do |course| %>
         <%# カード全体をリンクにする %>
-        <%= link_to course_play_path(course, 1, quiz_start: true), class: "course-card group" do %>
-          
+        <%= link_to course_quiz_path(course, 1, quiz_start: true), class: "course-card group" do %>
+
           <div class="course-info">
             <h2 class="course-name">
               <%= course.name %>

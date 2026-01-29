@@ -1,11 +1,11 @@
 <div class="quiz-container">
 
-  <%# --- ヘッダー：進捗表示 --- %>
+  <!----- 進捗表示 ----->
   <div class="quiz-header">
     <h1 class="quiz-course-name"><%= @course.name %></h1>
     <div class="quiz-progress">
       <span>第 <%= @index %> 問</span>
-      <%# 進捗バー（簡易計算） %>
+      <!-----  進捗バー. ------>
       <div class="quiz-progress-bar">
         <div class="quiz-progress-fill" style="width: <%= (@index.to_f / 5 * 100).to_i %>%;"></div>
       </div>
@@ -13,10 +13,10 @@
     </div>
   </div>
 
-  <%# --- クイズカード --- %>
+  <!------ クイズカード ------->
   <div class="quiz-card">
     <h2 class="quiz-question-number">問 <%= @index %></h2>
-    
+
     <p class="quiz-sentence"><%= @quiz.sentence %></p>
 
     <% if @quiz.image.attached? %>
@@ -25,20 +25,20 @@
       </div>
     <% end %>
 
-    <%# --- 回答フォーム（未回答時のみ表示、または回答後も表示しつつ無効化するなど要件によるが、今回は切り替え） --- %>
+    <!------ 回答フォーム（未回答時のみ表示） -------->
     <% if @is_correct.nil? %>
-      <%= form_with url: answer_course_play_path(@course, @index), method: :post, local: true, data: { turbo: false } do |form| %>
-        
+      <%= form_with url: answer_course_quiz_path(@course, @index), method: :post, local: true, data: { turbo: false } do |form| %>
+
         <div class="quiz-choices">
           <% if @multiple_answer %>
-            <%# 複数回答（チェックボックス） %>
+            <!-----     複数回答（チェックボックス）. --------->
             <p class="text-sm text-gray-500 font-bold mb-2">※複数選択可</p>
             <% @choices.each do |choice| %>
               <div class="choice-item choice-item--checkbox">
-                <input 
-                  type="checkbox" 
-                  name="selected_choice_ids[]" 
-                  id="choice_<%= choice.id %>" 
+                <input
+                  type="checkbox"
+                  name="selected_choice_ids[]"
+                  id="choice_<%= choice.id %>"
                   value="<%= choice.id %>"
                   <%= "checked" if @selected_choice_ids&.include?(choice.id) %>
                 >
@@ -49,13 +49,13 @@
             <% end %>
 
           <% else %>
-            <%# 単一回答（ラジオボタン） %>
+            <!-----   単一回答（ラジオボタン）.  ----->
             <% @choices.each do |choice| %>
               <div class="choice-item">
-                <input 
-                  type="radio" 
-                  name="selected_choice" 
-                  id="choice_<%= choice.id %>" 
+                <input
+                  type="radio"
+                  name="selected_choice"
+                  id="choice_<%= choice.id %>"
                   value="<%= choice.id %>"
                   <%= "checked" if choice.id.to_s == @selected_choice_id.to_s %>
                 >
@@ -73,12 +73,12 @@
 
       <% end %>
     <% else %>
-      <%# --- 回答済みの場合（選択肢を表示だけしておく：クリック不可） --- %>
+      <!------- 回答済みの場合（選択肢を表示だけしておく：クリック不可） -------->
       <div class="quiz-choices opacity-60 pointer-events-none">
         <% @choices.each do |choice| %>
           <div class="choice-item <%= @multiple_answer ? 'choice-item--checkbox' : '' %>">
-            <input type="<%= @multiple_answer ? 'checkbox' : 'radio' %>" 
-                   <%= "checked" if (@selected_choice_ids&.include?(choice.id) || choice.id.to_s == @selected_choice_id.to_s) %> disabled>
+            <input type="<%= @multiple_answer ? 'checkbox' : 'radio' %>"
+                    <%= "checked" if (@selected_choice_ids&.include?(choice.id) || choice.id.to_s == @selected_choice_id.to_s) %> disabled>
             <label class="choice-label"><%= choice.text %></label>
           </div>
         <% end %>
@@ -86,19 +86,19 @@
     <% end %>
   </div>
 
-  <%# --- 判定結果表示エリア --- %>
+  <!------ 判定結果表示エリア ------->
   <% unless @is_correct.nil? %>
     <div class="result-container">
-      
+
       <% if @is_correct %>
-        <%# 正解時の表示 %>
+        <!------ 正解時の表示 ------>
         <div class="result-box--correct">
           <div class="result-title--correct">
             <span class="text-4xl">◎</span> 見事！正解
           </div>
         </div>
       <% else %>
-        <%# 不正解時の表示 %>
+        <!-----     不正解時の表示 ------>
         <div class="result-box--incorrect">
           <div class="result-title--incorrect">
             <span class="text-4xl">✕</span> 無念...不正解
@@ -106,7 +106,7 @@
         </div>
       <% end %>
 
-      <%# 正解と解説 %>
+      <!-----   正解と解説 ------->
       <div class="explanation-box">
         <div class="mb-4">
           <span class="explanation-title text-[#C63D2F]">【正解】</span>
@@ -129,14 +129,14 @@
         <% end %>
       </div>
 
-      <%# 次へボタン %>
+      <!----- 次へボタン ----->
       <div class="text-center">
         <% if @index == 5 && @course_result_id.present? %>
           <%= link_to result_path(@course_result_id), class: "next-btn" do %>
             結果を確認する &rarr;
           <% end %>
         <% elsif @index < 5 %>
-          <%= link_to course_play_path(@course, @index + 1), class: "next-btn" do %>
+          <%= link_to course_quiz_path(@course, @index + 1), class: "next-btn" do %>
             次の問題へ進む &rarr;
           <% end %>
         <% end %>
