@@ -34,10 +34,10 @@ Rails.application.routes.draw do
   end
 
   ##### クイズ画面のルーティング。#####
-  # /courses/:course_id/play/:id というパスを生成している。
-  # :play に post :answer をネストさせ /courses/:course_id/play/:id/answer パスを生成。
+  # /courses/:course_id/quiz/:id というパスを生成している。
+  # :quiz に post :answer をネストさせ /courses/:course_id/quiz/:id/answer パスを生成。
   resources :courses, only: [] do
-    resources :play, only: [:show], controller: 'plays' do
+    resources :quiz, only: [:show], controller: 'quizzes' do
       post :answer, on: :member
     end
   end

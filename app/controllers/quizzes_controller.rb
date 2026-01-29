@@ -1,4 +1,4 @@
-class PlaysController < ApplicationController
+class QuizzesController < ApplicationController
   before_action :set_course
   before_action :prepare_quiz_session, only: :show
   before_action :set_index, :set_quiz_id, :set_quiz, :set_choices
@@ -68,10 +68,10 @@ class PlaysController < ApplicationController
         answers: session[:answers]
       )
 
-      redirect_to course_play_path(@course, @index, result_id: course_result.id)
+      redirect_to course_quiz_path(@course, @index, result_id: course_result.id)
     else
       # 次の問題へリダイレクトする。
-      redirect_to course_play_path(@course, @index)
+      redirect_to course_quiz_path(@course, @index)
     end
   end
 
@@ -90,7 +90,7 @@ class PlaysController < ApplicationController
       session[:quiz_ids] = nil
       session[:answers] = []
       # courses/:course_id/play/:id にリダイレクトしている。
-      redirect_to course_play_path(@course, 1)
+      redirect_to course_quiz_path(@course, 1)
       # redirect なので return で終了させる必要がある。
       return
     end

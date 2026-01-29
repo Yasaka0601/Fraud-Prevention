@@ -15,7 +15,7 @@ module ApplicationHelper
       "/home",
       "/categories",
       "/courses",
-      "/plays",
+      "/quizzes",
     ],
     rooms: [
       "/home_rooms",
