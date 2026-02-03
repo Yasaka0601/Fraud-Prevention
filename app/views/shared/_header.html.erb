@@ -8,7 +8,9 @@
     <nav class="header-nav">
       <% if user_signed_in? %>
         <%= link_to edit_user_registration_path, class: "user-link" do %>
-          <%= avatar_image_tag(current_user) %>
+          <div class="user-avatar-wrapper">
+            <%= avatar_image_tag(current_user, css_class: "user-avatar") %>
+          </div>
           <span class="header-user-name"><%= current_user.name %></span>
         <% end %>
       <% end %>

@@ -6,6 +6,11 @@
 
   border-top: 1px solid rgba(0, 0, 0, 0.25);
   margin-top: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
 }
 
 /* 未ログイン時 */
@@ -31,7 +36,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 12px 16px;
+  padding: 8px 16px 12px; /* カードが入った分、上の余白を微調整 */
 }
 
 /* リンク */
@@ -39,37 +44,54 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px; /* アイコンとテキストの間隔を少し詰める */
 
   text-decoration: none;
   color: #1F2F54;
   transition: color 160ms ease;
 }
 
-.footer-nav__link:hover,
-.footer-nav__link:focus-visible,
-.footer-nav__link.is-active {
-  color: #ff0000;
+/* アイコンを囲むカード枠（新規追加） */
+.footer-nav__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px; /* 角丸の指定 */
+  background-color: #1F2F54; /* 背景色：紺 */
+  transition: background-color 160ms ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* 軽く影をつけて浮き上がらせる */
 }
 
+/* アイコン本体 */
 .footer-nav__icon{
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   display: block;
+  color: #ffffff; /* アイコンは白抜きにする */
+  transition: color 160ms ease;
 }
 
+/* テキスト */
 .footer-nav__text{
-  font-size: 0.72rem;
+  font-size: 0.7rem; /* アイコンが強調された分、少し控えめに */
   font-family: "Noto Serif JP", serif;
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1;
 }
 
-.site-footer{
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 50;
+/* ホバー・アクティブ時の挙動 */
+.footer-nav__link:hover .footer-nav__icon-wrapper,
+.footer-nav__link:focus-visible .footer-nav__icon-wrapper,
+.footer-nav__link.is-active .footer-nav__icon-wrapper {
+  background-color: #c13434; /* ホバーで赤色に */
+}
+
+/* テキストの色も同期させる */
+.footer-nav__link:hover,
+.footer-nav__link:focus-visible,
+.footer-nav__link.is-active {
+  color: #ff0000;
 }
