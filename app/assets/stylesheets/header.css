@@ -4,54 +4,104 @@
   background-position: center;
   background-size: auto 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* 固定ヘッダーの設定 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
 }
 
 /***** 中身を左右に分けるコンテナ *****/
 .header-inner {
   max-width: 960px;
   margin: 0 auto;
-  padding: 8px 16px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/************ テキスト共通 ************/
-.header-text,
-.header-user-name {
-  color: #000000;
-  font-family: "Yuji Syuku", "Noto Serif JP", serif;
-  font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+/************ ロゴ部分（筆文字・カッコよく） ************/
+.header-logo-link {
+  text-decoration: none;
+  display: inline-block;
 }
 
-/* ロゴだけサイズと影を強める */
 .header-text {
-  font-size: 22px;
-  letter-spacing: 0.08em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  font-family: "Yuji Syuku", "Noto Serif JP", serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 0.1em;
+
+  /* 木目背景に映えるよう、白文字に濃い影をつける */
+  color: #ffffff;
+  text-shadow:
+    2px 2px 0px #000000,
+    0 0 10px rgba(0, 0, 0, 0.5);
+
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* ロゴのホバー時：少し色が変わり、輝くようなエフェクト */
+.header-logo-link:hover .header-text,
+.header-logo-link:focus-visible .header-text {
+  color: #ffcccc;
+  text-shadow:
+    2px 2px 0px #8b0000,
+    0 0 15px rgba(255, 0, 0, 0.6);
 }
 
 /************ 右側ナビ部分 ************/
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 16px;
 }
 
-/* hover 色（ロゴ・ユーザー名共通） */
-.header-logo-link:hover .header-text,
-.header-logo-link:focus-visible .header-text,
-.user-link:hover .header-user-name,
-.user-link:focus-visible .header-user-name {
-  color: #ff0000;
+.user-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
 }
 
-/***** ヘッダーを常に表示 *****/
-.site-header{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 60;
+/* ユーザー名のスタイル */
+.header-user-name {
+  font-family: "Yuji Syuku", "Noto Serif JP", serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff; /* ロゴに合わせて白文字に */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* アバター画像の装飾 */
+.user-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* imgタグに直接スタイルを当てる想定 */
+.user-avatar-wrapper img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ユーザーリンクのホバー時 */
+.user-link:hover,
+.user-link:focus-visible {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.user-link:hover .header-user-name {
+  color: #ffcccc;
 }
