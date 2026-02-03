@@ -357,6 +357,31 @@ select:-webkit-autofill{
   color: #fff;
 }
 
+/* ---　戻るボタン ---*/
+
+.courses-footer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: #1F2F54;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border: 1px solid #1F2F54;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  background-color: transparent;
+}
+
+.back-link:hover {
+  background-color: #1F2F54;
+  color: #fff;
+}
+
 /* --- 警告アラートボックス --- */
 .room-alert-wrapper {
   margin-bottom: 2rem;

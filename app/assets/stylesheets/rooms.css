@@ -196,3 +196,56 @@
   box-shadow: 0 4px 6px rgba(153, 27, 27, 0.1);
   transform: translateY(-1px);
 }
+
+/* --- 家族ルーム作成・編集用カードスタイル --- */
+
+/* 家族ルーム作成画面のタイトル（大きく、強調） */
+.room-new-title {
+  text-align: center;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.5rem; /* サイズを大きく */
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #F7F3E8;
+  position: relative;
+  letter-spacing: 0.05em;
+}
+
+/* タイトル下の赤いアクセントライン */
+.room-new-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 3px;
+  background-color: #C63D2F;
+}
+
+/* シンプルなエラーメッセージ表示 */
+.room-simple-error {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+}
+
+.room-simple-error ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* フォームの補足説明用テキスト */
+.room-field-note {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}

@@ -1,7 +1,7 @@
 <div class="room-container">
   <% if @room.present? %>
 
-    <%# --- ルーム看板 --- %>
+    <!------- ルーム名 -------->
     <header class="room-home-header">
       <div class="room-title-wrapper">
         <span class="room-title-label">家族の間</span>
@@ -9,7 +9,7 @@
       </div>
     </header>
 
-    <%# --- 家族メンバー一覧 --- %>
+    <!-------- ルームメンバーの一覧 -------->
     <div class="mb-6 flex justify-between items-end border-b-2 border-[#1F2F54] pb-2">
       <h2 class="font-serif-jp text-xl font-bold text-[#1F2F54]">
         <i class="fas fa-users mr-2"></i>家族の名簿
@@ -36,7 +36,7 @@
       <%= paginate @room_members %>
     </div>
 
-    <%# --- 管理・操作エリア --- %>
+    <!-------- 管理・操作エリア --------->
     <section class="room-actions">
       <h3 class="font-serif-jp font-bold text-[#1F2F54] mb-4">
         家族の間・管理
@@ -56,7 +56,7 @@
 
   <% else %>
 
-    <%# --- 未所属状態 --- %>
+    <!------- 未所属状態 --------->
     <div class="no-room-box animate-fade-in">
       <h1 class="font-serif-jp text-2xl font-bold text-[#1F2F54] mb-4">家族ルームへようこそ</h1>
       <p class="text-gray-600 mb-8 leading-relaxed">
@@ -75,7 +75,7 @@
 
   <% end %>
 
-  <%# --- 共通ナビゲーション --- %>
+  <!-------- 共通ナビゲーション -------->
   <div class="mt-12 text-center">
     <%= link_to home_path, class: "btn-back-to-categories" do %>
       カテゴリー選択へ戻る

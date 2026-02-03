@@ -1,6 +1,6 @@
 <div class="result-container animate-fade-in">
 
-  <%# --- 総合スコアカード --- %>
+  <!----- 総合スコアカード ----->
   <div class="score-card">
     <h1 class="result-course-title">
       <%= @course_result.course.name %>
@@ -13,7 +13,7 @@
         <span class="text-lg"> / <%= @course_result.total_questions %> 問</span>
       </div>
 
-      <%# 獲得ポイント（判子デザイン） %>
+      <!----- 獲得ポイント ------>
       <div class="result-point-badge">
         <span class="point-label">獲得</span>
         <div class="point-value"><%= @get_point %></div>
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <%# --- 各問題の振り返りリスト --- %>
+  <!----- 各問題の振り返りリスト ----->
   <% @quiz_histories.each_with_index do |history, i| %>
     <% quiz = history.quiz %>
     <% correct_choices  = quiz.choices.select(&:is_correct) %>
@@ -32,10 +32,10 @@
     <% selected_ids = selected_choices.map(&:id).sort %>
     <% is_correct   = (correct_ids == selected_ids) %>
 
-    <%# 正誤に応じてクラスを切り替え %>
+    <!----- 正誤に応じてクラスを切り替え ------->
     <section class="history-card <%= is_correct ? 'history-card--correct' : 'history-card--incorrect' %>">
 
-      <%# 問題番号と判定バッジ %>
+      <!----- 問題番号と判定バッジ ------->
       <div class="history-q-number">
         <span>第 <%= i + 1 %> 問</span>
         <% if is_correct %>
@@ -45,13 +45,13 @@
         <% end %>
       </div>
 
-      <%# 問題文 %>
+      <!----- 問題文 ------->
       <p class="history-sentence"><%= quiz.sentence %></p>
 
-      <%# 回答比較ブロック %>
+      <!------- 回答比較ブロック ------->
       <div class="answer-comparison">
 
-        <%# あなたの回答 %>
+        <!------  あなたの回答  ------->
         <div class="answer-block">
           <span class="answer-label">あなたの回答</span>
           <div class="font-bold text-gray-800">
@@ -67,7 +67,7 @@
           </div>
         </div>
 
-        <%# 正解 %>
+        <!------ 正解  -------->
         <div class="answer-block">
           <span class="answer-label text-[#C63D2F]">正解</span>
           <div class="font-bold text-[#C63D2F]">
@@ -81,7 +81,7 @@
 
       </div>
 
-      <%# 解説 %>
+      <!------   解説  ------>
       <% if quiz.explanation.present? %>
         <div class="history-explanation">
           <span class="explanation-label">【解説】</span>
@@ -92,7 +92,7 @@
     </section>
   <% end %>
 
-  <%# --- ナビゲーションボタン --- %>
+  <!------- ナビゲーションボタン --------->
   <div class="result-nav">
     <%= link_to results_path, class: "nav-btn nav-btn--primary" do %>
       成績一覧へ
