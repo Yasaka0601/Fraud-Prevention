@@ -1,34 +1,42 @@
-<h1>家族ルーム "作成" 画面</h1>
+<div class="form-page animate-fade-in">
 
-<p>この画面で実装するもの。
-<li>・家族ルーム名入力フォーム 済</li>
-<li>・ルームアイコンのファイル選択ボタン</li>
-<li>・「作成」ボタン 済</li>
-</p>
+  <div class="form-card">
+    <h1 class="room-new-title">家族ルーム作成</h1>
 
+    <!-- エラーメッセージ表示エリア -->
+    <% if @room.errors.any? %>
+      <div class="room-simple-error">
+        <ul>
+          <% @room.errors.full_messages.each do |message| %>
+            <li><i class="fas fa-exclamation-circle mr-1"></i><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
+    <!-----  フォーム ----->
+    <%= form_with model: @room, local: true do |form| %>
 
-<% if @room.errors.any? %>
-  <div class="error-messages">
-    <ul>
-      <% @room.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <div class="form-field">
+        <%= form.label :name, "家族ルーム名", class: "form-label" %>
+        <%= form.text_field :name,
+              class: "form-input",
+              autofocus: true %>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "作成する", class: "form-submit" %>
+      </div>
+
+    <% end %>
+
+    <!----- 戻るリンク ----->
+
+    <div class="courses-footer">
+      <%= link_to home_path, class: "back-link" do %>
+        <span>&larr; 戻る</span>
       <% end %>
-    </ul>
+    </div>
+
   </div>
-<% end %>
-
-<%= form_with model: @room do |form| %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit t('.submit') %>
-  </div>
-
-<% end %>
-
-<%= link_to "戻る", home_rooms_path %>
+</div>
