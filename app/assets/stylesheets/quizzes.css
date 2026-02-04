@@ -262,3 +262,12 @@
 .next-btn:hover {
   background-color: #a03024;
 }
+
+/***** 解説文 *****/
+.quiz-explanation{
+  color: #374151;
+  line-height: 1.625;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
