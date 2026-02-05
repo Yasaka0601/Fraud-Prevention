@@ -56,6 +56,11 @@ class CourseResult < ApplicationRecord
       # increment! は ActiveRecord の数値カラムを加算し、保存するメソッド。
       user.increment!(:total_point, get_point)
     end
+
+    # 成績履歴を20件に制限（21件目以降は古いのを削除）
+    excess = user.course_results.order(created_at: :desc).offset(20)
+    excess.delete_all
+
     # メソッドの戻り値
     course_result
   end
