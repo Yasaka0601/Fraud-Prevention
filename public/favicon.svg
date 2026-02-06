@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 外枠：藍色の太い円（家紋の輪） -->
+  <circle cx="32" cy="32" r="30" stroke="#1F2F54" stroke-width="4" fill="#fffcf5"/>
+  
+  <!-- 内側の円：朱色の細い円（結界） -->
+  <circle cx="32" cy="32" r="24" stroke="#C63D2F" stroke-width="1.5" fill="none"/>
+  
+  <!-- 文字：「守」 -->
+  <text x="32" y="43" 
+        font-family="'Hiragino Mincho ProN', 'Yu Mincho', serif" 
+        font-size="34" 
+        font-weight="bold" 
+        fill="#1F2F54" 
+        text-anchor="middle">防</text>
+</svg>
