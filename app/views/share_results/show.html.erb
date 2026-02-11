@@ -1,0 +1,30 @@
+<% category_name   = @course_result.course.category.name %>
+<% course_name     = @course_result.course.name %>
+<% total_questions = @course_result.total_questions.to_i %>
+<% correct_count   = @course_result.correct_count.to_i %>
+<% incorrect_count = [total_questions - correct_count, 0].max %>
+<% correct_rate    = total_questions.positive? ? ((correct_count.to_f / total_questions) * 100).round : 0 %>
+<% result_text     = "#{total_questions}問中、#{correct_count}問正解。" %>
+
+<main>
+  <h1>クイズ結果</h1>
+
+  <p>「<%= category_name %>」「<%= course_name %>」コース</p>
+  <p><%= result_text %></p>
+
+  <section>
+    <h2>成績サマリー</h2>
+    <p>正解: <%= correct_count %>問</p>
+    <p>不正解: <%= incorrect_count %>問</p>
+    <p>正答率: <%= correct_rate %>%</p>
+  </section>
+
+  <section>
+    <h2>受験日時</h2>
+    <p><%= @course_result.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+  </section>
+
+  <p>
+    <%= link_to "アプリトップへ", root_path %>
+  </p>
+</main>

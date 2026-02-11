@@ -46,4 +46,54 @@ module ApplicationHelper
     footer_active_key(path) == key ? "is-active" : ""
   end
 
+  ##### メタタグ #####
+  def show_meta_tags
+    assign_meta_tags if display_meta_tags.blank?
+    display_meta_tags
+  end
+
+  def assign_meta_tags(options = {})
+    defaults = {
+      site: "詐欺対策道場",
+      title: "詐欺対策道場",
+      description: "特殊詐欺に関する知識を身につける",
+      keywords: "詐欺対策,防犯,クイズ",
+      twitter_site: nil
+    }
+
+    opts = defaults.merge(options)
+    page_url = opts[:url].presence || request.original_url
+
+    # 画像は全ページ固定
+    fixed_image = image_url("ogp_default.png")
+
+    twitter_config = {
+      card: "summary_large_image",
+      title: opts[:title].presence || opts[:site],
+      description: opts[:description],
+      image: fixed_image
+    }
+    twitter_config[:site] = opts[:twitter_site] if opts[:twitter_site].present?
+
+    set_meta_tags(
+      separator: "|",
+      reverse: true,
+      site: opts[:site],
+      title: opts[:title],
+      description: opts[:description],
+      keywords: opts[:keywords],
+      canonical: page_url,
+      noindex: !Rails.env.production?,
+      og: {
+        site_name: opts[:site],
+        title: opts[:title].presence || opts[:site],
+        description: opts[:description],
+        type: "website",
+        url: page_url,
+        image: fixed_image,
+        locale: "ja_JP"
+      },
+      twitter: twitter_config
+    )
+  end
 end

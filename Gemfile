@@ -54,7 +54,6 @@ group :development, :test do
 
   gem "factory_bot_rails"
 
-  gem "dotenv-rails"
 end
 
 group :development do
@@ -91,3 +90,6 @@ gem 'omniauth-rails_csrf_protection'
 
 ##### ページネーション #####
 gem "kaminari"
+
+##### メタタグ #####
+gem 'meta-tags'

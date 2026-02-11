@@ -49,6 +49,9 @@ class ResultsController < ApplicationController
       # 答え合わせをして true なら、ポイント加算。false なら 0
       selected_ids == correct_ids ? quiz.give_point.to_i : 0
     end
+
+    token = @course_result.signed_id(purpose: :share_result, expires_in: 7.days)
+    @share_url = share_result_url(token: token)
   end
 
   private
