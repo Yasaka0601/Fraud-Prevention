@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   ##### 成績表示のルーティング #####
   get "results/users", to: "results#users", as: :result_users
+  get "share/results/:token", to: "share_results#show", as: :share_result
   resources :results, only: [:index, :show]
 
   ##### ランキングのルーティング #####
