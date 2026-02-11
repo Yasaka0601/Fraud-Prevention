@@ -492,3 +492,135 @@
   flex-grow: 1;
   min-width: 0;
 }
+
+/* ...既存の記述はそのまま... */
+
+/* =========================================
+  シェア用成績画面 (share_results)
+   ========================================= */
+
+/* 日時表示 */
+.share-date-box {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* サマリーグリッド（正解・不正解・率を並べる） */
+.share-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px dashed #d1d5db;
+}
+
+/* 各サマリー項目 */
+.share-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.share-stat-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.share-stat-value {
+  font-family: 'Yuji Syuku', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1F2F54;
+}
+
+.share-stat-value--correct {
+  color: #15803d; /* 緑 */
+}
+
+.share-stat-value--incorrect {
+  color: #b91c1c; /* 赤 */
+}
+
+/* 未ログインユーザー向けのウェルカムエリア */
+.share-welcome-box {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  margin-top: 2rem;
+}
+
+.share-welcome-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 0.5rem;
+}
+
+.share-welcome-text {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* トップへ戻るボタンのラッパー */
+.share-action-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* ...既存の記述はそのまま... */
+
+/* =========================================
+   ここから追記：Xシェアボタン
+   ========================================= */
+
+/* ボタン配置エリア */
+.share-area {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Xシェアボタン本体 */
+.btn-share-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: #000; /* Xブランドカラー */
+  color: #fff;
+  font-family: 'Noto Sans JP', sans-serif; /* ゴシック体で視認性重視 */
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
+}
+
+/* ホバー時の挙動 */
+.btn-share-x:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* アイコンサイズ調整 */
+.icon-x-logo {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
