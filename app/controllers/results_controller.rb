@@ -50,7 +50,10 @@ class ResultsController < ApplicationController
       selected_ids == correct_ids ? quiz.give_point.to_i : 0
     end
 
-    token = @course_result.signed_id(purpose: :share_result, expires_in: 7.days)
+    # この成績(@course_result)専用の「共有トークン」を作る。
+    token = @course_result.signed_id(purpose: :share_result, expires_in: 30.days)
+
+    # 上で作った token をURLに埋め込んで、共有用URLを作る。
     @share_url = share_result_url(token: token)
   end
 

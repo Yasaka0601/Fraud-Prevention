@@ -48,33 +48,41 @@ module ApplicationHelper
 
   ##### メタタグ #####
   def show_meta_tags
+    # display_meta_tags:
+    # meta-tags gem が持っている「現在リクエストのメタタグ出力結果」を返す
+    # まだ何も設定されていない場合は blank? になる
     assign_meta_tags if display_meta_tags.blank?
     display_meta_tags
   end
 
   def assign_meta_tags(options = {})
+    # 指定なしの共通デフォルト
     defaults = {
       site: "詐欺対策道場",
       title: "詐欺対策道場",
       description: "特殊詐欺に関する知識を身につける",
       keywords: "詐欺対策,防犯,クイズ",
-      twitter_site: nil
     }
 
+    #コントローラーから渡した値で上書きしている。
     opts = defaults.merge(options)
+
+    #コントローラーから渡されたURLがあれば opts[:url] を使う。
+    #なければ現在URL (original_url) を使う。
     page_url = opts[:url].presence || request.original_url
 
     # 画像は全ページ固定
     fixed_image = image_url("ogp_default.png")
 
+    # XにURLを貼ったときに出る「タイトル・説明・画像」を設定。
     twitter_config = {
       card: "summary_large_image",
       title: opts[:title].presence || opts[:site],
       description: opts[:description],
       image: fixed_image
     }
-    twitter_config[:site] = opts[:twitter_site] if opts[:twitter_site].present?
 
+    # meta-tags gem に「リクエストのメタ情報」を登録
     set_meta_tags(
       separator: "|",
       reverse: true,
