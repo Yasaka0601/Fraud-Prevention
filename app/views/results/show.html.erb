@@ -1,10 +1,6 @@
 <div class="result-container animate-fade-in">
 
   <!----- 総合スコアカード ----->
-  <% tweet_text = "「#{@course_result.course.category.name}」「#{@course_result.course.name}」コース\n#{@course_result.total_questions}問中、#{@course_result.correct_count}問正解。" %>
-  <% intent_url = "https://twitter.com/intent/tweet?text=#{CGI.escape(tweet_text)}&url=#{CGI.escape(@share_url)}" %>
-
-  <%= link_to "Xでシェア", intent_url, target: "_blank", rel: "noopener noreferrer" %>
 
   <div class="score-card">
     <h1 class="result-course-title">
@@ -25,6 +21,21 @@
         <span class="point-unit">pt</span>
       </div>
     </div>
+
+    <!----- X シェアボタン (デザイン適用) ----->
+    <% tweet_text = "「#{@course_result.course.category.name}」「#{@course_result.course.name}」コース\n#{@course_result.total_questions}問中、#{@course_result.correct_count}問正解。" %>
+    <% intent_url = "https://twitter.com/intent/tweet?text=#{CGI.escape(tweet_text)}&url=#{CGI.escape(@share_url)}&hashtags=詐欺対策道場" %>
+
+    <div class="share-area">
+      <%= link_to intent_url, target: "_blank", rel: "noopener noreferrer", class: "btn-share-x" do %>
+        <%# X (Twitter) ロゴSVG %>
+        <svg class="icon-x-logo" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+        </svg>
+        <span>結果をポストする</span>
+      <% end %>
+    </div>
+
   </div>
 
   <!----- 各問題の振り返りリスト ----->

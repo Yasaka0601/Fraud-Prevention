@@ -1,30 +1,62 @@
+<%# ロジック部：変数を整理 %>
 <% category_name   = @course_result.course.category.name %>
 <% course_name     = @course_result.course.name %>
 <% total_questions = @course_result.total_questions.to_i %>
 <% correct_count   = @course_result.correct_count.to_i %>
 <% incorrect_count = [total_questions - correct_count, 0].max %>
 <% correct_rate    = total_questions.positive? ? ((correct_count.to_f / total_questions) * 100).round : 0 %>
-<% result_text     = "#{total_questions}問中、#{correct_count}問正解。" %>
 
-<main>
-  <h1>クイズ結果</h1>
+<div class="result-container animate-fade-in">
 
-  <p>「<%= category_name %>」「<%= course_name %>」コース</p>
-  <p><%= result_text %></p>
+  <%# 日時表示 %>
+  <div class="share-date-box">
+    <i class="far fa-clock"></i> <%= @course_result.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+  </div>
 
-  <section>
-    <h2>成績サマリー</h2>
-    <p>正解: <%= correct_count %>問</p>
-    <p>不正解: <%= incorrect_count %>問</p>
-    <p>正答率: <%= correct_rate %>%</p>
-  </section>
+  <%# --- 結果カード --- %>
+  <div class="score-card">
+    <p class="point-label text-gray-500 mb-2"><%= category_name %></p>
 
-  <section>
-    <h2>受験日時</h2>
-    <p><%= @course_result.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-  </section>
+    <h1 class="result-course-title" style="font-size: 1.5rem;">
+      <%= course_name %>
+    </h1>
 
-  <p>
-    <%= link_to "アプリトップへ", root_path %>
-  </p>
-</main>
+    <div class="result-score-text">
+      <span class="text-lg font-bold">結果：</span>
+      <span class="score-highlight"><%= correct_count %></span>
+      <span class="text-lg"> / <%= total_questions %> 問正解</span>
+    </div>
+
+    <%# 3カラムのサマリー %>
+    <div class="share-summary-grid">
+      <div class="share-stat-item">
+        <span class="share-stat-label">正解</span>
+        <span class="share-stat-value share-stat-value--correct"><%= correct_count %>問</span>
+      </div>
+      <div class="share-stat-item">
+        <span class="share-stat-label">不正解</span>
+        <span class="share-stat-value share-stat-value--incorrect"><%= incorrect_count %>問</span>
+      </div>
+      <div class="share-stat-item">
+        <span class="share-stat-label">正答率</span>
+        <span class="share-stat-value"><%= correct_rate %>%</span>
+      </div>
+    </div>
+  </div>
+
+  <%# --- ウェルカムエリア（アプリへの誘導） --- %>
+  <div class="share-welcome-box">
+    <h2 class="share-welcome-title">詐欺対策道場へようこそ</h2>
+    <p class="share-welcome-text">
+      あなたも道場に入門して、<br>
+      詐欺の手口を見抜く力を鍛えませんか？
+    </p>
+
+    <div class="share-action-wrapper">
+      <%= link_to root_path, class: "nav-btn nav-btn--primary" do %>
+        道場の門を叩く（トップへ）
+      <% end %>
+    </div>
+  </div>
+
+</div>
