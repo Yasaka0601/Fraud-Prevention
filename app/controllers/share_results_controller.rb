@@ -22,8 +22,18 @@ class ShareResultsController < ApplicationController
   # 共有URLに含まれる token から、対応する成績データを取り出すメソッド
   def set_course_result_from_token
     @course_result = CourseResult.includes(course: :category)
-                                  .find_signed!(params[:token], purpose: :share_result)
-  rescue ActiveSupport::MessageVerifier::InvalidSignature, ActiveRecord::RecordNotFound
-    render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
+                                 .find_signed(params[:token], purpose: :share_result)
+    return if @course_result.present?
+
+    render_expired_page
+  end
+
+  def render_expired_page
+    helpers.assign_meta_tags(
+      title: "共有リンクの有効期限が切れました",
+      description: "共有された成績リンクは有効期限切れ、または無効です。",
+      url: request.original_url
+    )
+    render :expired, status: :gone
   end
 end
