@@ -51,6 +51,7 @@ class ResultsController < ApplicationController
     end
 
     # この成績(@course_result)専用の「共有トークン」を作る。
+    # .signed_id でトークンを作成している（Rails標準機能）
     token = @course_result.signed_id(purpose: :share_result, expires_in: 30.days)
 
     # 上で作った token をURLに埋め込んで、共有用URLを作る。
