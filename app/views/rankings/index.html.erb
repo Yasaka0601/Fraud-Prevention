@@ -25,14 +25,22 @@
     <% end %>
   </div>
 
-  <%# --- ランキングリスト --- %>
-  <% if scope == "room" && current_user.room.blank? %>
+  <!------- ランキングリスト ----->
+  <!----- 未ログインで true -------->
+  <% if scope == "room" && (!user_signed_in? || current_user.room.blank?) %>
 
-    <%# 家族ルーム未所属の場合 %>
-    <div class="ranking-empty">
-      <p>家族ルームに所属していません。</p>
-      <p class="text-sm mt-2">家族ルームを作成・参加すると、<br>家族内での順位が表示されます。</p>
-    </div>
+    <!----- 家族ルーム未所属の場合 ----->
+    <% if user_signed_in? %>
+      <div class="ranking-empty">
+        <p>家族ルームに所属していません。</p>
+        <p class="text-sm mt-2">家族ルームを作成・参加すると<br>家族内での順位が表示されます。</p>
+      </div>
+    <% else %>
+      <div class="ranking-empty">
+        <p>ログインしていません。</p>
+        <p class="text-sm mt-2">ログインして家族ルームに属すると<br>家族内での順位が表示されます。</p>
+      </div>
+    <% end %>
 
   <% else %>
 

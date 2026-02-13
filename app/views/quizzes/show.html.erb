@@ -129,12 +129,19 @@
         <% end %>
       </div>
 
-      <!----- 次へボタン ----->
+      <!----- 次へボタンと結果ボタン ----->
       <div class="text-center">
+        <!----- ログインしている場合 ----->
         <% if @index == 5 && @course_result_id.present? %>
           <%= link_to result_path(@course_result_id), class: "next-btn" do %>
             結果を確認する &rarr;
           <% end %>
+        <!----- ログインしていない場合 ----->
+        <% elsif @index == 5 && params[:guest_result].present? %>
+          <%= link_to guest_result_course_quiz_index_path(@course), class: "next-btn" do %>
+            結果を確認する &rarr;
+          <% end %>
+        <!----- まだクイズの途中の場合 ----->
         <% elsif @index < 5 %>
           <%= link_to course_quiz_path(@course, @index + 1), class: "next-btn" do %>
             次の問題へ進む &rarr;

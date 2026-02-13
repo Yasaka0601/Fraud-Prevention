@@ -1,7 +1,13 @@
 <footer class="site-footer"
         style="background-image: url('<%= asset_path('wood.jpg') %>');">
-  <% if user_signed_in? %>
 
+<!----- トップページ、新規登録、ログイン、パスワード変更画面にはナビを表示させない --->
+  <% if !current_page?(root_path) &&
+        !current_page?(new_user_registration_path) &&
+        !current_page?(new_user_session_path) &&
+        !(controller_name == "passwords" && %w[new edit].include?(action_name)) %>
+
+<!--------- ナビ -------->
     <nav class="footer-nav">
       <%= link_to home_path, class: "footer-nav__link #{footer_active_class(:quiz)}" do %>
         <span class="footer-nav__icon-wrapper">
@@ -17,7 +23,7 @@
         <span class="footer-nav__text">クイズ</span>
       <% end %>
 
-      <%= link_to home_rooms_path, class: "footer-nav__link #{footer_active_class(:rooms)}" do %>
+      <%= link_to (user_signed_in? ? home_rooms_path : guest_path), class: "footer-nav__link #{footer_active_class(:rooms)}" do %>
         <span class="footer-nav__icon-wrapper">
           <svg  xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -29,7 +35,7 @@
         <span class="footer-nav__text">家族ルーム</span>
       <% end %>
 
-      <%= link_to result_users_path, class: "footer-nav__link #{footer_active_class(:results)}" do %>
+      <%= link_to (user_signed_in? ? result_users_path : guest_path), class: "footer-nav__link #{footer_active_class(:results)}" do %>
         <span class="footer-nav__icon-wrapper">
           <svg  xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"

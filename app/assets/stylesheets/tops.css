@@ -106,12 +106,41 @@
 
 /* ログインボタン */
 .top-btn--outline{
-  background: transparent;
-  color: #1F2F54;
+  background: #1F2F54;
+  color: #fff;
   border: 2px solid #1F2F54;
+  box-shadow: 0 10px 18px rgba(31,47,84,0.22);
 }
 
 .top-btn--outline:hover{
-  background: #1F2F54;
-  color: #fff;
+  box-shadow: 0 12px 20px rgba(31,47,84,0.30);
+}
+
+/* ゲストボタン */
+.top-btn--guest{
+  background: #ffd54a;
+  color: #2c2200;
+  border: 2px solid #8c5a00;
+  box-shadow: 0 10px 18px rgba(140, 90, 0, 0.22);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+}
+
+.top-btn--guest:hover{
+  box-shadow: 0 12px 20px rgba(140, 90, 0, 0.30);
+}
+
+.top-btn--outline::before,
+.top-btn--guest::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.18);
+  transform: skewX(-12deg) translateX(-120%);
+  transition: transform 700ms ease;
+}
+
+.top-btn--outline:hover::before,
+.top-btn--guest:hover::before{
+  transform: skewX(-12deg) translateX(120%);
 }

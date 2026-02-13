@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :courses, only: [] do
     resources :quiz, only: [:show], controller: 'quizzes' do
       post :answer, on: :member
+      get :guest_result, on: :collection
     end
   end
 
@@ -49,6 +50,9 @@ Rails.application.routes.draw do
 
   ##### ランキングのルーティング #####
   resources :rankings, only: [:index]
+
+  ##### 未ログインのユーザーのルーティング #####
+  get "guest", to: "guest#show", as: :guest
 
   ##### アプリが動いているかhealth_checkするルート。 #####
   get "up" => "rails/health#show", as: :rails_health_check

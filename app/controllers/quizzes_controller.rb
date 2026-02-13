@@ -1,7 +1,10 @@
 class QuizzesController < ApplicationController
+  # 未ログインでも、クイズに挑戦できる。
+  skip_before_action :authenticate_user!, only: [:show, :answer, :guest_result]
+
   before_action :set_course
   before_action :prepare_quiz_session, only: :show
-  before_action :set_index, :set_quiz_id, :set_quiz, :set_choices
+  before_action :set_index, :set_quiz_id, :set_quiz, :set_choices, only: [:show, :answer]
 
   def show
     # 正解が、２個以上なら、複数選択問題とみなす。真偽値を格納。
@@ -60,21 +63,44 @@ class QuizzesController < ApplicationController
     # 最後の問題、途中の問題で条件を分岐。
     if @index >= session[:quiz_ids].size
       # 最後の問題の場合。
-      # build_from_session! に引数を与え、生成したオブジェクトを変数に代入。
-      course_result = CourseResult.build_from_session!(
-        user: current_user,
-        course: @course,
-        quiz_ids: session[:quiz_ids],
-        answers: session[:answers]
-      )
-
-      redirect_to course_quiz_path(@course, @index, result_id: course_result.id)
+      if user_signed_in?
+        # build_from_session! に引数を与え、生成したオブジェクトを変数に代入。
+        course_result = CourseResult.build_from_session!(
+          user: current_user,
+          course: @course,
+          quiz_ids: session[:quiz_ids],
+          answers: session[:answers]
+        )
+        redirect_to course_quiz_path(@course, @index, result_id: course_result.id)
+      else
+        # 未ログインの場合 guest_result: true はクエリパラメータ
+        redirect_to course_quiz_path(@course, @index, guest_result: true)
+      end
     else
       # 次の問題へリダイレクトする。
       redirect_to course_quiz_path(@course, @index)
     end
   end
 
+  # 未ログインの処理。
+  def guest_result
+    quiz_ids = Array(session[:quiz_ids])
+    answers  = Array(session[:answers])
+
+    @total_questions = quiz_ids.size
+    @correct_count = 0
+
+    # index_by を使うことで、キーid のクイズオブジェクトができる。
+    quizzes_by_id = Quiz.includes(:choices).where(id: quiz_ids).index_by(&:id)
+
+    quiz_ids.each_with_index do |quiz_id, i|
+      quiz = quizzes_by_id[quiz_id]
+
+      selected_ids = Array(answers[i]).map(&:to_i).uniq.sort
+      correct_ids  = quiz.choices.select(&:is_correct).map(&:id).sort
+      @correct_count += 1 if selected_ids == correct_ids
+    end
+  end
 
   private
   # どのコースをプレイ中か特定している。
