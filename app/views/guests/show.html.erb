@@ -1,0 +1,29 @@
+<div class="result-container animate-fade-in">
+  <div class="score-card">
+    <h1 class="result-course-title" style="font-size: 1.5rem;">
+      この機能はログインが必要です
+    </h1>
+    <div class="result-score-text">
+      <span class="text-lg">新規登録すると家族ルーム・成績一覧が使えます。</span>
+    </div>
+  </div>
+
+  <div class="share-welcome-box">
+    <h2 class="share-welcome-title">道場に入門して機能を開放しましょう</h2>
+    <p class="share-welcome-text">
+      新規登録はすぐに完了します。<br>
+      すでにアカウントをお持ちの場合はログインしてください。
+    </p>
+
+    <div class="top-actions">
+      <%= link_to "新規登録する", new_user_registration_path, class: "top-btn top-btn--primary" %>
+      <%= link_to "ログインする", new_user_session_path, class: "top-btn top-btn--outline" %>
+    </div>
+  </div>
+
+  <div class="result-nav">
+    <%= link_to home_path, class: "btn-back-to-categories" do %>
+      カテゴリー選択へ戻る
+    <% end %>
+  </div>
+</div>

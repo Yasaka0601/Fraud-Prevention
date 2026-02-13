@@ -8,13 +8,19 @@
       <div class="status-card">
         <h3 class="status-label">所属中の家族ルーム</h3>
 
-        <% if @room.present? %>
-          <div class="status-room">
-            <strong class="status-value"><%= @room.name %></strong>
-          </div>
+        <% if user_signed_in? %>
+          <% if @room.present? %>
+            <div class="status-room">
+              <strong class="status-value"><%= @room.name %></strong>
+            </div>
+          <% else %>
+            <div class="status-room">
+              <strong class="status-value status-value--empty">現在家族ルームに属していません</strong>
+            </div>
+          <% end %>
         <% else %>
           <div class="status-room">
-            <strong class="status-value status-value--empty">現在家族ルームに属していません</strong>
+            <strong class="status-value status-value--empty">ログインすると<br>家族ルーム機能が使えます</strong>
           </div>
         <% end %>
       </div>
@@ -23,10 +29,16 @@
       <div class="status-card status-card--point">
         <h3 class="status-label">今週の合計ポイント</h3>
 
-        <div class="status-point">
-          <strong class="status-value status-value--point"><%= current_user.total_point %></strong>
-          <span class="status-point__unit">pt</span>
-        </div>
+        <% if user_signed_in? %>
+          <div class="status-point">
+            <strong class="status-value status-value--point"><%= current_user.total_point %></strong>
+            <span class="status-point__unit">pt</span>
+          </div>
+        <% else %>
+          <div class="status-point">
+            <strong class="status-value status-value--empty">ログインすると<br>ポイント機能が使えます</strong>
+          </div>
+        <% end %>
       </div>
     </div>
 
