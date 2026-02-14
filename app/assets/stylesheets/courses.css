@@ -37,7 +37,7 @@
   padding: 0;
 }
 
-/* コースカード（木札風リストアイテム） */
+/* コースカード */
 .course-card {
   display: flex;
   align-items: center;
@@ -100,16 +100,40 @@
 
 /* レスポンシブ対応：スマホでは縦並びにする */
 @media (max-width: 640px) {
-  .course-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.25rem;
+  /* スマホ時は横幅を確保しつつ、カード自体は少し大きく見せる */
+  .courses-container {
+    padding: 1.25rem 0.25rem;
   }
 
+  .course-card {
+    /* 親要素より広く、画面幅いっぱいまでカードを広げる */
+    width: calc(100% + 8rem);
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    align-self: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+    padding: 1.1rem 0.75rem;
+  }
+
+  .course-name {
+    font-size: 1.2rem;
+  }
+
+  /* 稽古開始ボタンは押しやすさ優先で少し大きくする */
   .course-start-btn {
     width: 100%;
     justify-content: center;
     margin-left: 0;
+    min-height: 52px;
+    padding: 0.9rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 0.8rem;
+  }
+
+  .course-start-btn svg {
+    width: 1.1rem;
+    height: 1.1rem;
   }
 }

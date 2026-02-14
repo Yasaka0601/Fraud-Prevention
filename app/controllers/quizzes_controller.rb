@@ -50,19 +50,20 @@ class QuizzesController < ApplicationController
     session[:answers] ||= []
 
     if @choices.where(is_correct: true).count > 1
-      ##### 複数選択問題（チェックボックス）の場合 #####
-      # params[:selected_choice_ids] は ["3", "5", ...] みたいな配列で来る想定
+      ##### 複数選択問題の場合 #####
+      # ユーザーが選択した回答 params[:selected_choice_ids]を整形して、変数に代入。
       selected_ids = Array(params[:selected_choice_ids]).map(&:to_i).uniq
-      # 回答した配列を、session[:answers] に格納。
+      # 整形した回答を、session[:answers] に格納。
       session[:answers][@index - 1] = selected_ids
     else
-      # 今の問題(index問目)でユーザーが選んだ choice_id を配列の index-1 番目に保存
+      ##### 単一選択問題の場合 #####
+      # 単一問題は、を session[:answers] に格納。
       session[:answers][@index - 1] = params[:selected_choice]
     end
 
-    # 最後の問題、途中の問題で条件を分岐。
+    # コースの最後、途中で条件を分岐。
     if @index >= session[:quiz_ids].size
-      # 最後の問題の場合。
+      # コースの最後の場合。
       if user_signed_in?
         # build_from_session! に引数を与え、生成したオブジェクトを変数に代入。
         course_result = CourseResult.build_from_session!(
@@ -77,7 +78,7 @@ class QuizzesController < ApplicationController
         redirect_to course_quiz_path(@course, @index, guest_result: true)
       end
     else
-      # 次の問題へリダイレクトする。
+      # コースの途中の場合。次の問題へリダイレクトする。
       redirect_to course_quiz_path(@course, @index)
     end
   end
