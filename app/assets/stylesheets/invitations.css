@@ -215,3 +215,72 @@
   color: #1F2F54;
   border-bottom-color: #1F2F54;
 }
+
+/* =========================================
+  招待の手順（指南）エリア
+  ========================================= */
+
+.usage-box {
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.usage-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 2px solid #1F2F54;
+  padding-bottom: 0.5rem;
+}
+
+.usage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.usage-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* ステップ番号（藍色の丸） */
+.step-badge {
+  background-color: #1F2F54;
+  color: #fff;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: 'Noto Serif JP', serif;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.step-text {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* 重要な単語の強調 */
+.step-text strong {
+  color: #C63D2F; /* 朱色 */
+  font-weight: 700;
+  border-bottom: 1px dashed #C63D2F;
+}
