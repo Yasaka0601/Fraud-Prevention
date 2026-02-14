@@ -31,7 +31,7 @@
 
         <% if user_signed_in? %>
           <div class="status-point">
-            <strong class="status-value status-value--point"><%= current_user.total_point %></strong>
+            <strong class="status-value status-value--point"><%= current_user.total_point || 0 %></strong>
             <span class="status-point__unit">pt</span>
           </div>
         <% else %>
