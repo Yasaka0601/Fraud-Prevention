@@ -8,7 +8,7 @@
     <div class="link-box">
       <%= label_tag :invitation_link, '招待リンク', class: 'link-label' %>
 
-      <% invite_url = edit_room_invitation_url(@room, @invitation, token: @token || params[:token]) %>
+      <% invite_url = join_room_invitation_url(@room, @invitation, token: @token || params[:token]) %>
 
       <div class="link-input-group">
         <input

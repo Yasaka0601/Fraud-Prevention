@@ -37,7 +37,8 @@ class InvitationsController < ApplicationController
     helpers.assign_meta_tags(
     title: "家族ルームの招待が届きました",
     description: "#{@room.name}へ招待されています。",
-    url: request.original_url
+    url: request.original_url,
+    noindex: false
     )
   end
 

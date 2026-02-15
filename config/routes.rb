@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     # collection は id を持たないルーティングを生成。（その逆はmember)
       get :home, on: :collection
       # rooms に invitations をネストさせて、/rooms/:room_id/invitations/new みたいなパスを作成。
-      resources :invitations, only: %i[ show new create edit update ]
+      resources :invitations, only: %i[ show new create edit update ] do
+        get "join/:token", action: :edit, as: :join, on: :member
+      end
   end
 
   ##### カテゴリーとコースのルーティング #####
