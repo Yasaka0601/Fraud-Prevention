@@ -4,6 +4,7 @@ class ShareResultsController < ApplicationController
   before_action :set_course_result_from_token
 
   def show
+    # 各変数をセット
     category_name = @course_result.course.category.name
     course_name   = @course_result.course.name
     total         = @course_result.total_questions
