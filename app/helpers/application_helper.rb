@@ -67,6 +67,8 @@ module ApplicationHelper
     #コントローラーから渡した値で上書きしている。
     opts = defaults.merge(options)
 
+    noindex_value = opts.key?(:noindex) ? opts[:noindex] : !Rails.env.production?
+
     #コントローラーから渡されたURLがあれば opts[:url] を使う。
     #なければ現在URL (original_url) を使う。
     page_url = opts[:url].presence || request.original_url
@@ -91,7 +93,7 @@ module ApplicationHelper
       description: opts[:description],
       keywords: opts[:keywords],
       canonical: page_url,
-      noindex: !Rails.env.production?,
+      noindex: noindex_value,
       og: {
         site_name: opts[:site],
         title: opts[:title].presence || opts[:site],

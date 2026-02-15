@@ -99,4 +99,10 @@ Rails.application.configure do
   enable_starttls_auto: true
   }
   # Gmailを使用するための設定、ここまで。
+
+  # ngrok からのアクセスを許可
+  config.hosts << /.*\.ngrok-free\.dev/
+  # もし別ドメインも出るなら（念のため）
+  config.hosts << /.*\.ngrok\.io/
+
 end
