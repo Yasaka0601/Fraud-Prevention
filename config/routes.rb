@@ -20,23 +20,21 @@ Rails.application.routes.draw do
   ##### 家族ルームのルーティング #####
   resources :rooms, only: %i[new create edit update destroy] do
     # collection は id を持たないルーティングを生成。（その逆はmember)
-    collection do
-      get :home
-    end
+      get :home, on: :collection
       # rooms に invitations をネストさせて、/rooms/:room_id/invitations/new みたいなパスを作成。
       resources :invitations, only: %i[ show new create edit update ]
   end
 
   ##### カテゴリーとコースのルーティング #####
-  # categories に courses をネストさせたいだけなので、only 指定はしない。
-  resources :categories, only: [] do
+  # ネストさせることで、categories/ id /courses というパスを作成
+  resources :categories do
     resources :courses, only: [:index]
   end
 
   ##### クイズ画面のルーティング。#####
   # /courses/:course_id/quiz/:id というパスを生成している。
   # :quiz に post :answer をネストさせ /courses/:course_id/quiz/:id/answer パスを生成。
-  resources :courses, only: [] do
+  resources :courses do
     resources :quiz, only: [:show], controller: 'quizzes' do
       post :answer, on: :member
       get :guest_result, on: :collection

@@ -50,7 +50,8 @@ class ResultsController < ApplicationController
       selected_ids == correct_ids ? quiz.give_point.to_i : 0
     end
 
-    # この成績(@course_result)専用の「共有トークン」を作る。
+    ##### OGPのURLを作成 #####
+    # @course_result 専用の「共有トークン」を作る。
     # .signed_id でトークンを作成している（Rails標準機能）
     token = @course_result.signed_id(purpose: :share_result, expires_in: 30.days)
 

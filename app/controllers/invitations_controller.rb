@@ -1,7 +1,9 @@
 class InvitationsController < ApplicationController
 
-  # gem deviseのメソッドでログインしているかを確認
-  before_action :authenticate_user!, only: %i[ show new create edit update ]
+  # ログインしているかを確認
+  before_action :authenticate_user!, only: %i[ show new create update ]
+  # edit だけ未ログインでも閲覧可能。
+  skip_before_action :authenticate_user!, only: :edit
   # show new create edit update を実行する時、下記の set_room メソッドを実行。
   before_action :set_room, only: %i[ show new create edit update ]
   # show new create edit update を実行する時、下記の set_invitation メソッドを実行。
@@ -30,7 +32,14 @@ class InvitationsController < ApplicationController
     redirect_to room_invitation_path(@room, @invitation, token: @invitation.invitation_token)
   end
 
-  def edit; end
+  def edit
+    # 動的OGP のテキストを作成
+    helpers.assign_meta_tags(
+    title: "家族ルームの招待が届きました",
+    description: "#{@room.name}へ招待されています。",
+    url: request.original_url
+    )
+  end
 
   def update
 
