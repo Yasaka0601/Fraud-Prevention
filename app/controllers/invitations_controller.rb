@@ -33,14 +33,31 @@ class InvitationsController < ApplicationController
   end
 
   def edit
-    # 動的OGP のテキストを作成
-    helpers.assign_meta_tags(
-    title: "家族ルームの招待が届きました",
-    description: "#{@room.name}へ招待されています。",
-    url: request.original_url,
-    noindex: false
+    # メタタグの内容を作成
+    page_url = request.original_url
+    fixed_image = helpers.image_url("ogp_default.png")
+
+    set_meta_tags(
+      title: "家族ルームの招待が届きました",
+      description: "#{@room.name}へ招待されています。",
+      canonical: page_url,
+      noindex: false,
+      og: {
+        title: "家族ルームの招待が届きました",
+        description: "#{@room.name}へ招待されています。",
+        type: "website",
+        url: page_url,
+        image: fixed_image
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: "家族ルームの招待が届きました",
+        description: "#{@room.name}へ招待されています。",
+        image: fixed_image
+      }
     )
   end
+
 
   def update
 
