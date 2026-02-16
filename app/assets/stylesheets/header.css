@@ -1,105 +1,145 @@
-/************ ヘッダー全体 ************/
+/* =========================================
+  ヘッダー全体の設定
+   ========================================= */
 .site-header {
-  background-repeat: repeat-x;
+  background-repeat: no-repeat;
   background-position: center;
-  background-size: auto 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-  /* 固定ヘッダーの設定 */
+  background-size: cover;
+  background-color: #3E2723;
+  border-bottom: 2px solid #1F2F54;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 60;
+  height: 70px;
 }
 
-/***** 中身を左右に分けるコンテナ *****/
 .header-inner {
-  max-width: 960px;
+  max-width: 1024px;
   margin: 0 auto;
-  padding: 10px 16px;
+  padding: 0 16px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/************ ロゴ部分（筆文字・カッコよく） ************/
+/* =========================================
+  左側：ロゴ
+   ========================================= */
 .header-logo-link {
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  align-items: center;
 }
 
 .header-text {
-  font-family: "Yuji Syuku", "Noto Serif JP", serif;
+  font-family: "Yuji Syuku", serif;
   font-weight: 700;
   font-size: 1.75rem;
-  letter-spacing: 0.1em;
-
-  /* 木目背景に映えるよう、白文字に濃い影をつける */
+  letter-spacing: 0.05em;
   color: #ffffff;
-  text-shadow:
-    2px 2px 0px #000000,
-    0 0 10px rgba(0, 0, 0, 0.5);
-
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: 2px 2px 0px #000000, 0 0 10px rgba(0,0,0,0.5);
+  white-space: nowrap;
+  display: inline-block;
+  transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
 }
 
-/* ロゴのホバー時：少し色が変わり、輝くようなエフェクト */
 .header-logo-link:hover .header-text,
 .header-logo-link:focus-visible .header-text {
-  color: #ffcccc;
-  text-shadow:
-    2px 2px 0px #8b0000,
-    0 0 15px rgba(255, 0, 0, 0.6);
+  color: rgb(210, 3, 3);
+  transform: translateY(-2px);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.85), 0 0 12px rgba(210, 3, 3, 0.45);
 }
 
-/************ 右側ナビ部分 ************/
-.header-nav {
+/* =========================================
+  右側エリア（ユーザー情報 ＋ メニュー）
+   ========================================= */
+.header-right-area {
   display: flex;
   align-items: center;
+  gap: 1.5rem;
 }
 
-.user-link {
+.header-user-info {
   display: flex;
   align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 20px;
-  transition: background-color 0.2s ease;
+  gap: 0.75rem;
+  cursor: default;
 }
 
-/* ユーザー名のスタイル */
-.header-user-name {
-  font-family: "Yuji Syuku", "Noto Serif JP", serif;
-  font-weight: 700;
-  font-size: 1rem;
-  color: #ffffff; /* ロゴに合わせて白文字に */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-/* アバター画像の装飾 */
-.user-avatar-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* imgタグに直接スタイルを当てる想定 */
-.user-avatar-wrapper img {
-  width: 36px;
-  height: 36px;
+.header-avatar-img {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* ユーザーリンクのホバー時 */
-.user-link:hover,
-.user-link:focus-visible {
-  background-color: rgba(0, 0, 0, 0.2);
+.header-user-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+  display: none;
 }
 
-.user-link:hover .header-user-name {
-  color: #ffcccc;
+@media (min-width: 640px) {
+  .header-user-name {
+    display: block;
+  }
+}
+
+/* =========================================
+  ハンバーガーメニュー
+   ========================================= */
+
+.header-menu-btn {
+  color: #021f87 !important;
+  border-color: transparent;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
+}
+
+.header-menu-btn:hover {
+  background-color: rgba(210, 3, 3, 0.568);
+  transform: scale(1.05);
+}
+
+.header-menu-btn svg {
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
+}
+
+.header-dropdown-list {
+  background-color: #fffcf5;
+  border: 2px solid #1F2F54;
+  padding: 0.5rem 0;
+  min-width: 200px;
+}
+
+/* 共通のリンク・ボタン挙動 */
+.header-dropdown-link {
+  color: #1F2F54 !important;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  transition: all 0.2s;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.header-dropdown-link:hover {
+  background-color: #1F2F54 !important;
+  color: #ffffff !important;
+}
+
+/* DaisyUIのメニュー余白調整 */
+.header-dropdown-list li {
+  margin-bottom: 0;
 }

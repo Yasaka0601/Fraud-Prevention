@@ -1,0 +1,156 @@
+/* --- レイアウトコンテナ --- */
+.legal-page {
+  padding: 2rem 1rem 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.legal-shell {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* --- 文書カード（巻物風） --- */
+.legal-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  /* 上部に太いアクセントライン（デフォルトは藍色） */
+  border-top: 8px solid #1F2F54;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* プライバシーポリシーの場合は朱色にするクラス */
+.legal-page--privacy .legal-card {
+  border-top-color: #C63D2F;
+}
+
+/* 背景にうっすら和紙のようなノイズを入れる（任意） */
+.legal-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 0;
+}
+
+.legal-card__inner {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem;
+}
+
+@media (max-width: 640px) {
+  .legal-card__inner {
+    padding: 1.5rem;
+  }
+}
+
+/* --- タイトルエリア --- */
+.legal-title {
+  text-align: center;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #1F2F54;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px double #e5e7eb;
+  letter-spacing: 0.1em;
+}
+
+.legal-page--privacy .legal-title {
+  color: #C63D2F; /* ポリシーは朱色タイトル */
+}
+
+/* --- 本文スタイル --- */
+.legal-body {
+  color: #374151;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+/* 条文見出し（第○条） */
+.legal-section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1F2F54;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid #1F2F54; /* 左に藍色のライン */
+  background-color: #f9fafb;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.legal-page--privacy .legal-section-title {
+  border-left-color: #C63D2F; /* ポリシーは朱色ライン */
+  color: #C63D2F;
+}
+
+/* 段落 */
+.legal-text {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* リスト（箇条書き） */
+.legal-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.legal-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.legal-list li::before {
+  content: "・";
+  position: absolute;
+  left: 0.5rem;
+  color: #9ca3af;
+  font-weight: bold;
+}
+
+/* 番号付きリスト（1. 2. ...） */
+.legal-ordered-list {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.legal-ordered-list li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+/* 補足・注釈 */
+.legal-note {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* 右寄せ（日付など） */
+.text-right {
+  text-align: right;
+}
+
+/* --- フッター（戻るボタン） --- */
+.legal-footer {
+  margin-top: 3rem;
+  text-align: center;
+}
