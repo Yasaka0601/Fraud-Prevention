@@ -49,6 +49,12 @@
     <%= render "shared/line_button" %>
 
     <div class="reg-links">
+      <%= link_to "利用規約", terms_path, class: "reg-link" %>
+      <span class="reg-link" aria-hidden="true">｜</span>
+      <%= link_to "プライバシーポリシー", privacy_path, class: "reg-link" %>
+    </div>
+
+    <div class="reg-links">
       <%= link_to "アカウントをお持ちでない方はこちら（新規登録）",
                   new_user_registration_path,
                   class: "reg-link" %>

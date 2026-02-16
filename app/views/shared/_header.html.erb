@@ -7,36 +7,33 @@
       <span class="header-text">詐欺対策道場</span>
     <% end %>
 
-    <%# --- 右側：ユーザー情報 ＆ メニュー --- %>
-    <div class="header-right-area">
-
-      <%# ユーザー情報（ログイン時のみ表示） %>
-      <% if user_signed_in? %>
+    <%# --- 右側：ユーザー情報 ＆ メニュー（ログイン時のみ表示） --- %>
+    <% if user_signed_in? %>
+      <div class="header-right-area">
         <div class="header-user-info">
           <div class="header-avatar-wrapper">
             <%= avatar_image_tag(current_user, css_class: "user-avatar") %>
           </div>
           <span class="header-user-name"><%= current_user.name %></span>
         </div>
-      <% end %>
 
-      <%# ハンバーガーメニュー %>
-      <div class="dropdown dropdown-end header-menu-container">
-        <%# トグルボタン %>
-        <label tabindex="0" class="btn btn-ghost btn-circle header-menu-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </label>
+        <%# ハンバーガーメニュー %>
+        <div class="dropdown dropdown-end header-menu-container">
+          <%# トグルボタン %>
+          <label tabindex="0" class="btn btn-ghost btn-circle header-menu-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </label>
 
-        <%# ドロップダウンの中身 %>
-        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow rounded-box header-dropdown-list">
-          <li><%= link_to "マイページ（設定）", edit_user_registration_path, class: "header-dropdown-link" %></li>
-          <li><%= link_to "利用規約", terms_path, class: "header-dropdown-link" %></li>
-          <li><%= link_to "プライバシーポリシー", privacy_path, class: "header-dropdown-link" %></li>
-        </ul>
+          <%# ドロップダウンの中身 %>
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow rounded-box header-dropdown-list">
+            <li><%= link_to "マイページ（設定）", edit_user_registration_path, class: "header-dropdown-link" %></li>
+            <li><%= link_to "利用規約", terms_path, class: "header-dropdown-link" %></li>
+            <li><%= link_to "プライバシーポリシー", privacy_path, class: "header-dropdown-link" %></li>
+          </ul>
+        </div>
       </div>
-
-    </div>
+    <% end %>
   </div>
 </header>
