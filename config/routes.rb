@@ -54,6 +54,10 @@ Rails.application.routes.draw do
   ##### 未ログインのユーザーのルーティング #####
   get "guest", to: "guest#show", as: :guest
 
+  ##### 利用規約・ポリシーページ #####
+  get "/terms", to: "legal#terms"
+  get "/privacy", to: "legal#privacy"
+
   ##### アプリが動いているかhealth_checkするルート。 #####
   get "up" => "rails/health#show", as: :rails_health_check
 

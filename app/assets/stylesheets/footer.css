@@ -1,10 +1,14 @@
 /******** フッター全体 **********/
 .site-footer {
+  /* ヘッダーと同じ木目の見せ方に統一 */
+  background-repeat: no-repeat;
   background-position: center;
-  background-size: auto 100%;
-  background-repeat: repeat-x;
+  background-size: cover;
+  background-color: #3E2723; /* 画像読み込み前のフォールバック */
 
-  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  /* ヘッダーと対になる境界デザイン */
+  border-top: 2px solid #1F2F54;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
   margin-top: auto;
   position: fixed;
   left: 0;
