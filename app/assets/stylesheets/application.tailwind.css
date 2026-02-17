@@ -250,15 +250,6 @@ select:-webkit-autofill{
   border: 1px solid #f5a3a3;
 }
 
-/* ユーザーアイコン */
-.user-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  line-height: 1;
-}
-
 .user-avatar {
   width: 35px;
   height: 35px;
@@ -266,13 +257,6 @@ select:-webkit-autofill{
   object-fit: cover;
   display: block;
   flex: 0 0 35px;
-}
-
-.user-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  line-height: 1;
 }
 
 /***** LINEログイン/登録ボタン *****/

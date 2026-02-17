@@ -89,21 +89,6 @@
   margin-top: 0.25rem;
 }
 
-/***** 家族ルームにアイコン画像を実装した際に使用するクラス *****/
-.status-room__badge{
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  background: #1F2F54;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 0.75rem;
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 700;
-}
-
 .status-point{
   display: flex;
   align-items: flex-end;
