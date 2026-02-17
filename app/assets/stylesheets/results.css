@@ -441,28 +441,6 @@
   font-family: 'Yuji Syuku', serif;
 }
 
-.btn-back-to-categories {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 240px;
-  padding: 0.75rem 1rem;
-  border-radius: 9999px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s;
-  font-family: 'Noto Serif JP', serif;
-  background-color: transparent;
-  color: #1F2F54;
-  border: 2px solid #1F2F54;
-}
-
-.btn-back-to-categories:hover {
-  background-color: #1F2F54;
-  color: #fff;
-}
-
 /* flex-grow を Tailwind じゃなく自前で */
 .user-select-body{
   flex: 1; /* = flex-grow: 1 */
@@ -479,13 +457,6 @@
 .user-select-other{
   font-size: 0.75rem;
   color: #6b7280;
-}
-
-/* 右矢印（今 Tailwind で書いてた部分をCSS化） */
-.user-select-arrow{
-  color: #d1d5db;
-  padding-right: 1.5rem; /* pr-6 相当 */
-  transition: color 0.2s;
 }
 
 .history-main{

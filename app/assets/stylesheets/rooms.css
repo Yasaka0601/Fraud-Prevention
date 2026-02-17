@@ -84,12 +84,6 @@
   color: #1f2937;
 }
 
-.member-status {
-  font-size: 0.75rem;
-  color: #6b7280;
-  margin-top: 0.25rem;
-}
-
 /* --- アクションエリア --- */
 .room-actions {
   background: rgba(255, 252, 245, 0.8);
@@ -240,12 +234,4 @@
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-/* フォームの補足説明用テキスト */
-.room-field-note {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  color: #6b7280;
 }

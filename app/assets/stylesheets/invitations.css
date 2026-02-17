@@ -205,21 +205,6 @@
   box-shadow: 0 6px 8px rgba(0,0,0,0.15);
 }
 
-.btn-back-text {
-  display: inline-block;
-  margin-top: 1.5rem;
-  color: #6b7280;
-  font-size: 0.9rem;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: all 0.2s;
-}
-
-.btn-back-text:hover {
-  color: #1F2F54;
-  border-bottom-color: #1F2F54;
-}
-
 /* =========================================
   招待の手順（指南）エリア
   ========================================= */
