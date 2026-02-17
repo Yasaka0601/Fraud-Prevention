@@ -207,7 +207,8 @@
 
 .result-title--correct {
   font-family: 'Yuji Syuku', serif;
-  font-size: 2.5rem;
+  /* スマホでは見栄えを保てるサイズまで上げつつ、画面幅に応じて可変 */
+  font-size: clamp(1.6rem, 8vw, 2.5rem);
   color: #15803d;
   margin-bottom: 1rem;
 }
@@ -223,9 +224,29 @@
 
 .result-title--incorrect {
   font-family: 'Yuji Syuku', serif;
-  font-size: 2.5rem;
+  /* スマホでは見栄えを保てるサイズまで上げつつ、画面幅に応じて可変 */
+  font-size: clamp(1.6rem, 8vw, 2.5rem);
   color: #b91c1c;
   margin-bottom: 1rem;
+}
+
+/* 正誤タイトルの共通レイアウト */
+.result-title--correct,
+.result-title--incorrect {
+  /* 記号と文言を1行で中央配置し、改行崩れを防ぐ */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.result-mark {
+  /* 記号サイズをタイトル文字サイズに追従させる */
+  font-size: 1.05em;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 /* 解説エリア */

@@ -581,7 +581,7 @@
 /* ...既存の記述はそのまま... */
 
 /* =========================================
-   ここから追記：Xシェアボタン
+  ここから追記：Xシェアボタン
    ========================================= */
 
 /* ボタン配置エリア */
@@ -626,7 +626,7 @@
 }
 
 /* =========================================
-   共有リンク失効画面
+  共有リンク失効画面
    ========================================= */
 .share-expired-card {
   background-color: #fff;
@@ -657,4 +657,62 @@
 .share-expired-actions {
   display: flex;
   justify-content: center;
+}
+
+/* =========================================
+  結果詳細画面 (results/show) の崩れ対策
+   ========================================= */
+
+.result-container--show .score-card,
+.result-container--show .history-card,
+.result-container--show .answer-block,
+.result-container--show .history-explanation {
+  /* 子要素の長文で親の幅が押し広げられるのを防ぐ */
+  min-width: 0;
+}
+
+.result-container--show .result-course-title,
+.result-container--show .result-score-text,
+.result-container--show .history-sentence,
+.result-container--show .history-explanation,
+.result-container--show .answer-block li {
+  /* URLや長い単語が混ざる成績データでも強制的に折り返す */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 640px) {
+  .result-container--show {
+    /* 外側余白を最適化して横幅の利用効率を上げる */
+    padding: 1.25rem 0.75rem;
+  }
+
+  .result-container--show .score-card {
+    /* スコアカード内の余白を少し圧縮 */
+    padding: 1.25rem 1rem;
+  }
+
+  .result-container--show .score-summary {
+    /* スコア要素同士の間隔を詰めてはみ出しを防ぐ */
+    gap: 1rem;
+  }
+
+  .result-container--show .history-card {
+    /* 問題カードの余白をモバイル向けに最適化 */
+    padding: 1rem;
+  }
+
+  .result-container--show .history-q-number {
+    /* 問題番号と正誤バッジを必要に応じて改行可能にする */
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .result-container--show .btn-share-x {
+    /* シェアボタンをスマホ幅で押しやすく、かつはみ出さない幅に調整 */
+    width: 100%;
+    max-width: 18rem;
+    padding: 0.8rem 1rem;
+  }
 }

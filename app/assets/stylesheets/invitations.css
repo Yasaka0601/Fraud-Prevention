@@ -72,10 +72,14 @@
 .link-input-group {
   display: flex;
   gap: 0.5rem;
+  /* 長いURLを持つinputが親を押し広げないようにする */
+  min-width: 0;
 }
 
 .link-input {
-  flex-grow: 1;
+  flex: 1 1 auto;
+  /* flex内で縮小可能にし、横スクロール発生を防ぐ */
+  min-width: 0;
   background-color: #fff;
   border: 1px solid #d1d5db;
   border-radius: 0.375rem;
@@ -283,4 +287,41 @@
   color: #C63D2F; /* 朱色 */
   font-weight: 700;
   border-bottom: 1px dashed #C63D2F;
+}
+
+/* スマホ用のスタイル */
+@media (max-width: 640px) {
+  .invitation-card--show {
+    /* 画面幅が狭い端末でカード内余白を圧縮 */
+    padding: 1.25rem;
+  }
+
+  .invitation-card--show .link-box,
+  .invitation-card--show .usage-box {
+    /* 各ブロックの左右余白を詰めて収まりを改善 */
+    padding: 1rem;
+  }
+
+  .invitation-card--show .link-input-group {
+    /* 入力欄とコピーボタンを縦積みにして横幅不足を回避 */
+    flex-direction: column;
+  }
+
+  .invitation-card--show .link-input {
+    /* 入力欄を行幅いっぱいにし、文字サイズを微調整 */
+    width: 100%;
+    font-size: 0.8125rem;
+  }
+
+  .invitation-card--show .btn-copy {
+    /* コピーボタンも全幅化してはみ出しを防ぐ */
+    width: 100%;
+    justify-content: center;
+  }
+
+  .invitation-card--show .step-text,
+  .invitation-card--show .note-list li {
+    /* 長文説明やURL片でも改行してカード幅内に収める */
+    overflow-wrap: anywhere;
+  }
 }

@@ -105,35 +105,49 @@
     padding: 1.25rem 0.25rem;
   }
 
+  .course-list {
+    /* ビューポート基準のカードを中央に配置する */
+    align-items: center;
+  }
+
   .course-card {
-    /* 親要素より広く、画面幅いっぱいまでカードを広げる */
-    width: calc(100% + 8rem);
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    align-self: center;
+    /* 親要素ではなくビューポート基準でカード幅を決めつつ、少しコンパクトにする */
+    width: min(80vw, 40rem);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.1rem;
-    padding: 1.1rem 0.75rem;
+    gap: 0.8rem;
+    padding: 0.8rem 0.6rem;
+  }
+
+  .course-info {
+    /* 長いコース名が親幅を押し広げないようにする */
+    width: 100%;
+    min-width: 0;
   }
 
   .course-name {
     font-size: 1.2rem;
+    overflow-wrap: anywhere;
   }
 
-  /* 稽古開始ボタンは押しやすさ優先で少し大きくする */
+  /* カードサイズは維持し、スマホでは「稽古開始」ボタンだけ小さくする */
   .course-start-btn {
-    width: 100%;
+    width: auto;
     justify-content: center;
     margin-left: 0;
-    min-height: 52px;
-    padding: 0.9rem 1rem;
-    font-size: 1.1rem;
-    border-radius: 0.8rem;
+    margin-right: 0;
+    align-self: center;
+    min-height: 46px;
+    padding: 0.65rem 1.15rem;
+    font-size: 1rem;
+    border-radius: 9999px;
   }
 
   .course-start-btn svg {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.05rem;
+    height: 1.05rem;
   }
 }
