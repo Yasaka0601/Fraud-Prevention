@@ -103,7 +103,7 @@
       <% if quiz.explanation.present? %>
         <div class="history-explanation">
           <span class="explanation-label">【解説】</span>
-          <%= auto_link(quiz.explanation, sanitize: true, html: { target: "_blank", rel: "noopener noreferrer nofollow" }) %>
+          <p class="history-explanation-text"><%= auto_link(quiz.explanation, sanitize: true, html: { target: "_blank", rel: "noopener noreferrer nofollow" }) %></p>
         </div>
       <% end %>
 

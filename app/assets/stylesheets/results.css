@@ -136,6 +136,7 @@
   margin-bottom: 1rem;
   border-bottom: 1px dashed #d1d5db;
   padding-bottom: 1rem;
+  white-space: pre-wrap;
 }
 
 /* 回答比較エリア */
@@ -174,6 +175,13 @@
   font-size: 0.9rem;
   color: #4b5563;
   line-height: 1.6;
+}
+
+.history-explanation-text {
+  margin: 0.25rem 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .history-explanation a {
