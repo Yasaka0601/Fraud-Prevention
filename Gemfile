@@ -93,3 +93,6 @@ gem "kaminari"
 
 ##### メタタグ #####
 gem 'meta-tags'
+
+##### クイズ解説文のURLリンク化 #####
+gem "rails_autolink"

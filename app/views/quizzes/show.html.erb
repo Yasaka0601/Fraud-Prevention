@@ -51,7 +51,7 @@
         <% if @quiz.explanation.present? %>
           <div>
             <span class="explanation-title">【解説】</span>
-            <p class="quiz-explanation"><%= @quiz.explanation %></p>
+            <p class="quiz-explanation"><%= auto_link(@quiz.explanation, html: { target: '_blank', rel: "noopener noreferrer nofollow" }) %></p>
           </div>
         <% end %>
       </div>

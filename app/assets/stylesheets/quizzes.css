@@ -292,3 +292,24 @@
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+
+.quiz-explanation a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  border-radius: 3px;
+  padding: 0 2px;
+  transition: color 0.2s ease;
+}
+
+.quiz-explanation a:hover {
+  color: #b91c1c;
+  background-color: #fef3c7;
+  text-decoration-thickness: 2px;
+}
+
+.quiz-explanation a:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
