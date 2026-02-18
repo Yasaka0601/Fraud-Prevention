@@ -352,6 +352,10 @@ GEM
       nested_form (~> 0.3)
       rails (>= 6.0, < 9)
       turbo-rails (>= 1.0, < 3)
+    rails_autolink (1.1.8)
+      actionview (> 3.1)
+      activesupport (> 3.1)
+      railties (> 3.1)
     railties (7.2.3)
       actionpack (= 7.2.3)
       activesupport (= 7.2.3)
@@ -525,6 +529,7 @@ DEPENDENCIES
   rails (~> 7.2.1)
   rails-i18n
   rails_admin (~> 3.0)
+  rails_autolink
   rspec-rails
   rubocop-rails-omakase
   sassc-rails
