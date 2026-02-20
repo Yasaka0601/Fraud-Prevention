@@ -1,4 +1,6 @@
-<div class="quiz-container">
+<div class="quiz-container"
+     data-controller="quiz-scroll"
+     data-action="turbo:submit-end@document->quiz-scroll#scrollToResult">
 
   <!----- 進捗表示 ----->
   <div class="quiz-header">
@@ -14,7 +16,7 @@
   </div>
 
   <!------ 判定結果エリア ------->
-  <div id="quiz_result_area">
+  <div id="quiz_result_area" data-quiz-scroll-target="resultArea">
     <%= render "quizzes/result" %>
   </div>
 

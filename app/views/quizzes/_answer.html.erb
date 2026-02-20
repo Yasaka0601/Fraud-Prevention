@@ -1,6 +1,7 @@
 <!------ 回答フォーム（未回答時のみ表示） -------->
 <% if @is_correct.nil? %>
-  <%= form_with url: answer_course_quiz_path(@course, @index), method: :post do |form| %>
+  <%= form_with url: answer_course_quiz_path(@course, @index), method: :post,
+                data: { quiz_scroll_form: true } do |form| %>
     <div class="quiz-choices">
       <% if @multiple_answer %>
 
