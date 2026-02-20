@@ -6,3 +6,7 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+// クイズ画面のスクロール
+import QuizScrollController from "./quiz_scroll_controller"
+application.register("quiz-scroll", QuizScrollController)
