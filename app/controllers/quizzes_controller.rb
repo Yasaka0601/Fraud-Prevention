@@ -7,42 +7,10 @@ class QuizzesController < ApplicationController
   before_action :set_index, :set_quiz_id, :set_quiz, :set_choices, only: [:show, :answer]
 
   def show
-    # 正解が、２個以上なら、複数選択問題とみなす。真偽値を格納。
-    @multiple_answer = @choices.where(is_correct: true).count > 1
-
-    # 自分の回答を変数に代入。
-    stored_answer = (session[:answers] || [])[ @index - 1 ]
-
+    # 答え合わせのメソッドを実行（ブラウザの「戻る」で回答済みを復元）
+    answer_check
     # 最後の問題用に、「結果発表」で飛ぶ先の id を覚えておく
     @course_result_id = params[:result_id].presence&.to_i
-
-    if @multiple_answer
-      ##### 複数選択肢の場合。 #####
-      # 自分の回答を整数 id に変換して@selected_choice_ids に代入。
-      @selected_choice_ids = Array(stored_answer).map(&:to_i)
-      if @selected_choice_ids.present?
-        # 正解の選択肢をid に変換して correct_ids に代入。
-        correct_ids = @choices.where(is_correct: true).pluck(:id)
-        # 正解の選択肢を @multi_correct_choices に代入。
-        @multi_correct_choices = @choices.where(id: correct_ids)
-        # 答え合わせをしている。真偽値を格納。
-        @is_correct = (@selected_choice_ids.sort == correct_ids.sort)
-      end
-    else
-      ##### 単一選択の場合 #####
-      # 自分の回答を @selected_choice_id に代入。
-      @selected_choice_id = stored_answer
-      if @selected_choice_id.present?
-        # 自分の選択肢を selected_choice に代入。
-        selected_choice = @choices.find_by(id: @selected_choice_id)
-        # 正解の選択肢を correct_choice に代入。
-        correct_choice = @choices.find_by(is_correct: true)
-        # 正解の選択肢を @correct_choice に代入。
-        @correct_choice = correct_choice
-        # 答え合わせをしている。
-        @is_correct = (selected_choice == correct_choice)
-      end
-    end
   end
 
   def answer
@@ -61,6 +29,9 @@ class QuizzesController < ApplicationController
       session[:answers][@index - 1] = params[:selected_choice]
     end
 
+    # 答え合わせをするメソッドを実行
+    answer_check
+
     # コースの最後、途中で条件を分岐。
     if @index >= session[:quiz_ids].size
       # コースの最後の場合。
@@ -78,8 +49,11 @@ class QuizzesController < ApplicationController
         redirect_to course_quiz_path(@course, @index, guest_result: true)
       end
     else
-      # コースの途中の場合。次の問題へリダイレクトする。
-      redirect_to course_quiz_path(@course, @index)
+      # 次の問題へリダイレクトは同期通信。回答は非同期通信。
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to course_quiz_path(@course, @index) }
+      end
     end
   end
 
@@ -147,5 +121,42 @@ class QuizzesController < ApplicationController
   # @quiz に紐づく回答選択肢を取得。
   def set_choices
     @choices = @quiz.choices
+  end
+
+  # 答え合わせ。
+  def answer_check
+    # 正解が、２個以上なら、複数選択問題とみなす。真偽値を格納。
+    @multiple_answer = @choices.where(is_correct: true).count > 1
+
+    # 自分の回答を変数に代入。
+    stored_answer = (session[:answers] || [])[ @index - 1 ]
+
+    if @multiple_answer
+      ##### 複数選択肢の場合。 #####
+      # 自分の回答を整数 id に変換して@selected_choice_ids に代入。
+      @selected_choice_ids = Array(stored_answer).map(&:to_i)
+      if @selected_choice_ids.present?
+        # 正解の選択肢をid に変換して correct_ids に代入。
+        correct_ids = @choices.where(is_correct: true).pluck(:id)
+        # 正解の選択肢を @multi_correct_choices に代入。
+        @multi_correct_choices = @choices.where(id: correct_ids)
+        # 答え合わせをしている。真偽値を格納。
+        @is_correct = (@selected_choice_ids.sort == correct_ids.sort)
+      end
+    else
+      ##### 単一選択の場合 #####
+      # 自分の回答を @selected_choice_id に代入。
+      @selected_choice_id = stored_answer
+      if @selected_choice_id.present?
+        # 自分の選択肢を selected_choice に代入。
+        selected_choice = @choices.find_by(id: @selected_choice_id)
+        # 正解の選択肢を correct_choice に代入。
+        correct_choice = @choices.find_by(is_correct: true)
+        # 正解の選択肢を @correct_choice に代入。
+        @correct_choice = correct_choice
+        # 答え合わせをしている。
+        @is_correct = (selected_choice == correct_choice)
+      end
+    end
   end
 end

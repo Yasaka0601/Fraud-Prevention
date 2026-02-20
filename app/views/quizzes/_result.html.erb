@@ -1,0 +1,60 @@
+<!------ 判定結果表示エリア ------->
+<% unless @is_correct.nil? %>
+  <div class="result-container">
+    <% if @is_correct %>
+      <!------ 正解時の表示 ------>
+      <div class="result-box--correct">
+        <div class="result-title--correct">
+          <span class="result-mark">◎</span> 見事！正解
+        </div>
+      </div>
+    <% else %>
+      <!------ 不正解時の表示 ------>
+      <div class="result-box--incorrect">
+        <div class="result-title--incorrect">
+          <span class="result-mark">✕</span> 無念...不正解
+        </div>
+      </div>
+    <% end %>
+
+    <!------ 正解と解説 ------->
+    <div class="explanation-box">
+      <div class="mb-4">
+        <span class="explanation-title text-[#C63D2F]">【正解】</span>
+        <ul class="list-disc list-inside font-bold text-lg text-gray-800">
+          <% if @multi_correct_choices.present? %>
+            <% @multi_correct_choices.each do |correct| %>
+              <li><%= correct.text %></li>
+            <% end %>
+          <% elsif @correct_choice.present? %>
+            <li><%= @correct_choice.text %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <% if @quiz.explanation.present? %>
+        <div>
+          <span class="explanation-title">【解説】</span>
+          <p class="quiz-explanation"><%= auto_link(@quiz.explanation, html: { target: "_blank", rel: "noopener noreferrer nofollow" }) %></p>
+        </div>
+      <% end %>
+    </div>
+
+    <!------ 次へボタンと結果ボタン（クリックは同期） ------->
+    <div class="text-center">
+      <% if @index == 5 && @course_result_id.present? %>
+        <%= link_to result_path(@course_result_id), class: "next-btn", data: { turbo: false } do %>
+          結果を確認する &rarr;
+        <% end %>
+      <% elsif @index == 5 && params[:guest_result].present? %>
+        <%= link_to guest_result_course_quiz_index_path(@course), class: "next-btn", data: { turbo: false } do %>
+          結果を確認する &rarr;
+        <% end %>
+      <% elsif @index < 5 %>
+        <%= link_to course_quiz_path(@course, @index + 1), class: "next-btn", data: { turbo: false } do %>
+          次の問題へ進む &rarr;
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
