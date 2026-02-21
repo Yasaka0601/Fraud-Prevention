@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_05_101119) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_21_004732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -141,6 +141,17 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_05_101119) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_course_challenges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "conquered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_user_course_challenges_on_course_id"
+    t.index ["user_id", "course_id"], name: "index_user_course_challenges_on_user_id_and_course_id", unique: true
+    t.index ["user_id"], name: "index_user_course_challenges_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.integer "total_point", default: 0
@@ -176,5 +187,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_05_101119) do
   add_foreign_key "quiz_histories", "users"
   add_foreign_key "quiz_history_choices", "choices"
   add_foreign_key "quiz_history_choices", "quiz_histories", on_delete: :cascade
+  add_foreign_key "user_course_challenges", "courses"
+  add_foreign_key "user_course_challenges", "users"
   add_foreign_key "users", "rooms"
 end
