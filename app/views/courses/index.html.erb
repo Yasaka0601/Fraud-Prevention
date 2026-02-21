@@ -17,6 +17,17 @@
         <%= link_to course_quiz_path(course, 1, quiz_start: true), class: "course-card group" do %>
 
           <div class="course-info">
+            <%# --- バッジ表示エリア（レイアウト崩れを防ぐためコース名の上に配置） --- %>
+            <% if @conquered_course_ids.include?(course.id) || @challenged_course_ids.include?(course.id) %>
+              <div class="course-badge-area">
+                <% if @conquered_course_ids.include?(course.id) %>
+                  <span class="course-badge badge-conquered">全問制覇</span>
+                <% elsif @challenged_course_ids.include?(course.id) %>
+                  <span class="course-badge badge-challenged">稽古済</span>
+                <% end %>
+              </div>
+            <% end %>
+
             <h2 class="course-name">
               <%= course.name %>
             </h2>

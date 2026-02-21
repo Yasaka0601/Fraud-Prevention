@@ -151,3 +151,76 @@
     height: 1.05rem;
   }
 }
+
+/* =========================================
+   コースバッジ（全問制覇 / 稽古済）
+   ========================================= */
+
+.course-badge-area {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4rem; /* コース名との間隔 */
+}
+
+/* バッジ共通スタイル */
+.course-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.75rem;
+  border-radius: 9999px; /* 丸みを持たせて和風の札っぽく */
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+/* --- 全問制覇バッジ --- */
+.badge-conquered {
+  background-color: #e9ed10;
+  color: #000000;
+  border: 1px solid #9ca024;
+  box-shadow: 0 2px 4px rgba(190, 198, 47, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 全問制覇のキラッと光るアニメーション */
+.badge-conquered::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: badge-shine 3s infinite; /* 3秒ごとに光る */
+}
+
+@keyframes badge-shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+/* --- 稽古済バッジ（控えめ） --- */
+.badge-challenged {
+  background-color: transparent; /* 背景なし */
+  color: #6f6b80;
+  border: 1px solid #364359ac;
+}
+
+/* スマホ用の微調整 */
+@media (max-width: 640px) {
+  .course-badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.6rem;
+  }
+}

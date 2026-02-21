@@ -12,6 +12,7 @@ class User < ApplicationRecord
   # optional: true は、presence バリデーションを自動で付けさせないための記述。
   belongs_to :room, optional: true
   has_many :course_results, dependent: :destroy
+  has_many :user_course_challenges, dependent: :destroy
 
   ##### 各ユーザーの権限を定義。#####
   enum role: { general: 0, admin: 1}

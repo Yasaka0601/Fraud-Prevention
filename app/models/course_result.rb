@@ -71,7 +71,30 @@ class CourseResult < ApplicationRecord
     excess = user.course_results.order(created_at: :desc).offset(20)
     excess.delete_all
 
+    # コース挑戦の記録を作成
+    course_result.course_challenge_record
+
     # メソッドの戻り値
     course_result
   end
+
+  ##### コース挑戦履歴及び、全問正解の記録を作成 #####
+  def course_challenge_record
+    challenge = course_challenge_create
+
+    # 全問正解なら、conquered_at を作成、そうでなければ return する。
+    return unless correct_count == total_questions
+    UserCourseChallenge.where(id: challenge.id, conquered_at: nil).update_all(conquered_at: Time.current, updated_at: Time.current)
+  end
+
+  private
+
+  ##### コース挑戦履歴を作成 #####
+  def course_challenge_create
+    UserCourseChallenge.find_or_create_by!(user: user, course: course)
+  # 例外処理。
+  rescue ActiveRecord::RecordNotUnique
+    UserCourseChallenge.find_by!(user: user, course: course)
+  end
+
 end
