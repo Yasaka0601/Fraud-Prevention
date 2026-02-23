@@ -58,6 +58,9 @@ Rails.application.routes.draw do
   get "/terms", to: "legal#terms"
   get "/privacy", to: "legal#privacy"
 
+  ##### マイページのルーティング #####
+  resource :mypage, only: [:show], controller: "users/mypages"
+
   ##### アプリが動いているかhealth_checkするルート。 #####
   get "up" => "rails/health#show", as: :rails_health_check
 

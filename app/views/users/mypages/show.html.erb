@@ -1,0 +1,55 @@
+<div class="profile-container relative">
+  <%# --- 背景の装飾（registrations.cssのクラスを流用） --- %>
+  <div class="reg-bg">
+    <div class="reg-bg__blob reg-bg__blob--navy"></div>
+    <div class="reg-bg__blob reg-bg__blob--red"></div>
+  </div>
+
+  <%# --- メインカード --- %>
+  <div class="profile-card relative z-10">
+    <h1 class="profile-title">マイページ</h1>
+
+    <div class="mypage-user-info">
+      <%# ユーザーアイコン %>
+      <div class="profile-avatar-section">
+        <%= avatar_image_tag(@user, css_class: "profile-avatar-preview") %>
+      </div>
+
+      <%# ユーザー詳細情報 %>
+      <div class="mypage-details">
+        <div class="mypage-detail-item">
+          <span class="mypage-detail-label">名前</span>
+          <span class="mypage-detail-value"><%= @user.name %></span>
+        </div>
+        
+        <div class="mypage-detail-item">
+          <span class="mypage-detail-label">メールアドレス</span>
+          <span class="mypage-detail-value">
+            <% if @user.provider == "line" %>
+              未設定（LINEログイン）
+            <% else %>
+              <%= @user.email %>
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <%# 編集ボタン %>
+    <div class="profile-actions">
+      <%= link_to "ユーザー情報編集", edit_user_registration_path, class: "btn-profile-update" %>
+    </div>
+
+    <%# --- フッター（戻る・ログアウト） --- %>
+    <div class="profile-footer">
+      <%= link_to home_path, class: "btn-back-to-categories" do %>
+        ホームへ戻る
+      <% end %>
+
+      <%= button_to destroy_user_session_path, method: :delete, class: "btn-logout" do %>
+        道場から退出（ログアウト）
+      <% end %>
+    </div>
+
+  </div>
+</div>

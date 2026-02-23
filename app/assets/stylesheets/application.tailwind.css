@@ -16,6 +16,7 @@
 @import "./rooms.css";
 @import "./invitations.css";
 @import "./legal.css";
+@import "./mypages.css";
 
 /********** ここに記述するのは共通の CSS **********/
 
@@ -489,4 +490,19 @@ select:-webkit-autofill{
   margin-top: 1rem;
   justify-content: flex-end;
   width: 100%;
+}
+
+/*　ユーザーのアイコン */
+.profile-avatar-section{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar-preview{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15)
 }
