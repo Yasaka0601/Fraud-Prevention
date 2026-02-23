@@ -46,13 +46,8 @@
 
     <!----- 戻るボタン ----->
     <div class="profile-footer">
-      <%= link_to home_path, class: "btn-back-to-categories" do %>
-        ホームへ戻る
-      <% end %>
-
-      <!----- ログアウトボタン ----->
-      <%= button_to destroy_user_session_path, method: :delete, class: "btn-logout" do %>
-        道場から退出（ログアウト）
+      <%= link_to mypage_path, class: "btn-back-to-categories" do %>
+        マイページへ戻る
       <% end %>
     </div>
 
