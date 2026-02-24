@@ -1,5 +1,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include Devise::Controllers::Rememberable
+  include ImageProcessable
+
+  PROFILE_IMAGE_MAX_WIDTH = 400
+
   protected
 
   # サインアップ後、remember_me を適用させる（ログイン状態保持）
@@ -13,9 +17,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
     home_path
   end
 
-  # アカウント情報を編集した際、パスワードの要求を省略する。
   def update_resource(resource, params)
+    # ImageProcessableモジュールを使って、画像処理をする。
+    if params[:image].present?
+      params[:image] = process_and_transform_image(params[:image], PROFILE_IMAGE_MAX_WIDTH)
+    end
+    # アカウント情報を編集した際、パスワードの要求を省略する。
     resource.update_without_current_password(params)
-  end
 
+    # 画像処理のエラー
+    rescue ImageProcessable::ImageProcessingError
+      resource.errors.add(:image, "画像の処理に失敗しました。別の画像でお試しください。")
+    false
+  end
 end
