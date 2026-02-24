@@ -3,7 +3,14 @@
   <div class="profile-card">
     <h1 class="profile-title">門下生情報の変更</h1>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= form_for(resource,
+                  as: resource_name,
+                  url: registration_path(resource_name),
+                  html: {
+                    method: :put,
+                    data: { controller: "profile-image" }
+                  }
+                ) do |f| %>
 
       <!------ エラーメッセージ ------>
       <div class="mb-6">
@@ -12,7 +19,18 @@
 
       <!------ アイコンプレビュー ------>
       <div class="profile-avatar-section">
-        <%= avatar_image_tag(current_user, css_class: "profile-avatar-preview") %>
+        <% if current_user.image.attached? %>
+          <%= image_tag current_user.image,
+              class: "profile-avatar-preview",
+              alt: current_user.name,
+              data: { profile_image_target: "preview" } %>
+        <% else %>
+          <%= image_tag "icon.png",
+              class: "profile-avatar-preview",
+              alt: "デフォルトアイコン",
+              data: { profile_image_target: "preview" } %>
+        <% end %>
+        <!--- <%= avatar_image_tag(current_user, css_class: "profile-avatar-preview") %> -->
       </div>
 
       <!----- 名前入力 ----->
@@ -29,19 +47,27 @@
           <%= f.file_field :image,
             accept: User::ACCEPTED_CONTENT_TYPES.join(","),
             class: "file-input file-input-primary file-input-sm text-sm w-full max-w-none !bg-white !text-black",
-            id: "profile_image" %>
+            id: "profile_image",
+            data: {
+              profile_image_target: "fileInput",
+              action: "change->profile-image#preview"
+            } %>
 
           <span class="profile-hint">
             最大 5MB / JPEG・PNG・GIF・WebP
           </span>
         </fieldset>
+
+        <div class="hidden mt-3 flex items-center gap-2" data-profile-image-target="loading" aria-live="polite">
+          <span class="loading loading-spinner loading-sm"></span>
+          <span class="text-sm">画像を読み込み中...</span>
+        </div>
       </div>
 
       <!----- 更新ボタン ----->
       <div class="profile-actions">
         <%= f.submit "変更を保存する", class: "btn-profile-update" %>
       </div>
-
     <% end %>
 
     <!----- 戻るボタン ----->
@@ -50,7 +76,5 @@
         マイページへ戻る
       <% end %>
     </div>
-
   </div>
-
 </div>

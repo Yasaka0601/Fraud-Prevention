@@ -10,3 +10,7 @@ application.register("hello", HelloController)
 // クイズ画面のスクロール
 import QuizScrollController from "./quiz_scroll_controller"
 application.register("quiz-scroll", QuizScrollController)
+
+// ユーザーアイコン画像のプレビュー
+import ProfileImageController from "./profile_image_controller"
+application.register("profile-image", ProfileImageController)
