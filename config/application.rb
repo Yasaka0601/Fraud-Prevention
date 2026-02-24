@@ -26,5 +26,8 @@ module Myapp
     #
     config.time_zone = "Asia/Tokyo"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # バリアントプロセッサの設定
+    config.active_storage.variant_processor = :vips
   end
 end
