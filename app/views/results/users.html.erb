@@ -12,7 +12,7 @@
     <% if @room_users.present? %>
       <% @room_users.each do |user| %>
         <li>
-          <%= link_to results_path(user_id: user.id), class: "user-select-card group" do %>
+          <%= link_to results_path(user_id: user.public_id), class: "user-select-card group" do %>
             <%= avatar_image_tag(user, css_class: "user-select-avatar" ) %>
               <div class="user-select-body">
                 <div class="user-select-name"><%= user.name %></div>
@@ -47,7 +47,7 @@
     <% else %>
       <!------- ルーム未所属の場合 --------->
       <li>
-        <%= link_to results_path(user_id: current_user.id), class: "user-select-card group" do %>
+        <%= link_to results_path(user_id: current_user.public_id), class: "user-select-card group" do %>
           <%= avatar_image_tag(current_user, css_class: "user-select-avatar") %>
             <div class="user-select-body">
               <div class="user-select-name"><%= current_user.name %></div>

@@ -69,6 +69,6 @@ class ResultsController < ApplicationController
     end
 
     # 家族ルームに属していない場合、自分のユーザーをセット。属している場合、同じルームのユーザー達をセット。
-    @target_user = current_user.room.present? ? current_user.room.users.find(params[:user_id]) : current_user
+    @target_user = current_user.room.present? ? current_user.room.users.find_by!(public_id: params[:user_id]) : current_user
   end
 end
