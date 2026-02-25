@@ -6,6 +6,8 @@ class InvitationsController < ApplicationController
   skip_before_action :authenticate_user!, only: :edit
   # show new create edit update を実行する時、下記の set_room メソッドを実行。
   before_action :set_room, only: %i[ show new create edit update ]
+  # room のメンバーなのか確認するメソッド
+  before_action :ensure_room_member!, only: %i[new create show]
   # show new create edit update を実行する時、下記の set_invitation メソッドを実行。
   before_action :set_invitation, only: %i[ show edit update ]
   # edit update を実行する時、下記の valid_user メソッドを実行。
@@ -87,7 +89,7 @@ class InvitationsController < ApplicationController
 
   # params[:room_id] と一致する room を @room に代入している。
   def set_room
-    @room = Room.find(params[:room_id])
+    @room = Room.find_by!(public_id: params[:room_id])
   end
 
   # room 経由で invitation レコードを取り出して @invitation に代入している。
@@ -113,5 +115,11 @@ class InvitationsController < ApplicationController
       flash[:danger] = '招待リンクが無効です'
       redirect_to root_path
     end
+  end
+
+  # room のメンバーでなければ、招待トークンを作成できないというメソッド
+  def ensure_room_member!
+    return if current_user.room_id == @room.id
+    redirect_to home_rooms_path, alert: "このルームにはアクセスできません"
   end
 end

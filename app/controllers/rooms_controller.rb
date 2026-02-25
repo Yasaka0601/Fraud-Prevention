@@ -67,7 +67,7 @@ class RoomsController < ApplicationController
       return
     end
 
-    unless @room.id == params[:id].to_i
+    unless @room.public_id == params[:id]
       flash[:danger] = "参加している家族ルームではありません"
       redirect_to home_rooms_path
       return

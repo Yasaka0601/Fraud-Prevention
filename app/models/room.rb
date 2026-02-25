@@ -7,4 +7,9 @@ class Room < ApplicationRecord
   has_many :users
   has_many :invitations, dependent: :destroy
 
+  ##### URLに出す id を UUID に一括で切り替えている
+  def to_param
+    public_id
+  end
+
 end
