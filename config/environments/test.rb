@@ -24,6 +24,11 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
+  # Tailwind/DaisyUI の生成CSSを SassC で再圧縮すると構文エラーになるため、テストでは無効化する。
+  config.assets.css_compressor = nil
+  # system spec は rack_test で見た目を検証しないため、未ビルドCSSで失敗しないようにする。
+  config.assets.check_precompiled_asset = false
+  config.assets.unknown_asset_fallback = true
 
   # Render exception templates for rescuable exceptions and raise for other exceptions.
   config.action_dispatch.show_exceptions = :rescuable
