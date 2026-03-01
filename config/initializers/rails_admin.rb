@@ -44,8 +44,8 @@ RailsAdmin.config do |config|
     # history_show
   end
 
-  config.model 'Quiz' do
-    label 'クイズ'
+  config.model "Quiz" do
+    label "クイズ"
 
     list do
       field :id
@@ -59,17 +59,17 @@ RailsAdmin.config do |config|
       field :name
 
       field :sentence do
-        label '問題文'
+        label "問題文"
         html_attributes rows: 10
       end
 
       field :image, :active_storage do
-        label '問題画像'
-        help 'JPEG / PNG / GIF / WebP（5MBまで）'
+        label "問題画像"
+        help "JPEG / PNG / GIF / WebP（5MBまで）"
       end
 
       field :explanation do
-        label '解説'
+        label "解説"
         html_attributes rows: 10
       end
 

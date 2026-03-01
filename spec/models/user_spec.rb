@@ -17,5 +17,4 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:course_results).dependent(:destroy) }
     it { is_expected.to have_many(:user_course_challenges).dependent(:destroy) }
   end
-
 end

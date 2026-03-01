@@ -53,8 +53,8 @@ class CourseResult < ApplicationRecord
 
       # 答え合わせをしている。正解であれば true
       if selected_ids == correct_ids
-        correct_count += 1 #正解数に 1 を追加。
-        get_point += quiz.give_point.to_i #正解したクイズのポイントを追加。
+        correct_count += 1 # 正解数に 1 を追加。
+        get_point += quiz.give_point.to_i # 正解したクイズのポイントを追加。
       end
     end
     # 正解数を最新の状態にアップデート
@@ -96,5 +96,4 @@ class CourseResult < ApplicationRecord
   rescue ActiveRecord::RecordNotUnique
     UserCourseChallenge.find_by!(user: user, course: course)
   end
-
 end

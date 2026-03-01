@@ -7,6 +7,6 @@ class CreateUserCourseChallenges < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_index :user_course_challenges, [:user_id, :course_id], unique: true
+    add_index :user_course_challenges, [ :user_id, :course_id ], unique: true
   end
 end

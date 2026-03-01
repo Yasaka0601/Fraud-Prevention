@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   ##### devise のモジュールを適用させている記述。#####
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :omniauthable,
@@ -15,7 +14,7 @@ class User < ApplicationRecord
   has_many :user_course_challenges, dependent: :destroy
 
   ##### 各ユーザーの権限を定義。#####
-  enum role: { general: 0, admin: 1}
+  enum role: { general: 0, admin: 1 }
 
   ##### バリデーション #####
   validates :name, presence: true, length: { maximum: 50 }
@@ -59,8 +58,6 @@ class User < ApplicationRecord
     self.raw_info = raw_info.to_json
     self.save!
   end
-
-
 end
 
 #####  メモ   #####

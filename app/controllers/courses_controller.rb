@@ -14,5 +14,4 @@ class CoursesController < ApplicationController
       @conquered_course_ids = records.where.not(conquered_at: nil).pluck(:course_id)
     end
   end
-
 end

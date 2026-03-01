@@ -1,10 +1,10 @@
 class QuizzesController < ApplicationController
   # 未ログインでも、クイズに挑戦できる。
-  skip_before_action :authenticate_user!, only: [:show, :answer, :guest_result]
+  skip_before_action :authenticate_user!, only: [ :show, :answer, :guest_result ]
 
   before_action :set_course
   before_action :prepare_quiz_session, only: :show
-  before_action :set_index, :set_quiz_id, :set_quiz, :set_choices, only: [:show, :answer]
+  before_action :set_index, :set_quiz_id, :set_quiz, :set_choices, only: [ :show, :answer ]
 
   def show
     # 答え合わせのメソッドを実行（ブラウザの「戻る」で回答済みを復元）
@@ -110,7 +110,7 @@ class QuizzesController < ApplicationController
 
   # クイズを出すロジック。session[:quiz_ids]は配列なので、@index -1 をしている。
   def set_quiz_id
-    @quiz_id = session[:quiz_ids][@index - 1 ]
+    @quiz_id = session[:quiz_ids][@index - 1]
   end
 
   # DBから、実際のクイズを1件取得している。

@@ -53,7 +53,6 @@ group :development, :test do
   gem "rspec-rails"
 
   gem "factory_bot_rails"
-
 end
 
 group :development do
@@ -76,8 +75,8 @@ end
 gem "devise"
 
 ##### 日本語化 #####
-gem 'rails-i18n'
-gem 'devise-i18n'
+gem "rails-i18n"
+gem "devise-i18n"
 
 ##### 管理者画面 #####
 gem "rails_admin", "~> 3.0"
@@ -85,14 +84,14 @@ gem "cancancan"
 gem "sassc-rails"
 
 ##### LINE 認証 #####
-gem 'omniauth-line'
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth-line"
+gem "omniauth-rails_csrf_protection"
 
 ##### ページネーション #####
 gem "kaminari"
 
 ##### メタタグ #####
-gem 'meta-tags'
+gem "meta-tags"
 
 ##### クイズ解説文のURLリンク化 #####
 gem "rails_autolink"

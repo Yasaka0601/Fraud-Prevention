@@ -1,6 +1,5 @@
-require 'bcrypt'
+require "bcrypt"
 class Invitation < ApplicationRecord
-
   ##### バリデーション #####
   validates :room_id, presence: true
   validates :token_digest, presence: true

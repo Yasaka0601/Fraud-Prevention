@@ -1,5 +1,4 @@
 class Quiz < ApplicationRecord
-
   ##### Active Storage #####
   has_one_attached :image
 

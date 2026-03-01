@@ -15,21 +15,21 @@ module ApplicationHelper
       "/home",
       "/categories",
       "/courses",
-      "/quizzes",
+      "/quizzes"
     ],
     rooms: [
       "/home_rooms",
       "/rooms",
-      "/room_invitations",
+      "/room_invitations"
     ],
     results: [
       "/result_users",
       "/results",
-      "/result",
+      "/result"
     ],
     ranking: [
-      "/rankings",
-    ],
+      "/rankings"
+    ]
   }
 
   # パスがどの key に属するのか判定している。
@@ -61,16 +61,16 @@ module ApplicationHelper
       site: "詐欺対策道場",
       title: "詐欺対策道場",
       description: "特殊詐欺に関する知識を身につける",
-      keywords: "詐欺対策,防犯,クイズ",
+      keywords: "詐欺対策,防犯,クイズ"
     }
 
-    #コントローラーから渡した値で上書きしている。
+    # コントローラーから渡した値で上書きしている。
     opts = defaults.merge(options)
 
     noindex_value = opts.key?(:noindex) ? opts[:noindex] : !Rails.env.production?
 
-    #コントローラーから渡されたURLがあれば opts[:url] を使う。
-    #なければ現在URL (original_url) を使う。
+    # コントローラーから渡されたURLがあれば opts[:url] を使う。
+    # なければ現在URL (original_url) を使う。
     page_url = opts[:url].presence || request.original_url
 
     # 画像は全ページ固定

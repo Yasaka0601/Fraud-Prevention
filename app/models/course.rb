@@ -1,5 +1,4 @@
 class Course < ApplicationRecord
-
   ##### バリデーション #####
   validates :category_id, presence: true
   validates :name, presence: true
