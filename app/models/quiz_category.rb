@@ -1,5 +1,4 @@
 class QuizCategory < ApplicationRecord
-
   ##### バリデーション #####
   validates :quiz, presence: true
   validates :category, presence: true

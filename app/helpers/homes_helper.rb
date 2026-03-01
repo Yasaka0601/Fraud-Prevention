@@ -110,6 +110,4 @@ module HomesHelper
       "詐欺対策の極（きわみ） 知っていてもほぼ意味がないほど難しいクイズに挑め。"
     end
   end
-
 end
-

@@ -1,5 +1,4 @@
 class Room < ApplicationRecord
-
   ##### バリデーション #####
   validates :name, presence: true, length: { maximum: 20 }
 
@@ -11,5 +10,4 @@ class Room < ApplicationRecord
   def to_param
     public_id
   end
-
 end

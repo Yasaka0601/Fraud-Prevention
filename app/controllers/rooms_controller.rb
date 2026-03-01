@@ -36,7 +36,6 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-
     if params[:confirm].blank?
       @show_warning = true
       return render :edit, status: :unprocessable_entity
@@ -70,7 +69,7 @@ class RoomsController < ApplicationController
     unless @room.public_id == params[:id]
       flash[:danger] = "参加している家族ルームではありません"
       redirect_to home_rooms_path
-      return
+      nil
     end
   end
 end

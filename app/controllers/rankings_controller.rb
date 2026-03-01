@@ -29,6 +29,5 @@ class RankingsController < ApplicationController
         .select("users.*, DENSE_RANK() OVER  (ORDER BY users.total_point DESC) AS point_rank")
         .order(total_point: :desc, id: :asc)
         .page(params[:page]).per(10)
-
   end
 end

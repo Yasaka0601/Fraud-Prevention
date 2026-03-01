@@ -1,9 +1,8 @@
 class Choice < ApplicationRecord
-
   ##### バリデーション #####
   validates :quiz, presence: true
   validates :text, presence: true
-  validates :is_correct, inclusion: { in: [true, false] }
+  validates :is_correct, inclusion: { in: [ true, false ] }
 
   ##### アソシエーション #####
   belongs_to :quiz

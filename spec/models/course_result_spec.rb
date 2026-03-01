@@ -31,14 +31,14 @@ RSpec.describe CourseResult, type: :model do
       described_class.build_from_session!(
         user: user,
         course: course,
-        quiz_ids: [first_quiz_data[:quiz].id, second_quiz_data[:quiz].id],
+        quiz_ids: [ first_quiz_data[:quiz].id, second_quiz_data[:quiz].id ],
         answers: answers
       )
     end
 
     it '回答内容から成績、回答履歴、ポイントを保存すること' do
       course_result = build_result_with(
-        [first_quiz_data[:correct_choice].id, second_quiz_data[:wrong_choice].id]
+        [ first_quiz_data[:correct_choice].id, second_quiz_data[:wrong_choice].id ]
       )
 
       # 成績本体に、正解数と総問題数が保存されることを確認する。
@@ -66,7 +66,7 @@ RSpec.describe CourseResult, type: :model do
       challenge = UserCourseChallenge.create!(user: user, course: course)
 
       build_result_with(
-        [first_quiz_data[:correct_choice].id, second_quiz_data[:correct_choice].id]
+        [ first_quiz_data[:correct_choice].id, second_quiz_data[:correct_choice].id ]
       )
 
       # 同じ user / course の挑戦記録を増やさず、制覇済み状態へ更新できれば十分。

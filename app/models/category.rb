@@ -1,5 +1,4 @@
 class Category < ApplicationRecord
-
   ##### バリデーション #####
   validates :name, presence: true, length: { maximum: 50 }
 

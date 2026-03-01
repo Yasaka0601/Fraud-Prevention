@@ -105,8 +105,8 @@ Rails.application.configure do
 
   ##### Gmail を使用する設定-------ここから-------#####
   config.action_mailer.default_url_options = {
-  host:     'fraud-prevention-l35r.onrender.com',
-  protocol: 'https'
+  host:     "fraud-prevention-l35r.onrender.com",
+  protocol: "https"
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -118,7 +118,7 @@ Rails.application.configure do
     authentication:       "plain",
     enable_starttls_auto: true
   }
-  #####-------ここまで---------------#####
+  # ####-------ここまで---------------#####
 
   ##### CSS圧縮に Sass を使わせない設定 #####
   config.assets.css_compressor = nil

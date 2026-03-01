@@ -1,5 +1,4 @@
 class InvitationsController < ApplicationController
-
   # ログインしているかを確認
   before_action :authenticate_user!, only: %i[ show new create update ]
   # edit だけ未ログインでも閲覧可能。
@@ -62,10 +61,9 @@ class InvitationsController < ApplicationController
 
 
   def update
-
     # 既に、同じ家族ルームに参加している場合。
     if current_user.room_id == @room.id
-      flash[:danger] = '既にこの家族ルームに参加しています'
+      flash[:danger] = "既にこの家族ルームに参加しています"
       return redirect_to home_rooms_path
     end
 
@@ -82,7 +80,6 @@ class InvitationsController < ApplicationController
     current_user.update!(room: @room)
     flash[:notice] = "#{@room.name} に参加しました"
     redirect_to home_rooms_path
-
   end
 
   private
@@ -112,7 +109,7 @@ class InvitationsController < ApplicationController
   # 正しくない( unless が true)なら、ルートページへ遷移する。
   def valid_user
     unless @invitation && @invitation.authenticated?(params[:token])
-      flash[:danger] = '招待リンクが無効です'
+      flash[:danger] = "招待リンクが無効です"
       redirect_to root_path
     end
   end
