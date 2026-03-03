@@ -35,28 +35,7 @@ class InvitationsController < ApplicationController
 
   def edit
     # メタタグの内容を作成
-    page_url = request.original_url
-    fixed_image = helpers.image_url("ogp_default.png")
-
-    set_meta_tags(
-      title: "家族ルームの招待が届きました",
-      description: "#{@room.name}へ招待されています。",
-      canonical: page_url,
-      noindex: false,
-      og: {
-        title: "家族ルームの招待が届きました",
-        description: "#{@room.name}へ招待されています。",
-        type: "website",
-        url: page_url,
-        image: fixed_image
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: "家族ルームの招待が届きました",
-        description: "#{@room.name}へ招待されています。",
-        image: fixed_image
-      }
-    )
+    create_meta_tag
   end
 
 
@@ -90,8 +69,6 @@ class InvitationsController < ApplicationController
   end
 
   # room 経由で invitation レコードを取り出して @invitation に代入している。
-  # @room.invitations はInvitation.where(room_id: @room.id) とほぼ同じイメージの 関連の集合（ActiveRecord::Relation）
-  # その上で .find(params[:id]) 集合の中から「id が params[:id] のレコードを1件取ってくる」
   def set_invitation
     @invitation = @room.invitations.find(params[:id])
   end
@@ -118,5 +95,30 @@ class InvitationsController < ApplicationController
   def ensure_room_member!
     return if current_user.room_id == @room.id
     redirect_to home_rooms_path, alert: "このルームにはアクセスできません"
+  end
+
+  def create_meta_tag
+    page_url = request.original_url
+    fixed_image = helpers.image_url("ogp_default.png")
+
+    set_meta_tags(
+      title: "家族ルームの招待が届きました",
+      description: "#{@room.name}へ招待されています。",
+      canonical: page_url,
+      noindex: false,
+      og: {
+        title: "家族ルームの招待が届きました",
+        description: "#{@room.name}へ招待されています。",
+        type: "website",
+        url: page_url,
+        image: fixed_image
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: "家族ルームの招待が届きました",
+        description: "#{@room.name}へ招待されています。",
+        image: fixed_image
+      }
+    )
   end
 end

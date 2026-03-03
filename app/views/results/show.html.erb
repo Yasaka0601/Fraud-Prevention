@@ -46,17 +46,13 @@
     <% correct_choices  = quiz.choices.select(&:is_correct) %>
     <% selected_choices = history.choices.to_a %>
 
-    <% correct_ids  = correct_choices.map(&:id).sort %>
-    <% selected_ids = selected_choices.map(&:id).sort %>
-    <% is_correct   = (correct_ids == selected_ids) %>
-
     <!----- 正誤に応じてクラスを切り替え ------->
-    <section class="history-card <%= is_correct ? 'history-card--correct' : 'history-card--incorrect' %>">
+    <section class="history-card <%= history.correct? ? 'history-card--correct' : 'history-card--incorrect' %>">
 
       <!----- 問題番号と判定バッジ ------->
       <div class="history-q-number">
         <span>第 <%= i + 1 %> 問</span>
-        <% if is_correct %>
+        <% if history.correct? %>
           <span class="status-badge status-badge--correct">正解</span>
         <% else %>
           <span class="status-badge status-badge--incorrect">不正解</span>

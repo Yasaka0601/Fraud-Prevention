@@ -19,4 +19,9 @@ class Quiz < ApplicationRecord
 
   has_many :quiz_categories, dependent: :destroy
   has_many :categories, through: :quiz_categories
+
+  # 複数選択肢クイズなのか判定するメソッド
+  def multiple_answer?
+    choices.where(is_correct: true).count > 1
+  end
 end
