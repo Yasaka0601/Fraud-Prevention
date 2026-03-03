@@ -8,7 +8,6 @@ class ResultsController < ApplicationController
 
   # 対象ユーザーの成績を取り出す。絞り込み用の選択肢を作り、params に応じて絞った結果を一覧表示する
   def index
-
     # このユーザーの成績一覧を、あとでコース情報でも絞り込める形で用意する。検索のベースを作成。
     results_scope = base_results_scope
 
@@ -20,7 +19,6 @@ class ResultsController < ApplicationController
 
     # 最終的な絞り込みの結果。
     @course_results = paginated_results(results_scope)
-
   end
 
   def show
@@ -97,5 +95,4 @@ class ResultsController < ApplicationController
   def paginated_results(result)
     result.includes(:course).order(created_at: :desc).page(params[:page]).per(5)
   end
-
 end

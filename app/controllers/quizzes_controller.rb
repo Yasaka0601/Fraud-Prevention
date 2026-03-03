@@ -123,7 +123,6 @@ class QuizzesController < ApplicationController
 
   # QuizAnswerEvaluator で答え合わせをしたものをインスタンス変数に渡す。
   def answer_check
-
     # 自分の回答を変数に代入。
     stored_answer = (session[:answers] || [])[ @index - 1 ]
 
