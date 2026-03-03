@@ -87,6 +87,12 @@ class CourseResult < ApplicationRecord
     UserCourseChallenge.where(id: challenge.id, conquered_at: nil).update_all(conquered_at: Time.current, updated_at: Time.current)
   end
 
+  ##### ポイントを加算するメソッド #####
+  # 責務「そのコース全体で何ポイント獲得したか」QuizHistory の earned_point メソッドを使用。
+  def earned_point_total
+    quiz_histories.sum(&:earned_point)
+  end
+
   private
 
   ##### コース挑戦履歴を作成 #####

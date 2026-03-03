@@ -17,7 +17,7 @@ class QuizzesController < ApplicationController
     # session[:answers] が nil のときだけ [] にする。（エラー回避のため）
     session[:answers] ||= []
 
-    if @choices.where(is_correct: true).count > 1
+    if @quiz.multiple_answer?
       ##### 複数選択問題の場合 #####
       # ユーザーが選択した回答 params[:selected_choice_ids]を整形して、変数に代入。
       selected_ids = Array(params[:selected_choice_ids]).map(&:to_i).uniq
@@ -70,10 +70,8 @@ class QuizzesController < ApplicationController
 
     quiz_ids.each_with_index do |quiz_id, i|
       quiz = quizzes_by_id[quiz_id]
-
-      selected_ids = Array(answers[i]).map(&:to_i).uniq.sort
-      correct_ids  = quiz.choices.select(&:is_correct).map(&:id).sort
-      @correct_count += 1 if selected_ids == correct_ids
+      result = QuizAnswerEvaluator.call(quiz: quiz, answer: answers[i])
+      @correct_count += 1 if result.correct?
     end
   end
 
@@ -123,40 +121,31 @@ class QuizzesController < ApplicationController
     @choices = @quiz.choices
   end
 
-  # 答え合わせ。
+  # QuizAnswerEvaluator で答え合わせをしたものをインスタンス変数に渡す。
   def answer_check
-    # 正解が、２個以上なら、複数選択問題とみなす。真偽値を格納。
-    @multiple_answer = @choices.where(is_correct: true).count > 1
 
     # 自分の回答を変数に代入。
     stored_answer = (session[:answers] || [])[ @index - 1 ]
 
+    # 答え合わせのクラス QuizAnswerEvaluator を呼び出している
+    result = QuizAnswerEvaluator.call(
+      quiz: @quiz,
+      answer: stored_answer
+    )
+
+    # multiple_answer? と correct? メソッドは QuizAnswerEvaluator の Result で作成したメソッド。
+    @multiple_answer = result.multiple_answer?
+    @is_correct = result.correct?
+
     if @multiple_answer
       ##### 複数選択肢の場合。 #####
-      # 自分の回答を整数 id に変換して@selected_choice_ids に代入。
-      @selected_choice_ids = Array(stored_answer).map(&:to_i)
-      if @selected_choice_ids.present?
-        # 正解の選択肢をid に変換して correct_ids に代入。
-        correct_ids = @choices.where(is_correct: true).pluck(:id)
-        # 正解の選択肢を @multi_correct_choices に代入。
-        @multi_correct_choices = @choices.where(id: correct_ids)
-        # 答え合わせをしている。真偽値を格納。
-        @is_correct = (@selected_choice_ids.sort == correct_ids.sort)
-      end
+      # result が持つ selected_ids を @selected_choice_ids に代入。
+      @selected_choice_ids = result.selected_ids
+      @multi_correct_choices = result.correct_choices
     else
       ##### 単一選択の場合 #####
-      # 自分の回答を @selected_choice_id に代入。
-      @selected_choice_id = stored_answer
-      if @selected_choice_id.present?
-        # 自分の選択肢を selected_choice に代入。
-        selected_choice = @choices.find_by(id: @selected_choice_id)
-        # 正解の選択肢を correct_choice に代入。
-        correct_choice = @choices.find_by(is_correct: true)
-        # 正解の選択肢を @correct_choice に代入。
-        @correct_choice = correct_choice
-        # 答え合わせをしている。
-        @is_correct = (selected_choice == correct_choice)
-      end
+      @selected_choice_id = result.selected_ids.first
+      @correct_choice = result.correct_choices.first
     end
   end
 end
