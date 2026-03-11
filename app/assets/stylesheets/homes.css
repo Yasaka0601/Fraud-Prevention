@@ -231,3 +231,112 @@
   opacity: 0.6;
   pointer-events: none; /* クリックできないようにしたくないなら消してOK */
 }
+
+/* =========================================
+  お知らせブロック
+   ========================================= */
+.announcement-section {
+  margin-bottom: 3rem;
+}
+
+/* ステータスカードと同じ和風クリーム色・枠線で統一 */
+.announcement-card {
+  background-color: #fffcf5;
+  border: 1px solid #dcd3b2;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.announcement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 各お知らせを点線で区切る */
+.announcement-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px dashed #dcd3b2;
+}
+
+.announcement-item:first-child {
+  padding-top: 0;
+}
+
+.announcement-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.announcement-date {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-family: 'Noto Sans JP', sans-serif;
+  flex-shrink: 0;
+}
+
+.announcement-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1F2F54;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+}
+
+/* リンク付きタイトルの挙動 */
+.announcement-link {
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+}
+
+.announcement-link:hover {
+  color: #C63D2F; /* ホバーで朱色に変化 */
+}
+
+.announcement-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.25rem;
+  opacity: 0.5;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0; /* タイトルが長い場合にアイコンが潰れないようにする */
+}
+
+.announcement-link:hover .announcement-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* お知らせ本文 */
+.announcement-body {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+  font-family: 'Noto Sans JP', sans-serif;
+  white-space: pre-wrap; /* 改行をそのまま反映させる */
+  margin-top: 0.25rem;
+}
+
+/* お知らせが空の場合のメッセージ */
+.announcement-empty {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+  padding: 2rem 0;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+@media (max-width: 640px) {
+  .announcement-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

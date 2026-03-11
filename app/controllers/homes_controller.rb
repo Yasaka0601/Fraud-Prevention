@@ -7,5 +7,8 @@ class HomesController < ApplicationController
 
     # 未ログインであれば、@room は nil
     @room = user_signed_in? ? current_user.room : nil
+
+    # お知らせを取得
+    @announcements = Announcement.published.limit(3)
   end
 end
