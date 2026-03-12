@@ -17,7 +17,6 @@ class CourseResult < ApplicationRecord
       course: course,
       correct_count: 0,
       total_questions: total_questions,
-      started_at: nil, # started_at はいらない。
       finished_at: Time.current
     )
 
