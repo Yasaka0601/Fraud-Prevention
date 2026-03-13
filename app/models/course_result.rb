@@ -77,6 +77,9 @@ class CourseResult < ApplicationRecord
     # 全問正解なら、conquered_at を作成、そうでなければ return する。
     return unless correct_count == total_questions
     UserCourseChallenge.where(id: challenge.id, conquered_at: nil).update_all(conquered_at: Time.current, updated_at: Time.current)
+
+    # バッジ付与チェック
+    BadgeGrantService.new(user).grant_course_badges
   end
 
   ##### ポイントを加算するメソッド #####

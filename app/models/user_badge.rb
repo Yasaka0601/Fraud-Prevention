@@ -1,7 +1,6 @@
 class UserBadge < ApplicationRecord
-
   ##### バリデーション #####
-  validates :badge_type, :acquired_at, presence:true
+  validates :badge_type, :acquired_at, presence: true
 
   ##### アソシエーション #####
   belongs_to :user
@@ -18,7 +17,7 @@ class UserBadge < ApplicationRecord
     weekly_king_6:  7, # 鬼神（６回目の１位）
     weekly_king_10: 8, # 天下無双（１０回目の１位）
     weekly_second:  9, # 銀将（１回目の２位）
-    weekly_third:   10, # 銅将（１回目の３位）
+    weekly_third:   10 # 銅将（１回目の３位）
   }
 
   BADGE_NAMES = {
@@ -32,6 +31,6 @@ class UserBadge < ApplicationRecord
     weekly_king_6:  "鬼神",
     weekly_king_10: "天下無双",
     weekly_second:  "銀将",
-    weekly_third:   "銅将",
+    weekly_third:   "銅将"
 }.freeze
 end

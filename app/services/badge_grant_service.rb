@@ -5,7 +5,7 @@ class BadgeGrantService
     { badge_type: :black_belt, threshold: 15 },
     { badge_type: :brown_belt, threshold: 10 },
     { badge_type: :blue_belt,  threshold: 5 },
-    { badge_type: :white_belt, threshold: 1 },
+    { badge_type: :white_belt, threshold: 1 }
   ].freeze # .freeze で配列の変更を禁止（凍結）
 
   # 週間1位バッジ条件の定数（降順に並べる）
@@ -13,7 +13,7 @@ class BadgeGrantService
     { badge_type: :weekly_king_10, threshold: 10 },
     { badge_type: :weekly_king_6,  threshold: 6 },
     { badge_type: :weekly_king_3,  threshold: 3 },
-    { badge_type: :weekly_king,    threshold: 1 },
+    { badge_type: :weekly_king,    threshold: 1 }
   ].freeze
 
   def initialize(user)
