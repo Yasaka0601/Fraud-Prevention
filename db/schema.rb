@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_12_004853) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_13_021555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -152,6 +152,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_12_004853) do
     t.index ["public_id"], name: "index_rooms_on_public_id", unique: true
   end
 
+  create_table "user_badges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "badge_type", null: false
+    t.datetime "acquired_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
+  end
+
   create_table "user_course_challenges", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -178,6 +187,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_12_004853) do
     t.string "provider"
     t.string "uid"
     t.uuid "public_id", default: -> { "gen_random_uuid()" }, null: false
+    t.integer "weekly_ranking_first_count", default: 0, null: false
+    t.integer "weekly_ranking_second_count", default: 0, null: false
+    t.integer "weekly_ranking_third_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["public_id"], name: "index_users_on_public_id", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -200,6 +212,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_12_004853) do
   add_foreign_key "quiz_histories", "users"
   add_foreign_key "quiz_history_choices", "choices"
   add_foreign_key "quiz_history_choices", "quiz_histories", on_delete: :cascade
+  add_foreign_key "user_badges", "users"
   add_foreign_key "user_course_challenges", "courses"
   add_foreign_key "user_course_challenges", "users"
   add_foreign_key "users", "rooms"

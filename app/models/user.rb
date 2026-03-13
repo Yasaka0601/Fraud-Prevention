@@ -12,6 +12,7 @@ class User < ApplicationRecord
   belongs_to :room, optional: true
   has_many :course_results, dependent: :destroy
   has_many :user_course_challenges, dependent: :destroy
+  has_many :user_badges, dependent: :destroy
 
   ##### 各ユーザーの権限を定義。#####
   enum role: { general: 0, admin: 1 }
