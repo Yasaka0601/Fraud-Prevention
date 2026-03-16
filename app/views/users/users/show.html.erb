@@ -1,0 +1,72 @@
+<div class="profile-container relative">
+  <%# --- 背景の装飾 --- %>
+  <div class="reg-bg">
+    <div class="reg-bg__blob reg-bg__blob--navy"></div>
+    <div class="reg-bg__blob reg-bg__blob--red"></div>
+  </div>
+
+  <%# --- メインカード --- %>
+  <div class="profile-card relative z-10">
+    <h1 class="profile-title"><%= @user.name %> の稽古記録</h1>
+
+    <div class="mypage-user-info">
+      <%# ユーザーアイコン %>
+      <div class="profile-avatar-section">
+        <%= avatar_image_tag(@user, css_class: "profile-avatar-preview") %>
+      </div>
+
+      <%# ユーザー詳細情報 %>
+      <div class="mypage-details">
+        <div class="mypage-detail-item">
+          <span class="mypage-detail-label">名前</span>
+          <span class="mypage-detail-value"><%= @user.name %></span>
+        </div>
+
+        <div class="mypage-detail-item">
+          <span class="mypage-detail-label">コースクリア数</span>
+          <span class="mypage-detail-value"><%= @conquered_count %> コース</span>
+        </div>
+      </div>
+    </div>
+
+    <%# --- バッジ一覧（カード型グリッドに刷新） --- %>
+    <div class="badge-section">
+      <h2 class="badge-section-title">獲得した勲章</h2>
+
+      <% if @badges.present? %>
+        <ul class="badge-grid">
+          <% @badges.each do |badge| %>
+            <li class="badge-card">
+              <div class="badge-icon-wrapper">
+                <%= badge_icon(badge.badge_type) %>
+              </div>
+              <div class="badge-info">
+                <span class="badge-name"><%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %></span>
+                <span class="badge-date"><%= badge.acquired_at.strftime("%Y.%m.%d") %> 獲得</span>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="badge-empty-card">
+          <p>まだ勲章を獲得していません。</p>
+          <span class="badge-empty-note">稽古を続けて勲章を集めましょう！</span>
+        </div>
+      <% end %>
+    </div>
+
+    <%# 編集ボタンは本人のみ表示 %>
+    <% if user_signed_in? && current_user == @user %>
+      <div class="profile-actions">
+        <%= link_to "ユーザー情報編集", edit_user_registration_path, class: "btn-profile-update" %>
+      </div>
+    <% end %>
+
+    <%# --- フッター --- %>
+    <div class="profile-footer">
+      <%= link_to :back, class: "btn-back-to-categories" do %>
+        &larr; 戻る
+      <% end %>
+    </div>
+  </div>
+</div>
