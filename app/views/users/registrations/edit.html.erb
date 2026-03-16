@@ -39,6 +39,29 @@
         <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "profile-input" %>
       </div>
 
+      <!----- メールアドレス ----->
+      <div class="profile-field">
+        <%= f.label :email, "メールアドレス", class: "profile-label" %>
+        <%= f.email_field :email, autocomplete: "email", class: "profile-input" %>
+      </div>
+
+      <!----- パスワード変更 ----->
+      <div class="profile-field">
+        <%= f.label :password, "パスワード（変更する場合のみ入力）", class: "profile-label" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "profile-input" %>
+      </div>
+
+      <div class="profile-field">
+        <%= f.label :password_confirmation, "パスワード確認", class: "profile-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "profile-input" %>
+      </div>
+
+      <!----- 現在のパスワード（必須） ----->
+      <div class="profile-field">
+        <%= f.label :current_password, "現在のパスワード（変更を保存するために必要）", class: "profile-label" %>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "profile-input" %>
+      </div>
+
       <!----- アイコン画像選択 ----->
       <div class="profile-field">
         <fieldset class="fieldset">
@@ -72,7 +95,7 @@
 
     <!----- 戻るボタン ----->
     <div class="profile-footer">
-      <%= link_to mypage_path, class: "btn-back-to-categories" do %>
+      <%= link_to user_path(current_user.public_id), class: "btn-back-to-categories" do %>
         マイページへ戻る
       <% end %>
     </div>

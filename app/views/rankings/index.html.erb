@@ -59,7 +59,7 @@
               else "rank-other"
               end %>
 
-          <li class="ranking-card <%= rank_css_class %>">
+          <%= link_to user_path(user.public_id), class: "ranking-card #{rank_css_class}" do %>
             <%# 順位 %>
             <div class="ranking-rank">
               <% case rank %>
@@ -104,7 +104,7 @@
               <span class="ranking-point-label">獲得pt</span>
               <span class="ranking-point-value"><%= user.total_point %></span>
             </div>
-          </li>
+          <% end %>
         <% end %>
       </ol>
 

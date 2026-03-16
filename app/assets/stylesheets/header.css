@@ -142,3 +142,13 @@
 .header-dropdown-list li {
   margin-bottom: 0;
 }
+
+/* ログアウトリンク */
+.header-dropdown-link--logout {
+  color: #dc2626 !important;
+}
+
+.header-dropdown-link--logout:hover {
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+}
