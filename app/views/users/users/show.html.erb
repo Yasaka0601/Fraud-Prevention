@@ -12,7 +12,7 @@
     <div class="mypage-user-info">
       <%# ユーザーアイコン %>
       <div class="profile-avatar-section">
-        <%= avatar_image_tag(@user, css_class: "profile-avatar-preview") %>
+        <%= avatar_image_tag(@user, css_class: "profile-avatar-preview", show_badge: true) %>
       </div>
 
       <%# ユーザー詳細情報 %>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <%# --- バッジ一覧（カード型グリッドに刷新） --- %>
+    <%# --- バッジ一覧 --- %>
     <div class="badge-section">
       <h2 class="badge-section-title">獲得した勲章</h2>
 
@@ -43,6 +43,7 @@
               <div class="badge-info">
                 <span class="badge-name"><%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %></span>
                 <span class="badge-date"><%= badge.acquired_at.strftime("%Y.%m.%d") %> 獲得</span>
+                <span class="badge-description"><%= UserBadge::BADGE_DESCRIPTIONS[badge.badge_type.to_sym] %></span>
               </div>
             </li>
           <% end %>

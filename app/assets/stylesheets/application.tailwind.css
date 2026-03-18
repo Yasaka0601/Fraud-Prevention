@@ -506,3 +506,40 @@ select:-webkit-autofill{
   object-fit: cover;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15)
 }
+
+
+/* =========================================
+  アイコン右下のバッジ (avatar-wrapper)
+   ========================================= */
+.avatar-wrapper {
+  position: relative;
+  display: inline-flex; /* 親要素の幅を画像にぴったり合わせる */
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-wrapper img {
+  display: block; /* 余分な隙間を無くす */
+}
+
+.avatar-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(25%, 25%); /* 右下に少しはみ出すように配置 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* アイコンサイズの約1/3に自動調整 */
+  width: 33%;
+  height: 33%;
+  min-width: 24px;
+  min-height: 24px;
+  z-index: 10;
+}
+
+.avatar-badge svg {
+  width: 100%;
+  height: 100%;
+}

@@ -94,7 +94,6 @@
   border: 1px solid #e5e7eb;
   transition: transform 0.2s;
   position: relative;
-  overflow: hidden;
 }
 
 /* --- 順位別の装飾 --- */
@@ -146,9 +145,18 @@
   flex-shrink: 0;
 }
 
+.ranking-card .avatar-wrapper {
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.ranking-card .avatar-wrapper .ranking-avatar {
+  margin-right: 0;
+  flex-shrink: unset;
+}
+
 .ranking-user-info {
   flex-grow: 1;
-  overflow: hidden;
 }
 
 .ranking-name {
@@ -157,7 +165,6 @@
   font-size: 1.125rem;
   color: #1f2937;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
