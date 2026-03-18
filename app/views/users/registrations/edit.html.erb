@@ -98,50 +98,67 @@
         <fieldset class="fieldset">
           <legend class="profile-label">表示バッジ</legend>
 
-          <%# 現在の選択を表示 %>
-          <div class="badge-selected-preview">
-            <% if current_user.selected_badge_type.present? %>
-              <%= badge_icon(current_user.selected_badge_type) %>
-              <span><%= UserBadge::BADGE_NAMES[current_user.selected_badge_type.to_sym] %></span>
-            <% else %>
-              <span>表示しない</span>
-            <% end %>
-          </div>
-
           <% if @badges.present? %>
-            <button type="button" class="btn btn-sm" onclick="badge_modal.showModal()">
-              バッジを選択する
-            </button>
-          <% end %>
-
-          <%# DaisyUI モーダル（form の中に配置することでラジオボタンがフォーム送信に含まれる） %>
-          <dialog id="badge_modal" class="modal" onclick="if(event.target===this)this.close()">
-            <div class="modal-box">
-              <h3 class="font-bold text-lg mb-4">表示バッジを選択</h3>
-
-              <div class="badge-radio-list">
-                <%# 表示しない %>
-                <label class="badge-radio-item">
-                  <%= f.radio_button :selected_badge_type, "", checked: current_user.selected_badge_type.blank? %>
-                  <span>表示しない</span>
-                </label>
-
-                <%# 獲得済みバッジ一覧 %>
-                <% @badges.each do |badge| %>
-                  <label class="badge-radio-item">
-                    <%= f.radio_button :selected_badge_type, badge.badge_type,
-                        checked: current_user.selected_badge_type == badge.badge_type %>
-                    <%= badge_icon(badge.badge_type) %>
-                    <span><%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %></span>
-                  </label>
+            <button type="button" class="btn-badge-select" onclick="badge_modal.showModal()">
+              <div class="badge-select-content">
+                <% if current_user.selected_badge_type.present? %>
+                  <div class="badge-select-icon">
+                    <%= badge_icon(current_user.selected_badge_type) %>
+                  </div>
+                  <span class="badge-select-name"><%= UserBadge::BADGE_NAMES[current_user.selected_badge_type.to_sym] %></span>
+                <% else %>
+                  <span class="badge-select-name text-gray-400">表示しない</span>
                 <% end %>
               </div>
-
-              <div class="modal-action">
-                <button type="button" class="btn" onclick="badge_modal.close()">閉じる</button>
+              <div class="badge-select-action">
+                <i class="fas fa-pencil-alt"></i>
+                <span>変更</span>
               </div>
+            </button>
+
+            <%# DaisyUI モーダル %>
+            <dialog id="badge_modal" class="modal" onclick="if(event.target===this)this.close()">
+              <%# modal-box に bg-white を追加して背景色を白に固定 %>
+              <div class="modal-box badge-modal-box bg-white">
+                <h3 class="font-bold text-lg mb-4 text-[#1F2F54] border-b border-gray-200 pb-2">表示バッジを選択</h3>
+
+                <div class="badge-radio-list">
+                  <%# 表示しない %>
+                  <label class="badge-radio-item badge-radio-item--none">
+                    <%= f.radio_button :selected_badge_type, "", checked: current_user.selected_badge_type.blank?, class: "hidden" %>
+                    <div class="badge-radio-content">
+                      <i class="fas fa-ban text-gray-400 text-xl"></i>
+                      <span class="badge-radio-name">表示しない</span>
+                    </div>
+                  </label>
+
+                  <%# 獲得済みバッジ一覧 %>
+                  <% @badges.each do |badge| %>
+                    <label class="badge-radio-item">
+                      <%= f.radio_button :selected_badge_type, badge.badge_type,
+                          checked: current_user.selected_badge_type == badge.badge_type, class: "hidden" %>
+                      <div class="badge-radio-content">
+                        <div class="badge-radio-icon">
+                          <%= badge_icon(badge.badge_type) %>
+                        </div>
+                        <span class="badge-radio-name"><%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %></span>
+                      </div>
+                    </label>
+                  <% end %>
+                </div>
+
+                <%# キャンセルと選択ボタンを配置 %>
+                <div class="modal-action flex justify-end gap-3 mt-4">
+                  <button type="button" class="btn btn-ghost text-gray-600" onclick="badge_modal.close()">キャンセル</button>
+                  <button type="button" class="btn bg-[#C63D2F] hover:bg-[#a03024] text-white border-none" onclick="badge_modal.close()">選択</button>
+                </div>
+              </div>
+            </dialog>
+          <% else %>
+            <div class="badge-empty-preview">
+              まだバッジを獲得していません。
             </div>
-          </dialog>
+          <% end %>
         </fieldset>
       </div>
 

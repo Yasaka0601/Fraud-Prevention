@@ -1,5 +1,5 @@
 /* =========================================
-   マイページ固有のスタイル
+  マイページ固有のスタイル
    ========================================= */
 
 .mypage-user-info {
@@ -62,7 +62,7 @@ a.btn-profile-update {
 }
 
 /* =========================================
-   バッジセクションのデザイン
+  バッジセクションのデザイン
    ========================================= */
 .badge-section {
   margin-top: 2.5rem;
@@ -179,4 +179,141 @@ a.btn-profile-update {
 .badge-empty-note {
   font-size: 0.85rem;
   color: #9ca3af;
+}
+
+/* =========================================
+  ユーザー編集画面のバッジ選択ボタン
+   ========================================= */
+.btn-badge-select {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.btn-badge-select:hover {
+  border-color: #1F2F54;
+  background-color: #f9fafb;
+}
+
+.badge-select-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.badge-select-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-select-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.badge-select-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  color: #1F2F54;
+  font-size: 0.95rem;
+}
+
+.badge-select-action {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #6b7280;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.badge-empty-preview {
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  border: 1px dashed #d1d5db;
+  border-radius: 0.5rem;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+
+/* =========================================
+  バッジ選択モーダルのデザイン
+   ========================================= */
+.badge-modal-box {
+  max-height: 80vh; /* 画面に収まる高さに制限 */
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-radio-list {
+  overflow-y: auto; /* バッジが多い場合にスクロール可能にする */
+  padding-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.badge-radio-item {
+  display: block;
+  cursor: pointer;
+}
+
+.badge-radio-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+/* ラジオボタンがチェックされた時のカードのスタイル（:has を使用） */
+.badge-radio-item:has(input:checked) .badge-radio-content {
+  border-color: #C63D2F;
+  background-color: #fff5f5;
+  box-shadow: 0 2px 4px rgba(198, 61, 47, 0.1);
+}
+
+.badge-radio-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-radio-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.badge-radio-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  color: #1F2F54;
+  font-size: 1rem;
+}
+
+/* 「表示しない」項目の控えめデザイン */
+.badge-radio-item--none .badge-radio-content {
+  border-style: dashed;
+}
+
+.badge-radio-item--none .badge-radio-name {
+  color: #6b7280;
 }

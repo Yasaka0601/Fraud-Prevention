@@ -45,7 +45,6 @@ class UserBadge < ApplicationRecord
     weekly_king_6:  "週間ランキング1位を6回獲得",
     weekly_king_10: "週間ランキング1位を10回獲得",
     weekly_second:  "週間ランキング2位を獲得",
-    weekly_third:   "週間ランキング3位を獲得",
+    weekly_third:   "週間ランキング3位を獲得"
   }.freeze
-
 end

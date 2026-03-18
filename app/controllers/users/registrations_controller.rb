@@ -4,8 +4,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   PROFILE_IMAGE_MAX_WIDTH = 400
 
-  before_action :set_badges, only: [:edit, :update]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :set_badges, only: [ :edit, :update ]
+  before_action :configure_account_update_params, only: [ :update ]
 
   protected
 
@@ -44,7 +44,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit(
       :account_update,
-      keys: [:selected_badge_type]
+      keys: [ :selected_badge_type ]
     )
   end
 end

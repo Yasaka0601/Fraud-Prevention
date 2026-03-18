@@ -22,7 +22,7 @@
         <%= link_to results_path(user_id: member.public_id) do %>
           <div class="member-card">
             <div class="relative">
-              <%= avatar_image_tag(member, show_badge: true) %>
+              <%= avatar_image_tag(member) %>
             </div>
             <div class="member-info">
               <div class="member-name"><%= member.name %></div>
