@@ -4,6 +4,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   PROFILE_IMAGE_MAX_WIDTH = 400
 
+  before_action :set_badges, only: [:edit, :update]
+  before_action :configure_account_update_params, only: [:update]
+
   protected
 
   # サインアップ後、remember_me を適用させる（ログイン状態保持）
@@ -29,5 +32,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
     rescue ImageProcessable::ImageProcessingError
       resource.errors.add(:image, "画像の処理に失敗しました。別の画像でお試しください。")
     false
+  end
+
+  private
+
+  def set_badges
+    @badges = current_user.user_badges
+  end
+
+  # ストロングパラメーター
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(
+      :account_update,
+      keys: [:selected_badge_type]
+    )
   end
 end

@@ -32,5 +32,20 @@ class UserBadge < ApplicationRecord
     weekly_king_10: "天下無双",
     weekly_second:  "銀将",
     weekly_third:   "銅将"
-}.freeze
+  }.freeze
+
+  BADGE_DESCRIPTIONS = {
+    white_belt:     "コースを1つ全問正解でクリア達成",
+    blue_belt:      "コースを5つ全問正解でクリア達成",
+    brown_belt:     "コースを10個全問正解でクリア達成",
+    black_belt:     "コースを15個全問正解でクリア達成",
+    master:         "全コース全問正解でクリア達成",
+    weekly_king:    "週間ランキング1位を獲得",
+    weekly_king_3:  "週間ランキング1位を3回獲得",
+    weekly_king_6:  "週間ランキング1位を6回獲得",
+    weekly_king_10: "週間ランキング1位を10回獲得",
+    weekly_second:  "週間ランキング2位を獲得",
+    weekly_third:   "週間ランキング3位を獲得",
+  }.freeze
+
 end

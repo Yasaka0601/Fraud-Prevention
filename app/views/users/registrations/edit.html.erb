@@ -19,18 +19,24 @@
 
       <!------ アイコンプレビュー ------>
       <div class="profile-avatar-section">
-        <% if current_user.image.attached? %>
-          <%= image_tag current_user.image,
-              class: "profile-avatar-preview",
-              alt: current_user.name,
-              data: { profile_image_target: "preview" } %>
-        <% else %>
-          <%= image_tag "icon.png",
-              class: "profile-avatar-preview",
-              alt: "デフォルトアイコン",
-              data: { profile_image_target: "preview" } %>
-        <% end %>
-        <!--- <%= avatar_image_tag(current_user, css_class: "profile-avatar-preview") %> -->
+        <div class="avatar-wrapper">
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image,
+                class: "profile-avatar-preview",
+                alt: current_user.name,
+                data: { profile_image_target: "preview" } %>
+          <% else %>
+            <%= image_tag "icon.png",
+                class: "profile-avatar-preview",
+                alt: "デフォルトアイコン",
+                data: { profile_image_target: "preview" } %>
+          <% end %>
+          <% if current_user.selected_badge_type.present? %>
+            <span class="avatar-badge">
+              <%= badge_icon(current_user.selected_badge_type) %>
+            </span>
+          <% end %>
+        </div>
       </div>
 
       <!----- 名前入力 ----->
@@ -85,6 +91,58 @@
           <span class="loading loading-spinner loading-sm"></span>
           <span class="text-sm">画像を読み込み中...</span>
         </div>
+      </div>
+
+      <!----- 表示バッジ選択 ----->
+      <div class="profile-field">
+        <fieldset class="fieldset">
+          <legend class="profile-label">表示バッジ</legend>
+
+          <%# 現在の選択を表示 %>
+          <div class="badge-selected-preview">
+            <% if current_user.selected_badge_type.present? %>
+              <%= badge_icon(current_user.selected_badge_type) %>
+              <span><%= UserBadge::BADGE_NAMES[current_user.selected_badge_type.to_sym] %></span>
+            <% else %>
+              <span>表示しない</span>
+            <% end %>
+          </div>
+
+          <% if @badges.present? %>
+            <button type="button" class="btn btn-sm" onclick="badge_modal.showModal()">
+              バッジを選択する
+            </button>
+          <% end %>
+
+          <%# DaisyUI モーダル（form の中に配置することでラジオボタンがフォーム送信に含まれる） %>
+          <dialog id="badge_modal" class="modal" onclick="if(event.target===this)this.close()">
+            <div class="modal-box">
+              <h3 class="font-bold text-lg mb-4">表示バッジを選択</h3>
+
+              <div class="badge-radio-list">
+                <%# 表示しない %>
+                <label class="badge-radio-item">
+                  <%= f.radio_button :selected_badge_type, "", checked: current_user.selected_badge_type.blank? %>
+                  <span>表示しない</span>
+                </label>
+
+                <%# 獲得済みバッジ一覧 %>
+                <% @badges.each do |badge| %>
+                  <label class="badge-radio-item">
+                    <%= f.radio_button :selected_badge_type, badge.badge_type,
+                        checked: current_user.selected_badge_type == badge.badge_type %>
+                    <%= badge_icon(badge.badge_type) %>
+                    <span><%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %></span>
+                  </label>
+                <% end %>
+              </div>
+
+              <div class="modal-action">
+                <button type="button" class="btn" onclick="badge_modal.close()">閉じる</button>
+              </div>
+            </div>
+          </dialog>
+        </fieldset>
       </div>
 
       <!----- 更新ボタン ----->

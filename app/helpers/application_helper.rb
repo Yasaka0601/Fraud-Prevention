@@ -1,10 +1,22 @@
 module ApplicationHelper
-  def avatar_image_tag(user, css_class: "user-avatar", alt: nil)
+  def avatar_image_tag(user, css_class: "user-avatar", alt: nil, show_badge: false)
+    # alt が未指定なら、ユーザー名を使用する。
     alt ||= user.name
-    if user.image.attached?
+
+    img = if user.image.attached?
       image_tag user.image, class: css_class, alt: alt
     else
       image_tag "icon.png", class: css_class, alt: "デフォルトアイコン"
+    end
+
+    # unless条件が false の場合、<img>タグのみ返す。
+    return img unless show_badge && user.selected_badge_type.present?
+
+    badge_type = user.selected_badge_type
+    content_tag(:div, class: "avatar-wrapper") do
+      img + content_tag(:span, class: "avatar-badge") do
+        badge_icon(badge_type)
+      end
     end
   end
 

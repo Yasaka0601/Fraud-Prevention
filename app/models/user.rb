@@ -17,6 +17,21 @@ class User < ApplicationRecord
   ##### 各ユーザーの権限を定義。#####
   enum role: { general: 0, admin: 1 }
 
+  ##### バッジの選択（アイコン） #####
+  enum :selected_badge_type, {
+    white_belt:     0, # 白帯(1コースクリア)
+    blue_belt:      1, # 青帯（５コースクリア）
+    brown_belt:     2, # 茶帯（１０コースクリア）
+    black_belt:     3, # 黒帯（１５コースクリア）
+    master:         4, # 師範（全コースクリア）
+    weekly_king:    5, # 頂点（１回目の１位）
+    weekly_king_3:  6, # 覇者（３回目の１位）
+    weekly_king_6:  7, # 鬼神（６回目の１位）
+    weekly_king_10: 8, # 天下無双（１０回目の１位）
+    weekly_second:  9, # 銀将（１回目の２位）
+    weekly_third:   10 # 銅将（１回目の３位）
+  }
+
   ##### バリデーション #####
   validates :name, presence: true, length: { maximum: 50 }
 
