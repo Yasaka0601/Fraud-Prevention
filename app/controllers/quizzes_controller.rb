@@ -43,6 +43,7 @@ class QuizzesController < ApplicationController
           quiz_ids: session[:quiz_ids],
           answers: session[:answers]
         )
+        flash[:new_badges] = course_result.newly_granted_badges.map(&:badge_type)
         redirect_to course_quiz_path(@course, @index, result_id: course_result.id)
       else
         # 未ログインの場合 guest_result: true はクエリパラメータ

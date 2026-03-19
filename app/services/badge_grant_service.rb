@@ -25,14 +25,20 @@ class BadgeGrantService
     # ユーザーのコースクリア回数
     conquered_count = @user.user_course_challenges.where.not(conquered_at: nil).count
 
+    # 新規取得バッジの空配列を作成
+    newly_granted = []
+
     COURSE_BADGES.each do |badge|
       # .is_a?(Proc) で threshold が Proc (後で実行する処理の塊。ここでは Course.count ) なのか判定。
       # Proc であれば .call で Course.count を実行する。
       threshold = badge[:threshold].is_a?(Proc) ? badge[:threshold].call : badge[:threshold]
       if conquered_count >= threshold
-        grant_badge(badge[:badge_type])
+        result = grant_badge(badge[:badge_type])
+        newly_granted << result if result
       end
     end
+    # 戻り値
+    newly_granted
   end
 
   # rakeタスクの週次バッチ処理で呼び出すメソッド

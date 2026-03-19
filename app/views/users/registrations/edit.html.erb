@@ -96,7 +96,7 @@
       <!----- 表示バッジ選択 ----->
       <div class="profile-field">
         <fieldset class="fieldset">
-          <legend class="profile-label">表示バッジ</legend>
+          <legend class="profile-label">表示する勲章</legend>
 
           <% if @badges.present? %>
             <button type="button" class="btn-badge-select" onclick="badge_modal.showModal()">
@@ -120,7 +120,7 @@
             <dialog id="badge_modal" class="modal" onclick="if(event.target===this)this.close()">
               <%# modal-box に bg-white を追加して背景色を白に固定 %>
               <div class="modal-box badge-modal-box bg-white">
-                <h3 class="font-bold text-lg mb-4 text-[#1F2F54] border-b border-gray-200 pb-2">表示バッジを選択</h3>
+                <h3 class="font-bold text-lg mb-4 text-[#1F2F54] border-b border-gray-200 pb-2">表示する勲章を選択</h3>
 
                 <div class="badge-radio-list">
                   <%# 表示しない %>
@@ -156,7 +156,7 @@
             </dialog>
           <% else %>
             <div class="badge-empty-preview">
-              まだバッジを獲得していません。
+              まだ勲章を獲得していません。
             </div>
           <% end %>
         </fieldset>
