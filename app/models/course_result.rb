@@ -5,6 +5,9 @@ class CourseResult < ApplicationRecord
 
   has_many :quiz_histories, dependent: :destroy
 
+  ##### 獲得したバッジの配列をセット #####
+  attr_accessor :newly_granted_badges
+
   ##### 成績の集計メソッド #####
   def self.build_from_session!(user:, course:, quiz_ids:, answers:)
     # 引数で受け取った quiz_ids(配列) の要素数を代入。
@@ -32,8 +35,8 @@ class CourseResult < ApplicationRecord
     # 成績履歴を20件に制限（21件目以降は古いのを削除
     user.course_results.order(created_at: :desc).offset(20).delete_all
 
-    # コース挑戦の記録を作成
-    course_result.course_challenge_record
+    # コースの挑戦記録を作成し、新規獲得バッジ（配列）を course_result に持たせる。（バッジが無ければ空配列）
+    course_result.newly_granted_badges = course_result.course_challenge_record || []
 
     # メソッドの戻り値
     course_result

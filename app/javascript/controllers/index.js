@@ -14,3 +14,7 @@ application.register("quiz-scroll", QuizScrollController)
 // ユーザーアイコン画像のプレビュー
 import ProfileImageController from "./profile_image_controller"
 application.register("profile-image", ProfileImageController)
+
+// トースト・フラッシュメッセージの自動消去
+import AutoDismissController from "./auto_dismiss_controller"
+application.register("auto-dismiss", AutoDismissController)

@@ -26,6 +26,26 @@
     <%= render "shared/header" %>
     <%= render "shared/flash_message" %>
     <%= yield %>
+
+    <!----- バッジ獲得通知 (Toast) ----->
+    <% if flash[:new_badges].present? %>
+      <div class="toast toast-top toast-end" data-controller="auto-dismiss" style="z-index: 9999; margin-top: 4rem;">
+        <% flash[:new_badges].each do |badge_type| %>
+          <div class="bg-white border-l-4 border-[#C63D2F] shadow-xl rounded-lg flex items-center gap-4 p-4 max-w-sm animate-fade-in">
+            <div class="w-12 h-12 flex-shrink-0 drop-shadow-sm">
+              <%= badge_icon(badge_type) %>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-[#C63D2F] mb-0.5">新しい勲章を獲得しました！</span>
+              <span class="text-base font-bold text-[#1F2F54]">
+                <%= UserBadge::BADGE_NAMES[badge_type.to_sym] %>
+              </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
     <%= render "shared/footer" %>
   </body>
 </html>
