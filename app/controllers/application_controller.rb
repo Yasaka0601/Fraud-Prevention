@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   # ログインしているかをチェックするコールバック
   before_action :authenticate_user!
-
   # Deviseのコントローラーであれば、configure_permitted_parametersメソッドを呼び出すというコールバック。
   before_action :configure_permitted_parameters, if: :devise_controller?
 

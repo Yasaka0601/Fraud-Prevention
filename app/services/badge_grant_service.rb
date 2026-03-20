@@ -33,7 +33,7 @@ class BadgeGrantService
       # Proc であれば .call で Course.count を実行する。
       threshold = badge[:threshold].is_a?(Proc) ? badge[:threshold].call : badge[:threshold]
       if conquered_count >= threshold
-        result = grant_badge(badge[:badge_type])
+        result = grant_badge(badge[:badge_type], notified: true)
         newly_granted << result if result
       end
     end
@@ -60,10 +60,14 @@ class BadgeGrantService
     end
   end
 
-  def grant_badge(badge_type)
+  def grant_badge(badge_type, notified: false)
     # ユーザーの badge_type が一致するバッジが DB に存在するなら return する。
     return if @user.user_badges.where(badge_type: badge_type).exists?
     # @user の user_badges レコードを作成。
-    @user.user_badges.create!(badge_type: badge_type, acquired_at: Time.current)
+    @user.user_badges.create!(
+      badge_type: badge_type,
+      acquired_at: Time.current,
+      notified_at: notified ? Time.current : nil
+      )
   end
 end
