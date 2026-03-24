@@ -2,14 +2,14 @@
 
 /***** body に書いてたやつを、ホーム画面だけに効かせる *****/
 .home-page{
-  padding-top: 80px;
+  padding-top: 25px;
   color: #333;
 }
 
 .home-container{
   max-width: 1024px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 /***** セクション見出し *****/
