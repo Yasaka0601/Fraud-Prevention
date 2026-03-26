@@ -8,7 +8,7 @@
                   url: registration_path(resource_name),
                   html: {
                     method: :put,
-                    data: { controller: "profile-image" }
+                    data: { controller: "profile-image badge-select" }
                   }
                 ) do |f| %>
 
@@ -31,11 +31,11 @@
                 alt: "デフォルトアイコン",
                 data: { profile_image_target: "preview" } %>
           <% end %>
-          <% if current_user.selected_badge_type.present? %>
-            <span class="avatar-badge">
-              <%= badge_icon(current_user.selected_badge_type) %>
-            </span>
-          <% end %>
+          <span class="avatar-badge"
+                data-badge-select-target="avatarBadge"
+                <%= current_user.selected_badge_type.blank? ? "hidden" : "" %>>
+            <%= badge_icon(current_user.selected_badge_type) if current_user.selected_badge_type.present? %>
+          </span>
         </div>
       </div>
 
@@ -100,7 +100,7 @@
 
           <% if @badges.present? %>
             <button type="button" class="btn-badge-select" onclick="badge_modal.showModal()">
-              <div class="badge-select-content">
+              <div class="badge-select-content" data-badge-select-target="buttonContent">
                 <% if current_user.selected_badge_type.present? %>
                   <div class="badge-select-icon">
                     <%= badge_icon(current_user.selected_badge_type) %>
@@ -116,15 +116,17 @@
               </div>
             </button>
 
-            <%# DaisyUI モーダル %>
+            <!----- DaisyUI モーダル ----->
             <dialog id="badge_modal" class="modal" onclick="if(event.target===this)this.close()">
-              <%# modal-box に bg-white を追加して背景色を白に固定 %>
               <div class="modal-box badge-modal-box bg-white">
                 <h3 class="font-bold text-lg mb-4 text-[#1F2F54] border-b border-gray-200 pb-2">表示する勲章を選択</h3>
 
                 <div class="badge-radio-list">
-                  <%# 表示しない %>
-                  <label class="badge-radio-item badge-radio-item--none">
+                  <!----- 表示しない ----->
+                  <label class="badge-radio-item badge-radio-item--none"
+                         data-badge-select-target="radioLabel"
+                         data-badge-type=""
+                         data-badge-name="表示しない">
                     <%= f.radio_button :selected_badge_type, "", checked: current_user.selected_badge_type.blank?, class: "hidden" %>
                     <div class="badge-radio-content">
                       <i class="fas fa-ban text-gray-400 text-xl"></i>
@@ -132,9 +134,12 @@
                     </div>
                   </label>
 
-                  <%# 獲得済みバッジ一覧 %>
+                  <!----- 獲得済みバッジ一覧 ----->
                   <% @badges.each do |badge| %>
-                    <label class="badge-radio-item">
+                    <label class="badge-radio-item"
+                           data-badge-select-target="radioLabel"
+                           data-badge-type="<%= badge.badge_type %>"
+                           data-badge-name="<%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %>">
                       <%= f.radio_button :selected_badge_type, badge.badge_type,
                           checked: current_user.selected_badge_type == badge.badge_type, class: "hidden" %>
                       <div class="badge-radio-content">
@@ -147,10 +152,10 @@
                   <% end %>
                 </div>
 
-                <%# キャンセルと選択ボタンを配置 %>
+                <!----- キャンセルと選択ボタンを配置 ----->
                 <div class="modal-action flex justify-end gap-3 mt-4">
-                  <button type="button" class="btn btn-ghost text-gray-600" onclick="badge_modal.close()">キャンセル</button>
-                  <button type="button" class="btn bg-[#C63D2F] hover:bg-[#a03024] text-white border-none" onclick="badge_modal.close()">選択</button>
+                  <button type="button" class="btn btn-ghost text-gray-600" data-action="badge-select#cancel">キャンセル</button>
+                  <button type="button" class="btn bg-[#C63D2F] hover:bg-[#a03024] text-white border-none" data-action="badge-select#apply">選択</button>
                 </div>
               </div>
             </dialog>

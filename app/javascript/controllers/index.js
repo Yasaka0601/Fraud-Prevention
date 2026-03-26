@@ -18,3 +18,7 @@ application.register("profile-image", ProfileImageController)
 // トースト・フラッシュメッセージの自動消去
 import AutoDismissController from "./auto_dismiss_controller"
 application.register("auto-dismiss", AutoDismissController)
+
+// プロフィール編集画面のバッジ動的表示
+import BadgeSelectController from "./badge_select_controller"
+application.register("badge-select", BadgeSelectController)
