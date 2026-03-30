@@ -14,7 +14,7 @@ module HomesHelper
       mail_icon_svg
     when /WEB/
       web_icon_svg
-    when /極/
+    when /詐欺対策道場・極/
       extra_icon_svg
     end
   end
@@ -82,12 +82,13 @@ module HomesHelper
 
   def extra_icon_svg
     <<~SVG.html_safe
-      <svg xmlns="http://www.w3.org/2000/svg
+      <svg xmlns="http://www.w3.org/2000/svg"
       height="40px"
       viewBox="0 -960 960 960"
       width="40px"
       fill="#000000">
-      <path d="M446.67-386.67V-760h66.66v373.33h-66.66Zm0 186.67v-66.67h66.66V-200h-66.66Z"/></svg>
+      <path d="M233.33-120l65.34-282.67L80-584l289.33-25.33L480-880l110.67 270.67L880-584 661.33-402.67 726.67-120 480-268 233.33-120Z"/>
+      </svg>
     SVG
   end
 
@@ -106,8 +107,8 @@ module HomesHelper
       "宅配・金融機関・公的機関を装ったメールや、偽サイトへ誘導するフィッシングなど、メールを使った巧妙な詐欺を見抜く稽古。"
     when /WEB/
       "偽サイトや偽広告、偽のログイン画面など、Web上の罠に誘導して個人情報やお金を奪う手口を見抜く稽古。"
-    when /極/
-      "詐欺対策の極（きわみ） 知っていてもほぼ意味がないほど難しいクイズに挑め。"
+    when /詐欺対策道場・極/
+      "詐欺対策道場の難易度が高いクイズだけを集めたカテゴリー"
     end
   end
 end
