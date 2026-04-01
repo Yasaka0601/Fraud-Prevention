@@ -1,7 +1,7 @@
 <% flash.each do |key, message| %>
   <% next if message.blank? %>
   <% next if key == "new_badges" %>
-  <div class="flash flash-<%= key %>">
+      <div class="flash flash-<%= key %>" <% if key == "notice" %>data-controller="auto-dismiss"<% end %>>
     <%= message %>
   </div>
 <% end %>
