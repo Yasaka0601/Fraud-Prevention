@@ -15,6 +15,7 @@
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
+  margin-bottom: 2rem;
 }
 
 /* カード上部の装飾（封筒のフタのようなイメージ） */
