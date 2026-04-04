@@ -70,8 +70,12 @@
         <li>招待したい相手以外には伝えないように気を付けてください</li>
       </ul>
     </div>
-
-    <%= link_to "家族ルームへ戻る", home_rooms_path, class: "btn-back-text" %>
   </div>
 
+  <%# --- 戻るボタン --- %>
+  <div class="text-center">
+    <%= link_to home_rooms_path, class: "btn-back-to-categories" do %>
+      家族ルームへ戻る
+    <% end %>
+  </div>
 </div>
