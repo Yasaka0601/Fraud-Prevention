@@ -27,6 +27,7 @@ services:
       - node_modules:/myapp/node_modules #JS パッケージもボリュームに逃がして、ホストとコンテナで権限ぐちゃぐちゃにならないようにする。
     environment:
       TZ: Asia/Tokyo
+      GA_MEASUREMENT_ID: G-MMJNSEG2B1
     ports:
       - "3000:3000" # ホストの 3000 番ポートをコンテナの 3000 番に割り当て。ブラウザで http://localhost:3000 にアクセス。
     depends_on:
