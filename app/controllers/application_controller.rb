@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # 新しいURLへリダイレクトさせるメソッド
   def redirect_to_custom_domain
     if Rails.env.production? && request.host != "sagi-taisaku.com"
-      redirect_to "https://sagi-taisaku.com#{request.path}", status: :moved_permanently
+      redirect_to "https://sagi-taisaku.com#{request.path}", status: :moved_permanently, allow_other_host: true
     end
   end
 
