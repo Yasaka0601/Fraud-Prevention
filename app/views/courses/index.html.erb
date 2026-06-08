@@ -14,7 +14,7 @@
     <div class="course-list">
       <% @courses.each do |course| %>
         <%# カード全体をリンクにする %>
-        <%= link_to course_quiz_path(course, 1, quiz_start: true), class: "course-card group" do %>
+        <%= button_to start_course_quiz_index_path(course), method: :post, class: "course-card group" do %>
 
           <div class="course-info">
             <%# --- バッジ表示エリア（レイアウト崩れを防ぐためコース名の上に配置） --- %>

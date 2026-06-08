@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     resources :quiz, only: [ :show ], controller: "quizzes" do
       post :answer, on: :member
       get :guest_result, on: :collection
+      post :start, on: :collection
     end
   end
 

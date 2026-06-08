@@ -43,12 +43,15 @@ RSpec.describe "Quizzes", type: :system do
   let!(:expected_total_point) { expected_correct_count * 10 }
 
   before do
-    # 出題順を固定化するため、session[:quiz_ids] に作成順のIDを直接入れる。
+    # 出題順を固定化するため、RANDOM() の代わりに作成順のIDを返すようスタブする。
     fixed_quiz_ids = quizzes.map(&:id)
-    allow_any_instance_of(QuizzesController).to receive(:prepare_quiz_session) do |controller|
-      controller.session[:quiz_ids] ||= fixed_quiz_ids
-      controller.session[:answers] ||= []
-    end
+    allow_any_instance_of(Course).to receive_message_chain(:quizzes, :order, :pluck).and_return(fixed_quiz_ids)
+  end
+
+  # コース一覧からクイズを開始する共通処理（POST の start アクションを経由する）。
+  def start_quiz
+    visit category_courses_path(category)
+    find('button.course-card').click
   end
 
   # 5問回答して結果リンク表示まで進める共通処理。
@@ -75,7 +78,7 @@ RSpec.describe "Quizzes", type: :system do
 
   describe 'ゲストでのクイズ挑戦' do
     it '固定順で5問出題され、ゲスト結果画面まで進めること' do
-      visit course_quiz_path(course, 1)
+      start_quiz
       answer_all_questions(answer_choice_texts)
       click_link '結果を確認する'
 
@@ -96,7 +99,7 @@ RSpec.describe "Quizzes", type: :system do
     end
 
     it '固定順で5問回答し、成績詳細画面で結果を確認できること' do
-      visit course_quiz_path(course, 1)
+      start_quiz
       answer_all_questions(answer_choice_texts)
       click_link '結果を確認する'
 
