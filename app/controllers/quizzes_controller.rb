@@ -3,7 +3,7 @@ class QuizzesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :start, :show, :answer, :guest_result ]
 
   before_action :set_course
-  before_action :set_index, :set_quiz_id, :set_quiz, :set_choices, only: [ :show, :answer ]
+  before_action :set_quiz_data, only: [ :show, :answer ]
 
   def start
     session[:quiz_ids] = @course.quizzes.order("RANDOM()").pluck(:id)
@@ -88,22 +88,10 @@ class QuizzesController < ApplicationController
   end
 
   # 今、何問目のクイズをしているのか@index に代入している。
-  def set_index
+  def set_quiz_data
     @index = params[:id].to_i
-  end
-
-  # クイズを出すロジック。session[:quiz_ids]は配列なので、@index -1 をしている。
-  def set_quiz_id
-    @quiz_id = session[:quiz_ids][@index - 1]
-  end
-
-  # DBから、実際のクイズを1件取得している。
-  def set_quiz
-    @quiz = Quiz.find(@quiz_id)
-  end
-
-  # @quiz に紐づく回答選択肢を取得。
-  def set_choices
+    quiz_id = session[:quiz_ids][@index - 1]
+    @quiz = Quiz.find(quiz_id)
     @choices = @quiz.choices
   end
 
