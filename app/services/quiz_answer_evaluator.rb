@@ -45,7 +45,7 @@ class QuizAnswerEvaluator
 
   # answer を、整数の・重複なし・並び順統一済みの配列に変える
   def selected_ids
-    @selected_ids ||= Array(answer).map(&:to_i).uniq.sort
+    @selected_ids ||= Array(answer).sort
   end
 
   # 正解選択肢の id 一覧

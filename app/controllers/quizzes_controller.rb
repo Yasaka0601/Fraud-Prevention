@@ -21,20 +21,9 @@ class QuizzesController < ApplicationController
   def answer
     # session[:answers] が nil のときだけ [] にする。（エラー回避のため）
     session[:answers] ||= []
-
-    if @quiz.multiple_answer?
-      ##### 複数選択問題の場合 #####
-      # ユーザーが選択した回答 params[:selected_choice_ids]を整形して、変数に代入。
-      selected_ids = Array(params[:selected_choice_ids]).map(&:to_i).uniq
-      # 整形した回答を、session[:answers] に格納。
-      session[:answers][@index - 1] = selected_ids
-    else
-      ##### 単一選択問題の場合 #####
-      # 単一問題は、を session[:answers] に格納。
-      session[:answers][@index - 1] = params[:selected_choice]
-    end
-
-    # 答え合わせをするメソッドを実行
+    # ユーザーが選択肢した回答をセッションで管理。
+    session[:answers][@index - 1] = Array(params[:selected_choice_id]).map(&:to_i)
+    # 答え合わせをするメソッドを実行し、答え合わせオブジェクトを作成。
     answer_check
 
     # コースの最後、途中で条件を分岐。
