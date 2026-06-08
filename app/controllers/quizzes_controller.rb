@@ -1,10 +1,15 @@
 class QuizzesController < ApplicationController
   # 未ログインでも、クイズに挑戦できる。
-  skip_before_action :authenticate_user!, only: [ :show, :answer, :guest_result ]
+  skip_before_action :authenticate_user!, only: [ :start, :show, :answer, :guest_result ]
 
   before_action :set_course
-  before_action :prepare_quiz_session, only: :show
   before_action :set_index, :set_quiz_id, :set_quiz, :set_choices, only: [ :show, :answer ]
+
+  def start
+    session[:quiz_ids] = @course.quizzes.order("RANDOM()").pluck(:id)
+    session[:answers] = []
+    redirect_to course_quiz_path(@course, 1)
+  end
 
   def show
     # 答え合わせのメソッドを実行（ブラウザの「戻る」で回答済みを復元）
@@ -80,26 +85,6 @@ class QuizzesController < ApplicationController
   # どのコースをプレイ中か特定している。
   def set_course
     @course = Course.find(params[:course_id])
-  end
-
-  # 一度のプレイで出す問題リストを session に用意する。
-  def prepare_quiz_session
-    # クイズ開始ボタンから来たとき（クエリパラメータに quiz_start=true 付き）
-    if params[:quiz_start].present?
-      # セッションをリセットしている
-      session[:quiz_ids] = nil
-      session[:answers] = []
-      # courses/:course_id/play/:id にリダイレクトしている。
-      redirect_to course_quiz_path(@course, 1)
-      # redirect なので return で終了させる必要がある。
-      return
-    end
-
-    # session[:quiz_ids] が空の場合、コース内のクイズをランダムに並べて、idだけの配列にする。
-    if session[:quiz_ids].blank?
-      # コース内のクイズをランダム順にして、idだけの配列にする。
-      session[:quiz_ids] = @course.quizzes.order("RANDOM()").pluck(:id)
-    end
   end
 
   # 今、何問目のクイズをしているのか@index に代入している。
