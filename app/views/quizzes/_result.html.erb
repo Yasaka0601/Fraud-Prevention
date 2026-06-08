@@ -22,12 +22,10 @@
       <div class="mb-4">
         <span class="explanation-title text-[#C63D2F]">【正解】</span>
         <ul class="list-disc list-inside font-bold text-lg text-gray-800">
-          <% if @multi_correct_choices.present? %>
-            <% @multi_correct_choices.each do |correct| %>
+          <% if @correct_choices.present? %>
+            <% @correct_choices.each do |correct| %>
               <li><%= correct.text %></li>
             <% end %>
-          <% elsif @correct_choice.present? %>
-            <li><%= @correct_choice.text %></li>
           <% end %>
         </ul>
       </div>

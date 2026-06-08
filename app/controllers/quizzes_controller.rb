@@ -95,30 +95,20 @@ class QuizzesController < ApplicationController
     @choices = @quiz.choices
   end
 
-  # QuizAnswerEvaluator で答え合わせをしたものをインスタンス変数に渡す。
   def answer_check
     # 自分の回答を変数に代入。
     stored_answer = (session[:answers] || [])[ @index - 1 ]
 
-    # 答え合わせのクラス QuizAnswerEvaluator を呼び出している
+    # 答え合わせのインスタンスを作成し、resultに代入。
     result = QuizAnswerEvaluator.call(
       quiz: @quiz,
       answer: stored_answer
     )
 
-    # multiple_answer? と correct? メソッドは QuizAnswerEvaluator の Result で作成したメソッド。
+    # 答え合わせのインスタンスのメソッドを使い、必要なデータをセットする。
     @multiple_answer = result.multiple_answer?
     @is_correct = result.correct?
-
-    if @multiple_answer
-      ##### 複数選択肢の場合。 #####
-      # result が持つ selected_ids を @selected_choice_ids に代入。
-      @selected_choice_ids = result.selected_ids
-      @multi_correct_choices = result.correct_choices
-    else
-      ##### 単一選択の場合 #####
-      @selected_choice_id = result.selected_ids.first
-      @correct_choice = result.correct_choices.first
-    end
+    @selected_choice_ids = result.selected_ids
+    @correct_choices = result.correct_choices
   end
 end
