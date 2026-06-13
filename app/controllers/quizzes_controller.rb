@@ -11,22 +11,19 @@ class QuizzesController < ApplicationController
   end
 
   def show
+    # ブラウザの「戻る」で回答済み状態を復元するための answer_check
     answer_check
-    # 最後の問題用に、「結果発表」で飛ぶ先の id を覚えておく
-    @course_result_id = params[:result_id].presence&.to_i
+    # 結果発表で飛ぶ先の id をセットする。
+    @course_result_id = params[:result_id]&.to_i
   end
 
   def answer
-    # session[:answers] が nil のときだけ [] にする。（エラー回避のため）
-    session[:answers] ||= []
     # ユーザーが選択肢した回答をセッションで管理。
     session[:answers][@index - 1] = Array(params[:selected_choice_id]).map(&:to_i)
-    # 答え合わせをするメソッドを実行し、答え合わせオブジェクトを作成。
+    # 正誤を判定して表示するための answer_check
     answer_check
 
-    # コースの最後、途中で条件を分岐。
-    if @index >= session[:quiz_ids].size
-      # コースの最後の場合。
+    if @index == session[:quiz_ids].size
       if user_signed_in?
         # build_from_session! に引数を与え、生成したオブジェクトを変数に代入。
         course_result = CourseResult.build_from_session!(
@@ -52,18 +49,15 @@ class QuizzesController < ApplicationController
 
   # 未ログインの処理。
   def guest_result
-    quiz_ids = Array(session[:quiz_ids])
-    answers  = Array(session[:answers])
-
-    @total_questions = quiz_ids.size
+    @total_questions = session[:quiz_ids].size
     @correct_count = 0
 
-    # index_by を使うことで、キーid のクイズオブジェクトができる。
-    quizzes_by_id = Quiz.includes(:choices).where(id: quiz_ids).index_by(&:id)
+    # index_by を使うことで、キー:id 値:クイズオブジェクト のハッシュが作成される。
+    quizzes_by_id = Quiz.includes(:choices).where(id: session[:quiz_ids]).index_by(&:id)
 
-    quiz_ids.each_with_index do |quiz_id, i|
+    session[:quiz_ids].each_with_index do |quiz_id, i|
       quiz = quizzes_by_id[quiz_id]
-      result = QuizAnswerEvaluator.call(quiz: quiz, answer: answers[i])
+      result = QuizAnswerEvaluator.call(quiz: quiz, answer: session[:answers][i])
       @correct_count += 1 if result.correct?
     end
   end
@@ -84,13 +78,10 @@ class QuizzesController < ApplicationController
 
   def answer_check
     # 自分の回答を変数に代入。
-    stored_answer = (session[:answers] || [])[ @index - 1 ]
+    stored_answer = session[:answers][@index - 1]
 
     # 答え合わせのインスタンスを作成し、resultに代入。
-    result = QuizAnswerEvaluator.call(
-      quiz: @quiz,
-      answer: stored_answer
-    )
+    result = QuizAnswerEvaluator.call(quiz: @quiz, answer: stored_answer)
 
     # 答え合わせのインスタンスのメソッドを使い、必要なデータをセットする。
     @multiple_answer = result.multiple_answer?

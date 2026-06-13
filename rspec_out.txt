@@ -1,0 +1,238 @@
+DEPRECATION WARNING: Defining enums with keyword arguments is deprecated and will be removed
+in Rails 8.0. Positional arguments should be used instead:
+
+enum :role, {:general=>0, :admin=>1}
+ (called from <class:User> at /myapp/app/models/user.rb:18)
+
+Quizzes
+  ゲストでのクイズ挑戦
+    固定順で5問出題され、ゲスト結果画面まで進めること (FAILED - 1)
+  ログインユーザーでのクイズ挑戦
+    固定順で5問回答し、成績詳細画面で結果を確認できること (FAILED - 2)
+
+Failures:
+
+  1) Quizzes ゲストでのクイズ挑戦 固定順で5問出題され、ゲスト結果画面まで進めること
+     Got 0 failures and 2 other errors:
+
+     1.1) Failure/Error: visit category_courses_path(category)
+
+          Selenium::WebDriver::Error::SessionNotCreatedError:
+            session not created: Chrome instance exited. Examine ChromeDriver verbose log to determine the cause.
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:63:in `add_cause'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:41:in `error'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:52:in `assert_ok'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:34:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `create_response'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/default.rb:103:in `request'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:68:in `call'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:625:in `execute'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:76:in `create_session'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:325:in `block in create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:324:in `create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:73:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/chrome/driver.rb:35:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `for'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver.rb:88:in `for'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/selenium/driver.rb:75:in `browser'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:106:in `driver'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:92:in `initialize'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `new'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `block in session_pool'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:317:in `current_session'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/dsl.rb:46:in `page'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/dsl.rb:52:in `visit'
+          # ./spec/system/quizzes_spec.rb:53:in `start_quiz'
+          # ./spec/system/quizzes_spec.rb:81:in `block (3 levels) in <top (required)>'
+          # ------------------
+          # --- Caused by: ---
+          # Selenium::WebDriver::Error::WebDriverError:
+          #   #0 0xaaaaad59c174 <unknown>
+#1 0xaaaaacf2d254 <unknown>
+#2 0xaaaaacf64fdc <unknown>
+#3 0xaaaaacf60180 <unknown>
+#4 0xaaaaacfa7154 <unknown>
+#5 0xaaaaacfa6a8c <unknown>
+#6 0xaaaaacf6bb1c <unknown>
+#7 0xaaaaad560c78 <unknown>
+#8 0xaaaaad55f7a4 <unknown>
+#9 0xaaaaad55f320 <unknown>
+#10 0xaaaaad54f4c8 <unknown>
+#11 0xaaaaad55fe80 <unknown>
+#12 0xaaaaad53a3ec <unknown>
+#13 0xaaaaad588558 <unknown>
+#14 0xaaaaad588758 <unknown>
+#15 0xaaaaad59ab78 <unknown>
+#16 0xffffba4bee8c <unknown>
+#17 0xffffba527b18 <unknown>
+
+
+     1.2) Failure/Error: raise ex, cause: cause
+
+          Selenium::WebDriver::Error::SessionNotCreatedError:
+            session not created: Chrome instance exited. Examine ChromeDriver verbose log to determine the cause.
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:63:in `add_cause'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:41:in `error'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:52:in `assert_ok'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:34:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `create_response'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/default.rb:103:in `request'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:68:in `call'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:625:in `execute'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:76:in `create_session'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:325:in `block in create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:324:in `create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:73:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/chrome/driver.rb:35:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `for'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver.rb:88:in `for'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/selenium/driver.rb:75:in `browser'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:106:in `driver'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:92:in `initialize'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `new'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `block in session_pool'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:317:in `current_session'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/dsl.rb:46:in `page'
+          # ------------------
+          # --- Caused by: ---
+          # Selenium::WebDriver::Error::WebDriverError:
+          #   #0 0xaaaacbf5c174 <unknown>
+#1 0xaaaacb8ed254 <unknown>
+#2 0xaaaacb924fdc <unknown>
+#3 0xaaaacb920180 <unknown>
+#4 0xaaaacb967154 <unknown>
+#5 0xaaaacb966a8c <unknown>
+#6 0xaaaacb92bb1c <unknown>
+#7 0xaaaacbf20c78 <unknown>
+#8 0xaaaacbf1f7a4 <unknown>
+#9 0xaaaacbf1f320 <unknown>
+#10 0xaaaacbf0f4c8 <unknown>
+#11 0xaaaacbf1fe80 <unknown>
+#12 0xaaaacbefa3ec <unknown>
+#13 0xaaaacbf48558 <unknown>
+#14 0xaaaacbf48758 <unknown>
+#15 0xaaaacbf5ab78 <unknown>
+#16 0xffff84b4ee8c <unknown>
+#17 0xffff84bb7b18 <unknown>
+
+
+  2) Quizzes ログインユーザーでのクイズ挑戦 固定順で5問回答し、成績詳細画面で結果を確認できること
+     Got 0 failures and 2 other errors:
+
+     2.1) Failure/Error: visit new_user_session_path
+
+          Selenium::WebDriver::Error::SessionNotCreatedError:
+            session not created: Chrome instance exited. Examine ChromeDriver verbose log to determine the cause.
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:63:in `add_cause'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:41:in `error'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:52:in `assert_ok'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:34:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `create_response'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/default.rb:103:in `request'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:68:in `call'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:625:in `execute'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:76:in `create_session'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:325:in `block in create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:324:in `create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:73:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/chrome/driver.rb:35:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `for'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver.rb:88:in `for'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/selenium/driver.rb:75:in `browser'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:106:in `driver'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:92:in `initialize'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `new'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `block in session_pool'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:317:in `current_session'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/dsl.rb:46:in `page'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/dsl.rb:52:in `visit'
+          # ./spec/support/system_login_helpers.rb:4:in `login_as_user'
+          # ./spec/system/quizzes_spec.rb:98:in `block (3 levels) in <top (required)>'
+          # ------------------
+          # --- Caused by: ---
+          # Selenium::WebDriver::Error::WebDriverError:
+          #   #0 0xaaaabcb0c174 <unknown>
+#1 0xaaaabc49d254 <unknown>
+#2 0xaaaabc4d4fdc <unknown>
+#3 0xaaaabc4d0180 <unknown>
+#4 0xaaaabc517154 <unknown>
+#5 0xaaaabc516a8c <unknown>
+#6 0xaaaabc4dbb1c <unknown>
+#7 0xaaaabcad0c78 <unknown>
+#8 0xaaaabcacf7a4 <unknown>
+#9 0xaaaabcacf320 <unknown>
+#10 0xaaaabcabf4c8 <unknown>
+#11 0xaaaabcacfe80 <unknown>
+#12 0xaaaabcaaa3ec <unknown>
+#13 0xaaaabcaf8558 <unknown>
+#14 0xaaaabcaf8758 <unknown>
+#15 0xaaaabcb0ab78 <unknown>
+#16 0xffffa9f6ee8c <unknown>
+#17 0xffffa9fd7b18 <unknown>
+
+
+     2.2) Failure/Error: raise ex, cause: cause
+
+          Selenium::WebDriver::Error::SessionNotCreatedError:
+            session not created: Chrome instance exited. Examine ChromeDriver verbose log to determine the cause.
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:63:in `add_cause'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:41:in `error'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:52:in `assert_ok'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/response.rb:34:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:103:in `create_response'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/default.rb:103:in `request'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/http/common.rb:68:in `call'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:625:in `execute'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/remote/bridge.rb:76:in `create_session'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:325:in `block in create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:324:in `create_bridge'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:73:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/chrome/driver.rb:35:in `initialize'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `new'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver/common/driver.rb:47:in `for'
+          # /usr/local/bundle/gems/selenium-webdriver-4.38.0/lib/selenium/webdriver.rb:88:in `for'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/selenium/driver.rb:75:in `browser'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:106:in `driver'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/session.rb:92:in `initialize'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `new'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:422:in `block in session_pool'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara.rb:317:in `current_session'
+          # /usr/local/bundle/gems/capybara-3.40.0/lib/capybara/dsl.rb:46:in `page'
+          # ------------------
+          # --- Caused by: ---
+          # Selenium::WebDriver::Error::WebDriverError:
+          #   #0 0xaaaab579c174 <unknown>
+#1 0xaaaab512d254 <unknown>
+#2 0xaaaab5164fdc <unknown>
+#3 0xaaaab5160180 <unknown>
+#4 0xaaaab51a7154 <unknown>
+#5 0xaaaab51a6a8c <unknown>
+#6 0xaaaab516bb1c <unknown>
+#7 0xaaaab5760c78 <unknown>
+#8 0xaaaab575f7a4 <unknown>
+#9 0xaaaab575f320 <unknown>
+#10 0xaaaab574f4c8 <unknown>
+#11 0xaaaab575fe80 <unknown>
+#12 0xaaaab573a3ec <unknown>
+#13 0xaaaab5788558 <unknown>
+#14 0xaaaab5788758 <unknown>
+#15 0xaaaab579ab78 <unknown>
+#16 0xffff9f25ee8c <unknown>
+#17 0xffff9f2c7b18 <unknown>
+
+
+Finished in 1.61 seconds (files took 0.91517 seconds to load)
+2 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/system/quizzes_spec.rb:80 # Quizzes ゲストでのクイズ挑戦 固定順で5問出題され、ゲスト結果画面まで進めること
+rspec ./spec/system/quizzes_spec.rb:101 # Quizzes ログインユーザーでのクイズ挑戦 固定順で5問回答し、成績詳細画面で結果を確認できること
+
