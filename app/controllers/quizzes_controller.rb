@@ -78,7 +78,7 @@ class QuizzesController < ApplicationController
 
   def answer_check
     # 自分の回答を変数に代入。
-    stored_answer = session[:answers][ @index - 1 ]
+    stored_answer = session[:answers][@index - 1]
 
     # 答え合わせのインスタンスを作成し、resultに代入。
     result = QuizAnswerEvaluator.call(quiz: @quiz, answer: stored_answer)
