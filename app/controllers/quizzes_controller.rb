@@ -1,7 +1,6 @@
 class QuizzesController < ApplicationController
   # 未ログインでも、クイズに挑戦できる。
-  skip_before_action :authenticate_user!, only: [ :start, :show, :answer, :guest_result ]
-
+  skip_before_action :authenticate_user!
   before_action :set_course
   before_action :set_quiz_data, only: [ :show, :answer ]
 
@@ -12,7 +11,6 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    # 答え合わせのメソッドを実行（ブラウザの「戻る」で回答済みを復元）
     answer_check
     # 最後の問題用に、「結果発表」で飛ぶ先の id を覚えておく
     @course_result_id = params[:result_id].presence&.to_i
