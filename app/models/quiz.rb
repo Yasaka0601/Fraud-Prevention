@@ -19,5 +19,4 @@ class Quiz < ApplicationRecord
 
   has_many :quiz_categories, dependent: :destroy
   has_many :categories, through: :quiz_categories
-
 end

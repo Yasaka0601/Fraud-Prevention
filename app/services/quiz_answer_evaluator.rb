@@ -1,6 +1,5 @@
 # クイズの正誤判定などを行うクラス
 class QuizAnswerEvaluator
-
   def self.call(quiz:, answer:)
     self.new(quiz:, answer:)
   end
@@ -34,5 +33,4 @@ class QuizAnswerEvaluator
   def correct?
     selected_ids.present? ? selected_ids == correct_ids : nil
   end
-
 end
