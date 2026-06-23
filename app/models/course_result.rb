@@ -19,15 +19,14 @@ class CourseResult < ApplicationRecord
       user: user,
       course: course,
       correct_count: 0,
-      total_questions: total_questions,
-      finished_at: Time.current
+      total_questions: total_questions
     )
 
     # クイズ履歴、選択肢を作成
     tally = course_result.build_quiz_histories!(quiz_ids: quiz_ids, answers: answers)
 
     # 正解数を最新の状態にアップデート
-    course_result.update!(correct_count: tally[:correct_count])
+    course_result.update!(correct_count: tally[:correct_count]) if tally[:correct_count].positive?
 
     # ユーザーの合計ポイントに加算
     user.increment!(:total_point, tally[:earned_point]) if tally[:earned_point].positive?
@@ -55,7 +54,7 @@ class CourseResult < ApplicationRecord
       evaluation = QuizAnswerEvaluator.call(quiz: quiz, answer: answers[index])
 
       # クイズ１問分の履歴を作成
-      quiz_history = quiz_histories.create!(user: user, quiz: quiz)
+      quiz_history = quiz_histories.create!(quiz: quiz)
 
       # クイズの選択肢の履歴を作成
       evaluation.selected_ids.each do |choice_id|

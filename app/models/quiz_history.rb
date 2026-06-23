@@ -1,6 +1,5 @@
 class QuizHistory < ApplicationRecord
   ##### アソシエーション #####
-  belongs_to :user
   belongs_to :course_result
   belongs_to :quiz
 

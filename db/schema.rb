@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_20_062235) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_23_105255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -81,7 +81,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_20_062235) do
     t.bigint "course_id", null: false
     t.integer "correct_count", default: 0, null: false
     t.integer "total_questions", default: 0, null: false
-    t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_course_results_on_course_id"
@@ -116,14 +115,12 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_20_062235) do
   end
 
   create_table "quiz_histories", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "course_result_id", null: false
     t.bigint "quiz_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_result_id"], name: "index_quiz_histories_on_course_result_id"
     t.index ["quiz_id"], name: "index_quiz_histories_on_quiz_id"
-    t.index ["user_id"], name: "index_quiz_histories_on_user_id"
   end
 
   create_table "quiz_history_choices", force: :cascade do |t|
@@ -211,7 +208,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_20_062235) do
   add_foreign_key "quiz_categories", "quizzes"
   add_foreign_key "quiz_histories", "course_results", on_delete: :cascade
   add_foreign_key "quiz_histories", "quizzes"
-  add_foreign_key "quiz_histories", "users"
   add_foreign_key "quiz_history_choices", "choices"
   add_foreign_key "quiz_history_choices", "quiz_histories", on_delete: :cascade
   add_foreign_key "user_badges", "users"
