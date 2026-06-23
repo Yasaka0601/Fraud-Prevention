@@ -12,8 +12,7 @@ RSpec.describe "Results", type: :system do
       user: user,
       course: course,
       correct_count: 1,
-      total_questions: 2,
-      finished_at: Time.current
+      total_questions: 2
     )
   end
 
@@ -41,8 +40,8 @@ RSpec.describe "Results", type: :system do
   let!(:second_wrong_choice) { Choice.create!(quiz: second_quiz, text: '問題2の不正解', is_correct: false) }
 
   # course_result にぶら下がる各問題の回答履歴。
-  let!(:first_history) { QuizHistory.create!(user: user, course_result: course_result, quiz: first_quiz) }
-  let!(:second_history) { QuizHistory.create!(user: user, course_result: course_result, quiz: second_quiz) }
+  let!(:first_history) { QuizHistory.create!(course_result: course_result, quiz: first_quiz) }
+  let!(:second_history) { QuizHistory.create!(course_result: course_result, quiz: second_quiz) }
 
   let!(:first_history_choice) { QuizHistoryChoice.create!(quiz_history: first_history, choice: first_correct_choice) }
   let!(:second_history_choice) { QuizHistoryChoice.create!(quiz_history: second_history, choice: second_wrong_choice) }
