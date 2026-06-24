@@ -10,16 +10,14 @@ class CourseResult < ApplicationRecord
 
   ##### 成績の集計メソッド #####
   def self.build_from_session!(user:, course:, quiz_ids:, answers:)
-    # 引数で受け取った quiz_ids(配列) の要素数を代入。
-    total_questions = quiz_ids.size
 
     ##### メソッドのベースとなるオブジェクトを作成。#####
-    # 受け取った引数や、上記の変数で CourseResult モデルのオブジェクトを生成。
+    # 受け取った引数で CourseResult モデルのオブジェクトを生成。
     course_result = CourseResult.create!(
       user: user,
       course: course,
       correct_count: 0,
-      total_questions: total_questions
+      total_questions: quiz_ids.size
     )
 
     # クイズ履歴、選択肢を作成
