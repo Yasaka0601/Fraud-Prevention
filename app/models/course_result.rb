@@ -10,7 +10,6 @@ class CourseResult < ApplicationRecord
 
   ##### 成績の集計メソッド #####
   def self.build_from_session!(user:, course:, quiz_ids:, answers:)
-
     ##### メソッドのベースとなるオブジェクトを作成。#####
     # 受け取った引数で CourseResult モデルのオブジェクトを生成。
     course_result = CourseResult.create!(
