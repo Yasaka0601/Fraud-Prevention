@@ -29,7 +29,6 @@ class BadgeGrantService
     newly_granted = []
 
     COURSE_BADGES.each do |badge|
-      # .is_a?(Proc) で threshold が Proc (後で実行する処理の塊。ここでは Course.count ) なのか判定。
       # Proc であれば .call で Course.count を実行する。
       threshold = badge[:threshold].is_a?(Proc) ? badge[:threshold].call : badge[:threshold]
       if conquered_count >= threshold

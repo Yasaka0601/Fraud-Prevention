@@ -71,7 +71,8 @@ class CourseResult < ApplicationRecord
 
   ##### コース挑戦履歴及び、全問正解の記録を作成 #####
   def course_challenge_record
-    challenge = course_challenge_create
+    # find_or_create_by! は該当レコードを探して、なければ作成するというメソッド。
+    challenge = UserCourseChallenge.find_or_create_by!(user: user, course: course)
 
     # 全問正解なら、conquered_at を作成、そうでなければ return する。
     return unless correct_count == total_questions
@@ -87,14 +88,4 @@ class CourseResult < ApplicationRecord
     quiz_histories.sum(&:earned_point)
   end
 
-  private
-
-  ##### コース挑戦履歴を作成 #####
-  def course_challenge_create
-    # find_or_create_by! は該当レコードを探して、なければ作成するというメソッド。
-    UserCourseChallenge.find_or_create_by!(user: user, course: course)
-    # 競合による重複登録を防ぐ
-  rescue ActiveRecord::RecordNotUnique
-    UserCourseChallenge.find_by!(user: user, course: course)
-  end
 end
