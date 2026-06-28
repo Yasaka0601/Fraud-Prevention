@@ -87,5 +87,4 @@ class CourseResult < ApplicationRecord
   def earned_point_total
     quiz_histories.sum(&:earned_point)
   end
-
 end
