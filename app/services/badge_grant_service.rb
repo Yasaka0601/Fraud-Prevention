@@ -66,7 +66,6 @@ class BadgeGrantService
     # @user の user_badges レコードを作成。
     @user.user_badges.create!(
       badge_type: badge_type,
-      acquired_at: Time.current,
       notified_at: notified ? Time.current : nil
       )
   end
