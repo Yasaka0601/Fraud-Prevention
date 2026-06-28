@@ -1,6 +1,6 @@
 class UserBadge < ApplicationRecord
   ##### バリデーション #####
-  validates :badge_type, :acquired_at, presence: true
+  validates :badge_type, presence: true
 
   ##### アソシエーション #####
   belongs_to :user

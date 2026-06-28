@@ -6,11 +6,6 @@ RSpec.describe UserBadge, type: :model do
       badge = build(:user_badge, badge_type: nil)
       expect(badge).not_to be_valid
     end
-
-    it 'acquired_at がなければ無効である' do
-      badge = build(:user_badge, acquired_at: nil)
-      expect(badge).not_to be_valid
-    end
   end
 
   describe 'アソシエーション' do
