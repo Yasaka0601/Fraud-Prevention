@@ -1,20 +1,89 @@
-<div class="top-page">
-  <div class="top-container">
-    <div class="top-signboard">
-      <%= image_tag "logo.png", alt: "詐欺対策道場", class: "top-logo" %>
-    </div>
+<div class="top">
 
-    <p class="top-description">
-      その電話、ほんまに安全？<br>
-      そのメール、ほんまに安全？<br>
-      ここで稽古をして<br>
-      詐欺を見抜く力を鍛えよう。
-    </p>
+  <%# ============ ヒーロー ============ %>
+  <header class="hero">
+    <div class="hero__bg" style="background-image: url('<%= image_path "hero.png" %>');"></div>
 
-    <div class="top-actions">
-      <%= link_to "入門する", new_user_registration_path, class: "top-btn top-btn--primary" %>
-      <%= link_to "稽古再開（ログイン）", new_user_session_path, class: "top-btn top-btn--outline" %>
-      <%= link_to "登録せずに稽古する", home_path, class: "top-btn top-btn--guest" %>
+    <div class="hero__inner">
+      <h1 class="hero__title">詐欺対策道場</h1>
+      <div class="hero__rule"></div>
+      <p class="hero__lead">
+        巧妙化する<span class="kw">特殊詐欺</span>の手口を<br>
+        <span class="kw">詐欺クイズ</span>で楽しく学ぶ。<br>
+        家族みんなで極める、<span class="kw">防犯</span>の稽古場。
+      </p>
+
+      <div class="top-actions">
+        <%= link_to "新規登録", new_user_registration_path, class: "top-btn top-btn--primary" %>
+        <%= link_to "ログイン", new_user_session_path, class: "top-btn top-btn--outline" %>
+        <%= link_to "登録せずに利用", home_path, class: "top-btn top-btn--guest" %>
+      </div>
+
+      <div class="hero__cue">
+        <span>scroll</span>
+        <span class="hero__arrow"></span>
+      </div>
     </div>
-  </div>
+  </header>
+
+  <%# ============ 使い方 ============ %>
+  <section class="guide">
+    <div class="guide__inner">
+
+      <div class="guide__head">
+        <p class="guide__eyebrow">使用方法</p>
+        <h2 class="guide__title">クイズで詐欺対策を身につける</h2>
+        <p class="guide__sub">クイズで学び、家族で見守り、知識を競い合う。<br>誰でもすぐに始められます。</p>
+      </div>
+
+      <%# その一 %>
+      <article class="step">
+        <div class="step__figure">
+          <%= image_tag "description-1.png", alt: "詐欺クイズを解く画面", class: "step__img" %>
+        </div>
+        <div class="step__body">
+          <h3 class="step__title">クイズを解く</h3>
+          <p class="step__text">
+            実際にあった<span class="kw">詐欺の手口</span>をもとにした<span class="kw">詐欺クイズ</span>に挑戦。
+            問題を解くうちに、あやしい電話やメールを見抜く力が自然と身につきます。
+          </p>
+        </div>
+      </article>
+
+      <%# その二 %>
+      <article class="step">
+        <div class="step__figure">
+          <%= image_tag "description-2.png", alt: "詐欺クイズを解く画面", class: "step__img" %>
+        </div>
+        <div class="step__body">
+          <h3 class="step__title">家族の成績を確認する</h3>
+          <p class="step__text">
+            離れて暮らす親や家族の<span class="kw">詐欺対策</span>の進み具合を、成績一覧でいつでも確認。
+            さりげなく見守りながら、家族ぐるみで防犯意識を高められます。
+          </p>
+        </div>
+      </article>
+
+      <%# その三 %>
+      <article class="step">
+        <div class="step__figure">
+          <%= image_tag "description-3.jpeg", alt: "詐欺クイズを解く画面", class: "step__img" %>
+        </div>
+        <div class="step__body">
+          <h3 class="step__title">ランキングで競い合う</h3>
+          <p class="step__text">
+            ユーザー同士で<span class="kw">防犯</span>の知識を競い合えるランキング機能。
+            楽しみながら続けるうちに、いつのまにか詐欺に強くなっていきます。
+          </p>
+        </div>
+      </article>
+
+      <div class="guide__foot">
+        <p>さあ、あなたも今日から<br>詐欺対策道場の門をくぐろう。</p>
+        <%= link_to "はじめる", new_user_registration_path, class: "guide__cta" %>
+      </div>
+
+    </div>
+  </section>
+
 </div>
