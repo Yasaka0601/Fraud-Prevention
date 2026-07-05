@@ -4,21 +4,20 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
-// クイズ画面のスクロール
-import QuizScrollController from "./quiz_scroll_controller"
-application.register("quiz-scroll", QuizScrollController)
-
-// ユーザーアイコン画像のプレビュー
-import ProfileImageController from "./profile_image_controller"
-application.register("profile-image", ProfileImageController)
-
-// トースト・フラッシュメッセージの自動消去
 import AutoDismissController from "./auto_dismiss_controller"
 application.register("auto-dismiss", AutoDismissController)
 
-// プロフィール編集画面のバッジ動的表示
 import BadgeSelectController from "./badge_select_controller"
 application.register("badge-select", BadgeSelectController)
+
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
+
+import ProfileImageController from "./profile_image_controller"
+application.register("profile-image", ProfileImageController)
+
+import QuizScrollController from "./quiz_scroll_controller"
+application.register("quiz-scroll", QuizScrollController)
+
+import TopController from "./top_controller"
+application.register("top", TopController)

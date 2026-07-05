@@ -58,8 +58,8 @@
   letter-spacing:0.14em; line-height:1.25;
   color: var(--hada-2);
   text-shadow: 0 2px 24px rgba(0,0,0,0.55);
+  margin-bottom: 40px;
 }
-.hero__rule{ width:54px; height:2px; margin:20px auto 18px; }
 
 .hero__lead{
   font-family:"Shippori Mincho",serif;
