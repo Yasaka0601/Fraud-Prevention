@@ -1,13 +1,12 @@
-<div class="top">
+<div class="top" data-controller="top">
 
   <%# ============ ヒーロー ============ %>
   <header class="hero">
-    <div class="hero__bg" style="background-image: url('<%= image_path "hero.png" %>');"></div>
+    <div class="hero__bg" data-top-target="hero_image" style="background-image: url('<%= image_path "hero.webp" %>');"></div>
 
     <div class="hero__inner">
-      <h1 class="hero__title">詐欺対策道場</h1>
-      <div class="hero__rule"></div>
-      <p class="hero__lead">
+      <h1 class="hero__title" data-top-target="title">詐欺対策道場</h1>
+      <p class="hero__lead" data-top-target="lead">
         巧妙化する<span class="kw">特殊詐欺</span>の手口を<br>
         <span class="kw">詐欺クイズ</span>で楽しく学ぶ。<br>
         家族みんなで極める、<span class="kw">防犯</span>の稽古場。
@@ -37,9 +36,9 @@
       </div>
 
       <%# その一 %>
-      <article class="step">
+      <article class="step" data-top-target="step">
         <div class="step__figure">
-          <%= image_tag "description-1.png", alt: "詐欺クイズを解く画面", class: "step__img" %>
+          <%= image_tag "description-1.webp", alt: "詐欺クイズを解く画面", class: "step__img" %>
         </div>
         <div class="step__body">
           <h3 class="step__title">クイズを解く</h3>
@@ -51,9 +50,9 @@
       </article>
 
       <%# その二 %>
-      <article class="step">
+      <article class="step" data-top-target="step">
         <div class="step__figure">
-          <%= image_tag "description-2.png", alt: "詐欺クイズを解く画面", class: "step__img" %>
+          <%= image_tag "description-2.webp", alt: "詐欺クイズを解く画面", class: "step__img" %>
         </div>
         <div class="step__body">
           <h3 class="step__title">家族の成績を確認する</h3>
@@ -65,9 +64,9 @@
       </article>
 
       <%# その三 %>
-      <article class="step">
+      <article class="step" data-top-target="step">
         <div class="step__figure">
-          <%= image_tag "description-3.jpeg", alt: "詐欺クイズを解く画面", class: "step__img" %>
+          <%= image_tag "description-3.webp", alt: "詐欺クイズを解く画面", class: "step__img" %>
         </div>
         <div class="step__body">
           <h3 class="step__title">ランキングで競い合う</h3>
