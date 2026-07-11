@@ -3,9 +3,9 @@
 
 <!----- トップページ、新規登録、ログイン、パスワード変更画面にはナビを表示させない --->
   <% if !current_page?(root_path) &&
-        !current_page?(new_user_registration_path) &&
-        !current_page?(new_user_session_path) &&
-        !(controller_name == "passwords" && %w[new edit].include?(action_name)) %>
+        !(controller_name == "registrations" && ["new", "create"].include?(action_name)) &&
+        !(controller_name == "sessions" && ["new", "create"].include?(action_name)) &&
+        !(controller_name == "passwords" && ["new", "edit", "create", "update"].include?(action_name)) %>
 
 <!--------- ナビ -------->
     <nav class="footer-nav">
