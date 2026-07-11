@@ -4,7 +4,7 @@
     <!-- お知らせブロック -->
     <div class="announcement-section">
       <h2 class="section-title">お知らせ</h2>
-      
+
       <div class="announcement-card">
         <% if @announcements.present? %>
           <ul class="announcement-list">
@@ -13,7 +13,7 @@
                 <div class="announcement-date">
                   <%= announcement.published_at&.strftime("%Y年%m月%d日") %>
                 </div>
-                
+
                 <% if announcement.url.present? %>
                   <%= link_to announcement.url, class: "announcement-title announcement-link" do %>
                     <span><%= announcement.title %></span>
@@ -25,7 +25,7 @@
                 <% else %>
                   <h3 class="announcement-title"><%= announcement.title %></h3>
                 <% end %>
-                
+
                 <% if announcement.body.present? %>
                   <p class="announcement-body"><%= announcement.body %></p>
                 <% end %>
@@ -83,10 +83,10 @@
 
     <!-- カテゴリー一覧 -->
     <!-- カテゴリーを追加すれば,ヘルパーに追記すること-->
-    <div>
+    <div data-controller="home">
       <h2 class="section-title">本日の稽古（カテゴリー選択）</h2>
 
-      <div class="category-grid">
+      <div class="category-grid" data-home-target="category_grid">
         <% @categories.each do |category| %>
           <%= link_to category_courses_path(category), class: "category-card" do %>
             <div class="category-icon-wrapper">
