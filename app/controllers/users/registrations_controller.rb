@@ -7,6 +7,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :set_badges, only: [ :edit, :update ]
   before_action :configure_account_update_params, only: [ :update ]
 
+  def create
+    super do |resource|
+      flash.now[:alert] = resource.errors.full_messages.join("、") if resource.errors.any?
+    end
+  end
+
   protected
 
   # サインアップ後、remember_me を適用させる（ログイン状態保持）
