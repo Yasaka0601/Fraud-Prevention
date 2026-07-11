@@ -21,3 +21,6 @@ application.register("quiz-scroll", QuizScrollController)
 
 import TopController from "./top_controller"
 application.register("top", TopController)
+
+import HomeController from "./home_controller"
+application.register("home", HomeController)
