@@ -101,7 +101,6 @@ ja:
         user: ユーザー
         user_id: ユーザー
         badge_type: バッジ種類
-        acquired_at: 取得日時
         created_at: 作成日
         updated_at: 更新日
 
