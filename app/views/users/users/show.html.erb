@@ -42,7 +42,7 @@
               </div>
               <div class="badge-info">
                 <span class="badge-name"><%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %></span>
-                <span class="badge-date"><%= badge.acquired_at.strftime("%Y.%m.%d") %> 獲得</span>
+                <span class="badge-date"><%= badge.created_at.strftime("%Y.%m.%d") %> 獲得</span>
                 <span class="badge-description"><%= UserBadge::BADGE_DESCRIPTIONS[badge.badge_type.to_sym] %></span>
               </div>
             </li>
