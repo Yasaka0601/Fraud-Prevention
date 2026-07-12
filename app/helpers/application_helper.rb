@@ -6,7 +6,7 @@ module ApplicationHelper
     img = if user.image.attached?
       image_tag user.image, class: css_class, alt: alt
     else
-      image_tag "icon.png", class: css_class, alt: "デフォルトアイコン"
+      image_tag "icon.webp", class: css_class, alt: "デフォルトアイコン"
     end
 
     # unless条件が false の場合、<img>タグのみ返す。
@@ -86,7 +86,7 @@ module ApplicationHelper
     page_url = opts[:url].presence || request.original_url
 
     # 画像は全ページ固定
-    fixed_image = image_url("ogp_default.png")
+    fixed_image = image_url("ogp_default.webp")
 
     # XにURLを貼ったときに出る「タイトル・説明・画像」を設定。
     twitter_config = {

@@ -99,7 +99,7 @@ class InvitationsController < ApplicationController
 
   def create_meta_tag
     page_url = request.original_url
-    fixed_image = helpers.image_url("ogp_default.png")
+    fixed_image = helpers.image_url("ogp_default.webp")
 
     set_meta_tags(
       title: "家族ルームの招待が届きました",
