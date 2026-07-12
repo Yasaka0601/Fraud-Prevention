@@ -37,6 +37,11 @@
           </ul>
         </div>
       </div>
+    <% else %>
+      <div class="header-auth-actions">
+        <%= link_to "新規登録", new_user_registration_path, class: "header-auth-btn header-auth-btn--primary" %>
+        <%= link_to "ログイン",  new_user_session_path,  class: "header-auth-btn header-auth-btn--outline" %>
+      </div>
     <% end %>
   </div>
 </header>
