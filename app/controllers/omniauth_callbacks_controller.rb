@@ -17,7 +17,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         name: auth.dig("info", "name"),
         password: password,
         password_confirmation: password)
-      user.save!
+      return redirect_to new_user_session_path, alert: "アカウントを作成できませんでした" unless user.save
     end
     sign_in(:user, user)
     redirect_to home_path, notice: "ログインしました"
