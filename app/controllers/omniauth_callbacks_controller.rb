@@ -19,12 +19,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         password_confirmation: password)
       user.save!
     end
-    user.set_values(auth)
     sign_in(:user, user)
     redirect_to home_path, notice: "ログインしました"
-  end
-
-  def fake_email(uid, provider)
-    "#{auth.uid}-#{auth.provider}@example.com"
   end
 end
