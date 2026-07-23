@@ -2,7 +2,7 @@ class User < ApplicationRecord
   ##### devise のモジュールを適用させている記述。#####
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :omniauthable,
-          :validatable, omniauth_providers: %i[line]
+          :validatable, omniauth_providers: [ :line, :google_oauth2 ]
 
   ##### Active Storage #####
   has_one_attached :image
@@ -52,6 +52,15 @@ class User < ApplicationRecord
     result = update(params, *options)
     clean_up_passwords
     result
+  end
+
+  ##### 外部のプロバイダーで認証する時に、ユーザーの情報を取得・保存する #####
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+      user.email = auth.info.email.presence || "#{auth.uid}-#{auth.provider}@example.com"
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name
+    end
   end
 end
 

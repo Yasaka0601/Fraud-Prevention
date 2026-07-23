@@ -124,9 +124,9 @@
                 <div class="badge-radio-list">
                   <!----- 表示しない ----->
                   <label class="badge-radio-item badge-radio-item--none"
-                         data-badge-select-target="radioLabel"
-                         data-badge-type=""
-                         data-badge-name="表示しない">
+                        data-badge-select-target="radioLabel"
+                        data-badge-type=""
+                        data-badge-name="表示しない">
                     <%= f.radio_button :selected_badge_type, "", checked: current_user.selected_badge_type.blank?, class: "hidden" %>
                     <div class="badge-radio-content">
                       <i class="fas fa-ban text-gray-400 text-xl"></i>
@@ -137,9 +137,9 @@
                   <!----- 獲得済みバッジ一覧 ----->
                   <% @badges.each do |badge| %>
                     <label class="badge-radio-item"
-                           data-badge-select-target="radioLabel"
-                           data-badge-type="<%= badge.badge_type %>"
-                           data-badge-name="<%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %>">
+                          data-badge-select-target="radioLabel"
+                          data-badge-type="<%= badge.badge_type %>"
+                          data-badge-name="<%= UserBadge::BADGE_NAMES[badge.badge_type.to_sym] %>">
                       <%= f.radio_button :selected_badge_type, badge.badge_type,
                           checked: current_user.selected_badge_type == badge.badge_type, class: "hidden" %>
                       <div class="badge-radio-content">
