@@ -28,9 +28,11 @@ Devise.setup do |config|
   # Gmail を使用する設定
   config.mailer_sender = ENV.fetch("MAILER_SENDER", "test@example.com")
 
-  # LINE を使用する設定
+  # 認証に LINE を使用する設定
   config.omniauth :line, ENV["LINE_KEY"], ENV["LINE_SECRET"]
 
+  # 認証に Google を使用する設定
+  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

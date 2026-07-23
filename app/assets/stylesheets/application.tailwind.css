@@ -266,59 +266,27 @@ select:-webkit-autofill{
   flex: 0 0 35px;
 }
 
-/***** LINEログイン/登録ボタン *****/
-.line-auth{
+/***** SNS認証ボタン（LINE・Google） *****/
+.oauth-buttons {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
   margin: 16px 0 24px;
 }
 
-.line-auth form{
+.oauth-buttons form {
   margin: 0;
-  width: 100%;
 }
 
-.line-auth__btn{
-  width: 100%;
-  cursor: pointer;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  padding: .75rem 1rem;
-  border-radius: .5rem;
-  border: 0;
-
-  background: #1F2F54;
-  color: #fff;
-
-  font-size: 1.125rem;
-  font-weight: 700;
-  font-family: "Noto Serif JP", serif;
-  letter-spacing: .1em;
-
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
-  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+.oauth-buttons .btn {
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.line-auth__btn:hover,
-.line-auth__btn:focus-visible{
-  background: #16213d;
-  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
+.oauth-buttons .btn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,.25);
 }
-
-.line-auth__btn:active{ transform: scale(0.99); }
-
-.line-auth__icon{
-  width: 22px;
-  height: 22px;
-  display: block;
-}
-
-.line-auth__text{ line-height: 1; }
 
 /* ===== 共通：カテゴリー選択へ戻るボタン ===== */
 .btn-back-to-categories{

@@ -46,7 +46,10 @@
       <div class="form-divider__line"></div>
     </div>
 
-    <%= render "shared/line_button" %>
+    <div class="oauth-buttons">
+      <%= render "shared/line_button" %>
+      <%= render "shared/google_button" %>
+    </div>
 
     <div class="reg-links">
       <%= link_to "利用規約", terms_path, class: "reg-link" %>
