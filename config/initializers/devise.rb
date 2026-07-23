@@ -32,7 +32,7 @@ Devise.setup do |config|
   config.omniauth :line, ENV["LINE_KEY"], ENV["LINE_SECRET"]
 
   # 認証に Google を使用する設定
-  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
+  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

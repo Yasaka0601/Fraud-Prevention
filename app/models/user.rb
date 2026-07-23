@@ -2,7 +2,7 @@ class User < ApplicationRecord
   ##### devise のモジュールを適用させている記述。#####
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :omniauthable,
-          :validatable, omniauth_providers: [:line, :google_oauth2]
+          :validatable, omniauth_providers: [ :line, :google_oauth2 ]
 
   ##### Active Storage #####
   has_one_attached :image
@@ -62,7 +62,6 @@ class User < ApplicationRecord
       user.name = auth.info.name
     end
   end
-
 end
 
 #####  メモ   #####
