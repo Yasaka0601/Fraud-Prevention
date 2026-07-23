@@ -87,6 +87,9 @@ gem "sassc-rails"
 gem "omniauth-line"
 gem "omniauth-rails_csrf_protection"
 
+##### Google 認証 #####
+gem "omniauth-google-oauth2"
+
 ##### ページネーション #####
 gem "kaminari"
 
