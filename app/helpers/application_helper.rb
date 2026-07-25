@@ -72,17 +72,18 @@ module ApplicationHelper
     defaults = {
       site: "詐欺対策道場",
       title: "詐欺対策道場",
-      description: "特殊詐欺に関する知識を身につける",
-      keywords: "詐欺対策,防犯,クイズ"
+      description: "特殊詐欺に関する知識をクイズ形式で身につける",
+      keywords: "詐欺対策,防犯,クイズ,詐欺クイズ"
     }
 
     # コントローラーから渡した値で上書きしている。
     opts = defaults.merge(options)
 
+    # :noindex はSEO用のメタタグであり、開発のページを Google 検索に表示させないための記述。
     noindex_value = opts.key?(:noindex) ? opts[:noindex] : !Rails.env.production?
 
     # コントローラーから渡されたURLがあれば opts[:url] を使う。
-    # なければ現在URL (original_url) を使う。
+    # なければ現在のURLを使う。
     page_url = opts[:url].presence || request.original_url
 
     # 画像は全ページ固定

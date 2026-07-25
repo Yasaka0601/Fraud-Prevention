@@ -11,11 +11,11 @@ class ShareResultsController < ApplicationController
     correct       = @course_result.correct_count
 
     # 動的OGP（テキストのみ） optionsに入る値。
-    helpers.assign_meta_tags(
+    helpers.assign_meta_tags({
       title: "「#{category_name}」「#{course_name}」コース",
       description: "#{total}問中、#{correct}問正解。",
       url: request.original_url
-    )
+    })
   end
 
   private
