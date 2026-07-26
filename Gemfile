@@ -98,3 +98,6 @@ gem "meta-tags"
 
 ##### クイズ解説文のURLリンク化 #####
 gem "rails_autolink"
+
+##### サイトマップ作成 #####
+gem "sitemap_generator"
