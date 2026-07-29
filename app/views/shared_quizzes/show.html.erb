@@ -1,0 +1,51 @@
+<div class="quiz-container"
+    data-controller="quiz-scroll"
+    data-action="turbo:submit-end@document->quiz-scroll#scrollToResult">
+
+  <!------ 判定結果エリア ------->
+  <div id="quiz_result_area" data-quiz-scroll-target="resultArea">
+    <%= render "shared_quizzes/result" %>
+  </div>
+
+  <!------ クイズカード ------->
+  <div class="quiz-card">
+
+    <p class="quiz-sentence"><%= @quiz.sentence %></p>
+
+    <% if @quiz.image.attached? %>
+      <div class="quiz-image-container">
+        <%= image_tag @quiz.image, class: "quiz-image" %>
+      </div>
+    <% end %>
+
+    <!------ 回答エリア ------->
+    <div id="quiz_answer_area">
+      <%= form_with url: answer_share_quiz_path(@quiz.id), method: :post,
+                    data: { quiz_scroll_form: true } do |form| %>
+        <div class="quiz-choices">
+          <% if @multiple_answer %>
+            <p class="text-sm text-gray-500 font-bold mb-2">※複数選択可</p>
+          <% end %>
+          <% @choices.each do |choice| %>
+            <div class="choice-item <%= @multiple_answer ? 'choice-item--checkbox' : '' %>">
+              <input
+                type="<%= @multiple_answer ? 'checkbox' : 'radio' %>"
+                name="selected_choice_id[]"
+                id="choice_<%= choice.id %>"
+                value="<%= choice.id %>"
+              >
+              <label for="choice_<%= choice.id %>" class="choice-label">
+                <%= choice.text %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="quiz-actions">
+          <%= form.submit "回答する", class: "quiz-submit-btn", data: { turbo_submits_with: "判定中..." } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
