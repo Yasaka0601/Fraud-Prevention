@@ -627,6 +627,36 @@
 }
 
 /* =========================================
+  クイズ単体シェア画面 (shared_quizzes)
+   ========================================= */
+
+/* 「他のクイズに挑戦」ボタン */
+.btn-next-quiz {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 0.8rem 2rem;
+  background-color: #C63D2F;
+  color: #fff;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.btn-next-quiz:hover {
+  background-color: #a8321f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+/* =========================================
   共有リンク失効画面
    ========================================= */
 .share-expired-card {

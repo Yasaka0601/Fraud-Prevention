@@ -1,0 +1,46 @@
+<!------ 判定結果表示エリア ------->
+<% unless @is_correct.nil? %>
+  <div class="result-container">
+    <% if @is_correct %>
+      <!------ 正解時の表示 ------>
+      <div class="result-box--correct">
+        <div class="result-title--correct">
+          <span class="result-mark">◎</span> 見事！正解
+        </div>
+      </div>
+    <% else %>
+      <!------ 不正解時の表示 ------>
+      <div class="result-box--incorrect">
+        <div class="result-title--incorrect">
+          <span class="result-mark">✕</span> 無念...不正解
+        </div>
+      </div>
+    <% end %>
+
+    <!------ 正解と解説 ------->
+    <div class="explanation-box">
+      <div class="mb-4">
+        <span class="explanation-title text-[#C63D2F]">【正解】</span>
+        <ul class="list-disc list-inside font-bold text-lg text-gray-800">
+          <% if @correct_choices.present? %>
+            <% @correct_choices.each do |correct| %>
+              <li><%= correct.text %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <% if @quiz.explanation.present? %>
+        <div>
+          <span class="explanation-title">【解説】</span>
+          <p class="quiz-explanation"><%= auto_link(@quiz.explanation, html: { target: "_blank", rel: "noopener noreferrer nofollow" }) %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="share-action-wrapper">
+    <%= link_to "他のクイズに挑戦", home_path, class: "btn-next-quiz" %>
+  </div>
+
+<% end %>

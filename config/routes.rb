@@ -44,6 +44,10 @@ Rails.application.routes.draw do
     end
   end
 
+  ##### クイズシェア用 X などのリンクからきた一問一答 #####
+  get "share/quiz/:id", to: "shared_quizzes#show", as: :share_quiz
+  post "share/quiz/:id/answer", to: "shared_quizzes#answer", as: :answer_share_quiz
+
   ##### 成績表示のルーティング #####
   get "results/users", to: "results#users", as: :result_users
   get "share/results/:token", to: "share_results#show", as: :share_result

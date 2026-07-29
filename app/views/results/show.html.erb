@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <!----- X シェアボタン (デザイン適用) ----->
+    <!----- 成績の X シェアボタン ----->
     <% if @course_result.user_id == current_user.id %>
       <% tweet_text = "「#{@course_result.course.category.name}」「#{@course_result.course.name}」コース\n#{@course_result.total_questions}問中、#{@course_result.correct_count}問正解。" %>
       <% intent_url = "https://twitter.com/intent/tweet?text=#{CGI.escape(tweet_text)}&url=#{CGI.escape(@share_url)}&hashtags=詐欺対策道場" %>
@@ -34,7 +34,7 @@
           <svg class="icon-x-logo" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
           </svg>
-          <span>結果をポストする</span>
+          <span>成績をポストする</span>
         <% end %>
       </div>
     <% end %>
@@ -101,6 +101,22 @@
         <div class="history-explanation">
           <span class="explanation-label">【解説】</span>
           <p class="history-explanation-text"><%= auto_link(quiz.explanation, sanitize: true, html: { target: "_blank", rel: "noopener noreferrer nofollow" }) %></p>
+        </div>
+      <% end %>
+
+      <!----- クイズの X シェアボタン  ----->
+      <% if @course_result.user_id == current_user.id %>
+        <% tweet_text = "#{@course_result.course.category.name}クイズ\n一問一答の詐欺対策クイズに挑戦しよう" %>
+        <% intent_url = "https://twitter.com/intent/tweet?text=#{CGI.escape(tweet_text)}&url=#{CGI.escape(share_quiz_url(quiz.id))}&hashtags=詐欺対策道場" %>
+
+        <div class="share-area">
+          <%= link_to intent_url, target: "_blank", rel: "noopener noreferrer", class: "btn-share-x" do %>
+            <%# X (Twitter) ロゴSVG %>
+            <svg class="icon-x-logo" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+            </svg>
+            <span>このクイズを共有する</span>
+          <% end %>
         </div>
       <% end %>
 
