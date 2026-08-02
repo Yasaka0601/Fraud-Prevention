@@ -5,6 +5,15 @@
   padding: 2rem 1rem;
 }
 
+/* --- 家族ルーム共通カード --- */
+.room-card {
+  padding: 4rem 2rem;
+  background: #fffcf5;
+  border-top: 4px solid #1F2F54;
+  border-radius: .75rem;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+}
+
 /* --- メインヘッダー --- */
 .room-home-header {
   text-align: center;
@@ -130,7 +139,6 @@
 /* --- 未所属状態の表示 --- */
 .no-room-box {
   text-align: center;
-  padding: 4rem 2rem;
 }
 
 /* =========================================
@@ -205,18 +213,6 @@
   border-bottom: 2px solid #F7F3E8;
   position: relative;
   letter-spacing: 0.05em;
-}
-
-/* タイトル下の赤いアクセントライン */
-.room-new-title::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 3px;
-  background-color: #C63D2F;
 }
 
 /* シンプルなエラーメッセージ表示 */
