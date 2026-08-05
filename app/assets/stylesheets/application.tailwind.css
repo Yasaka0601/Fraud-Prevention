@@ -251,7 +251,8 @@ select:-webkit-autofill{
 
 /* 　　　　エラー系の色　　　 */
 .flash-alert,
-.flash-error {
+.flash-error,
+.flash-danger {
   background: #fde2e1;
   color: #9b1c1c;
   border: 1px solid #f5a3a3;
