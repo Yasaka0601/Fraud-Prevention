@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
       current_user.update!(room_id: @room.id)
       redirect_to home_rooms_path
     else
-      flash.now[:danger] = "家族ルームを作成出来ませんでした"
+      flash.now[:danger] = @room.errors.full_messages.join("、")
       render :new, status: :unprocessable_entity
     end
   end

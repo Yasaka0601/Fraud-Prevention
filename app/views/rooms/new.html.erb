@@ -3,17 +3,6 @@
   <div class="room-card">
     <h1 class="room-new-title">家族ルーム作成</h1>
 
-    <!-- エラーメッセージ表示エリア -->
-    <% if @room.errors.any? %>
-      <div class="room-simple-error">
-        <ul>
-          <% @room.errors.full_messages.each do |message| %>
-            <li><i class="fas fa-exclamation-circle mr-1"></i><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <!-----  フォーム ----->
     <%= form_with model: @room, local: true do |form| %>
 
