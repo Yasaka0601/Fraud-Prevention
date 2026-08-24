@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Edit(./.env)",
+      "Edit(./.env.*)",
+      "Write(./.env)",
+      "Write(./.env.*)",
+      "Read(./config/master.key)",
+      "Edit(./config/master.key)",
+      "Write(./config/master.key)",
+      "Edit(./config/credentials.yml.enc)",
+      "Write(./config/credentials.yml.enc)",
+      "Bash(cat .env*)",
+      "Bash(cat ./.env*)",
+      "Bash(cat config/master.key)",
+      "Bash(cat ./config/master.key)",
+      "Bash(rails credentials:*)",
+      "Bash(bin/rails credentials:*)",
+      "Bash(bundle exec rails credentials:*)"
+    ]
+  }
+}
