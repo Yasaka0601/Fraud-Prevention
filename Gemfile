@@ -101,3 +101,6 @@ gem "rails_autolink"
 
 ##### サイトマップ作成 #####
 gem "sitemap_generator"
+
+##### メール送信（Render無料プランはSMTPポートがブロックされるため、HTTP API型に変更） #####
+gem "resend"
