@@ -79,4 +79,9 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
+  ##### 週次ポイントリセットの内部API（GASからのトリガー用） #####
+  namespace :internal do
+    post "points/weekly_reset", to: "points#weekly_reset"
+  end
 end
