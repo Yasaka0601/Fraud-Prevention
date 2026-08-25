@@ -169,6 +169,10 @@ GEM
       activesupport (>= 6.1)
     hashie (5.1.0)
       logger
+    httparty (0.24.2)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -383,6 +387,9 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
+    resend (1.11.0)
+      base64
+      httparty (>= 0.22.0)
     responders (3.2.0)
       actionpack (>= 7.0)
       railties (>= 7.0)
@@ -540,6 +547,7 @@ DEPENDENCIES
   rails-i18n
   rails_admin (~> 3.0)
   rails_autolink
+  resend
   rspec-rails
   rubocop-rails-omakase
   sassc-rails

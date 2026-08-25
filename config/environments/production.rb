@@ -103,22 +103,11 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
 
-  ##### Gmail を使用する設定-------ここから-------#####
   config.action_mailer.default_url_options = {
-  host:     "fraud-prevention-l35r.onrender.com",
-  protocol: "https"
+    host:     "sagi-taisaku.com",
+    protocol: "https"
   }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              "smtp.gmail.com",
-    port:                 587,
-    domain:               "fraud-prevention-l35r.onrender.com",
-    user_name:            ENV["MAILER_SENDER"],
-    password:             ENV["MAILER_PASSWORD"],
-    authentication:       "plain",
-    enable_starttls_auto: true
-  }
-  # ####-------ここまで---------------#####
+  config.action_mailer.delivery_method = :resend
 
   ##### CSS圧縮に Sass を使わせない設定 #####
   config.assets.css_compressor = nil
