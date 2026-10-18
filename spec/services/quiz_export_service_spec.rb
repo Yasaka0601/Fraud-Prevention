@@ -42,5 +42,30 @@ RSpec.describe QuizExportService do
       expect(markdown).to include("市役所から還付金の電話が来た。どうする？")
       expect(markdown).to include("✅ 電話を切って市役所に確認する")
     end
+
+    it '画像がないクイズは image_url が nil になる' do
+      QuizExportService.call(dir: @dir)
+      exported = JSON.parse(@dir.join("quizzes.json").read)["quizzes"].first
+
+      expect(exported["image_url"]).to be_nil
+    end
+
+    context '画像があるクイズ' do
+      before do
+        ActiveStorage::Current.url_options = { host: "http://example.com" }
+        quiz.image.attach(io: file_fixture("sample.png").open, filename: "sample.png", content_type: "image/png")
+      end
+
+      after { ActiveStorage::Current.reset }
+
+      it 'JSONに画像のURLが含まれ、Markdownに画像が埋め込まれる' do
+        QuizExportService.call(dir: @dir)
+        exported = JSON.parse(@dir.join("quizzes.json").read)["quizzes"].first
+        markdown = @dir.join("quizzes.md").read
+
+        expect(exported["image_url"]).to include("sample.png")
+        expect(markdown).to include("![sample.png](#{exported["image_url"]})")
+      end
+    end
   end
 end
