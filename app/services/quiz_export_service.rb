@@ -31,6 +31,7 @@ class QuizExportService
       categories: quiz.categories.map(&:name),
       courses: quiz.courses.map(&:name),
       image_filename: quiz.image.attached? ? quiz.image.filename.to_s : nil,
+      image_url: quiz.image.attached? ? quiz.image.url : nil,
       choices: quiz.choices.sort_by(&:id).map { |choice| { text: choice.text, is_correct: choice.is_correct } },
       created_at: quiz.created_at
     }
@@ -51,6 +52,7 @@ class QuizExportService
       lines << ""
       lines << "### 問題文"
       lines << quiz[:sentence]
+      lines << "![#{quiz[:image_filename]}](#{quiz[:image_url]})" if quiz[:image_url]
       lines << ""
       lines << "### 選択肢"
       quiz[:choices].each do |choice|
