@@ -34,6 +34,23 @@ docker compose exec web bin/rails db:prepare            # DBセットアップ
 - `app/javascript/controllers/` — Stimulusコントローラー
 - `spec/` — テスト本体（RSpec）。`test/`ディレクトリは未使用の残骸なので触らなくてよい
 
+## クイズ作成フロー
+
+クイズは Claude が案を作り、ユーザーが本番（RailsAdmin）に登録する。Notion「詐欺対策道場 クイズDB」のステータス（下書き → 採用 → 登録済み）で進み具合を管理する。
+
+| # | 誰が | やること | 使うもの |
+|---|---|---|---|
+| ① | Claude | Webで調べてクイズ案を作り、チャットに表示 | `/quiz-draft` |
+| ② | ユーザー | 案を確認し、書き出してよいか返事する | チャット |
+| ③ | Claude | 許可された案を `tmp/quiz_drafts/` と Notion（下書き）に書き出す | `/quiz-draft` |
+| ④ | ユーザー | Notionで本番に出すものを「採用」にする | Notion |
+| ⑤ | ユーザー | 本番の RailsAdmin で採用したクイズを登録（画像があれば添付） | RailsAdmin |
+| ⑥ | ユーザー | 自分のターミナルで本番から書き出す | `/quiz-export` |
+| ⑦ | Claude | 書き出し結果を確認し、Notionの「採用」に元IDを入れて「登録済み」にする | `/quiz-export` |
+
+- 本番DB（Neon）への接続文字列は秘密情報。Claude は受け取らず、⑥ のコマンドも実行しない
+- Git操作（ブランチ・コミット・push・PR）はユーザーが行う
+
 ## CI（`.github/workflows/ci.yml`）
 
 - `rubocop`ジョブ
