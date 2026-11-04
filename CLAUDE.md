@@ -44,10 +44,17 @@ docker compose exec web bin/rails db:prepare            # DBセットアップ
 | ② | ユーザー | 案を確認し、書き出してよいか返事する | チャット |
 | ③ | Claude | 許可された案を `tmp/quiz_drafts/` と Notion（下書き）に書き出す | `/quiz-draft` |
 | ④ | ユーザー | Notionで本番に出すものを「採用」にする | Notion |
-| ⑤ | ユーザー | 本番の RailsAdmin で採用したクイズを登録（画像があれば添付） | RailsAdmin |
-| ⑥ | ユーザー | 自分のターミナルで本番から書き出す | `/quiz-export` |
-| ⑦ | Claude | 書き出し結果を確認し、Notionの「採用」に元IDを入れて「登録済み」にする | `/quiz-export` |
+| ⑤ | ユーザー | 本番の RailsAdmin で採用したクイズを登録（画像があれば添付）し、Notionに元IDを入れて「登録済み」にする | RailsAdmin / Notion |
 
+**必要に応じて（毎回ではない）**：本番と Notion のズレを直したいときに行う。
+
+| # | 誰が | やること | 使うもの |
+|---|---|---|---|
+| ⑥ | ユーザー | 自分のターミナルで本番から書き出す | `/quiz-export` |
+| ⑦ | Claude | 書き出し結果を確認し、Notion と `tmp/quiz_drafts/` を本番の内容に合わせる（ユーザーの許可を得てから） | `/quiz-export` |
+
+- 本番が正。RailsAdmin 登録時に改行・ポイントなどを手で直すため、本番と Notion には必ずズレが出る。ズレは本番に合わせる
+- クイズ作成（`/quiz-draft`）の重複チェックは Notion を使うので、作成の前に書き出す必要はない
 - 本番DB（Neon）への接続文字列は秘密情報。Claude は受け取らず、⑥ のコマンドも実行しない
 - Git操作（ブランチ・コミット・push・PR）はユーザーが行う
 
