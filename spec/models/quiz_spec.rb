@@ -8,6 +8,29 @@ RSpec.describe Quiz, type: :model do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_length_of(:name).is_at_most(50) }
     it { is_expected.to validate_presence_of(:sentence) }
+
+    describe 'PR欄' do
+      subject(:quiz) { described_class.new(name: 'テスト', sentence: '問題文') }
+
+      it 'URLもリンク文字も空なら有効' do
+        expect(quiz).to be_valid
+      end
+
+      it 'https のURLとリンク文字があれば有効' do
+        quiz.assign_attributes(affiliate_url: 'https://px.a8.net/svt/ejp?a8mat=xxx', affiliate_text: 'おすすめのVPN')
+        expect(quiz).to be_valid
+      end
+
+      it 'http(s) 以外で始まるURLは無効' do
+        quiz.assign_attributes(affiliate_url: 'javascript:alert(1)', affiliate_text: 'リンク')
+        expect(quiz).not_to be_valid
+      end
+
+      it 'URLがあるのにリンク文字が空なら無効' do
+        quiz.affiliate_url = 'https://example.com'
+        expect(quiz).not_to be_valid
+      end
+    end
   end
 
   describe 'アソシエーション' do

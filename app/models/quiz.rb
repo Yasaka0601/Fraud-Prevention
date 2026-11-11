@@ -11,6 +11,11 @@ class Quiz < ApplicationRecord
   validates :image, content_type: ACCEPTED_CONTENT_TYPES,
                     size: { less_than_or_equal_to: 5.megabytes }
 
+  # PR欄（アフィリエイトリンク）
+  validates :affiliate_url, format: { with: %r{\Ahttps?://}, message: "は http:// か https:// で始めてください" },
+                            allow_blank: true
+  validates :affiliate_text, presence: true, length: { maximum: 100 }, if: -> { affiliate_url.present? }
+
   ##### アソシエーション #####
   has_many :choices, dependent: :destroy
 
