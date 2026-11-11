@@ -32,7 +32,7 @@ class QuizExportService
       courses: quiz.courses.map(&:name),
       image_filename: quiz.image.attached? ? quiz.image.filename.to_s : nil,
       image_url: quiz.image.attached? ? quiz.image.url : nil,
-      choices: quiz.choices.sort_by(&:id).map { |choice| { text: choice.text, is_correct: choice.is_correct } },
+      choices: quiz.choices.sort_by(&:id).map { |choice| { id: choice.id, text: choice.text, is_correct: choice.is_correct } },
       created_at: quiz.created_at
     }
   end
