@@ -313,3 +313,27 @@
   outline: 2px solid #93c5fd;
   outline-offset: 2px;
 }
+
+/***** PR欄（アフィリエイト） *****/
+.quiz-affiliate {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #d1d5db;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.quiz-affiliate__label {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0 0.4rem;
+  border: 1px solid #9ca3af;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.quiz-affiliate a {
+  color: #2563eb;
+  text-decoration: underline;
+}

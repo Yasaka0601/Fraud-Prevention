@@ -104,6 +104,8 @@
         </div>
       <% end %>
 
+      <%= render "quizzes/affiliate", quiz: quiz %>
+
       <!----- クイズの X シェアボタン  ----->
       <% if @course_result.user_id == current_user.id %>
         <% tweet_text = "#{@course_result.course.category.name}クイズ\n一問一答の詐欺対策クイズに挑戦しよう" %>

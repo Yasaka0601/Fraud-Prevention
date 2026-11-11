@@ -73,6 +73,16 @@ RailsAdmin.config do |config|
         html_attributes rows: 10
       end
 
+      field :affiliate_text do
+        label "PR：リンク文字"
+        help "解説の下に「PR」付きで表示されます。空なら表示しません"
+      end
+
+      field :affiliate_url do
+        label "PR：リンクURL"
+        help "A8.net／もしもアフィリエイトのテキストリンクのURL"
+      end
+
       field :give_point
       field :categories
       field :choices

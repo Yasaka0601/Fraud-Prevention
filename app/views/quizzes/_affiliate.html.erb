@@ -1,0 +1,8 @@
+<%# 解説の下に表示するPR欄（URLが入っているクイズだけ） %>
+<% if quiz.affiliate_url.present? %>
+  <p class="quiz-affiliate">
+    <span class="quiz-affiliate__label">PR</span>
+    <%= link_to quiz.affiliate_text, quiz.affiliate_url,
+                target: "_blank", rel: "sponsored noopener" %>
+  </p>
+<% end %>
