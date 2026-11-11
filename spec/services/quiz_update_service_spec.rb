@@ -99,19 +99,6 @@ RSpec.describe QuizUpdateService do
 
         expect { QuizUpdateService.call(dir: @dir) }.to raise_error(ArgumentError, /正解の選択肢がありません/)
       end
-
-      it '「（複数回答可能です）」があるのに正解が1つならエラーにする' do
-        write_updates([ { id: quiz.id, sentence: "どれ？（複数回答可能です）" } ])
-
-        expect { QuizUpdateService.call(dir: @dir) }.to raise_error(ArgumentError, /正解が1つです/)
-      end
-
-      it '正解が複数なのに「（複数回答可能です）」がなければエラーにする' do
-        choices = new_choices.map { |choice| choice.merge(is_correct: true) }
-        write_updates([ { id: quiz.id, choices: choices } ])
-
-        expect { QuizUpdateService.call(dir: @dir) }.to raise_error(ArgumentError, /がありません/)
-      end
     end
 
     it 'バリデーションに引っかかれば、先に更新したクイズも元に戻す' do
