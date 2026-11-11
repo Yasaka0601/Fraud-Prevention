@@ -1,7 +1,6 @@
 class QuizUpdateService
   QUIZ_KEYS = %w[id name sentence explanation give_point choices].freeze
   CHOICE_KEYS = %w[id text is_correct].freeze
-  MULTIPLE_ANSWER_TEXT = "（複数回答可能です）".freeze
 
   def self.call(dir:, dry_run: false)
     new(dir, dry_run).call
@@ -65,15 +64,7 @@ class QuizUpdateService
     end
 
     correct_count = choices.count { |choice| choice["is_correct"] }
-    sentence = update["sentence"] || quiz.sentence
-
     errors << "クイズID #{quiz.id}: 正解の選択肢がありません" if correct_count.zero?
-    if sentence.include?(MULTIPLE_ANSWER_TEXT) && correct_count == 1
-      errors << "クイズID #{quiz.id}: 「#{MULTIPLE_ANSWER_TEXT}」があるのに正解が1つです"
-    end
-    if !sentence.include?(MULTIPLE_ANSWER_TEXT) && correct_count > 1
-      errors << "クイズID #{quiz.id}: 正解が複数なのに「#{MULTIPLE_ANSWER_TEXT}」がありません"
-    end
 
     errors
   end
