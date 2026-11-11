@@ -30,8 +30,8 @@ RSpec.describe QuizExportService do
       expect(exported["name"]).to eq("還付金の電話")
       expect(exported["categories"]).to eq([ "還付金詐欺" ])
       expect(exported["choices"]).to eq([
-        { "text" => "電話を切って市役所に確認する", "is_correct" => true },
-        { "text" => "ATMに向かう", "is_correct" => false }
+        { "id" => correct_choice.id, "text" => "電話を切って市役所に確認する", "is_correct" => true },
+        { "id" => wrong_choice.id, "text" => "ATMに向かう", "is_correct" => false }
       ])
     end
 
