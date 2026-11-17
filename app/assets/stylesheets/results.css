@@ -747,3 +747,16 @@
     padding: 0.8rem 1rem;
   }
 }
+
+/* AdSense 広告ユニット */
+.ad-unit {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.ad-unit__label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
