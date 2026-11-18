@@ -14,4 +14,13 @@ namespace :quizzes do
     puts lines
     puts dry_run ? "DRY_RUN: #{lines.size}件の変更があります（保存していません）" : "#{lines.size}件の変更を保存しました"
   end
+
+  desc "tmp/quiz_imports/*.json のクイズとコースをまとめて登録する（DRY_RUN=1 で確認だけ）"
+  task import: :environment do
+    dry_run = ENV["DRY_RUN"] == "1"
+    lines = QuizImportService.call(dir: Rails.root.join("tmp/quiz_imports"), dry_run: dry_run)
+
+    puts lines
+    puts dry_run ? "DRY_RUN: 上の内容で登録できます（保存していないので、IDはまだ決まっていません）" : "登録しました"
+  end
 end
